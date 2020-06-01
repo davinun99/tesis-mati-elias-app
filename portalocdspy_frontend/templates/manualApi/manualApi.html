@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Manual API</title>
+{% endblock %}
+
+{% load static %}
+
+{% block container %}
+<div class="container tamanoMinimo">
+   <div class="row">
+      <div class="col-md-12">
+         <h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Manual de Usuario de la API</h1>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-12 pb-3">
+         <p class="textoAlineadoJustificado">
+            El Portal de Contrataciones Abiertas de Honduras es una potente herramienta web que utiliza como fuente los datos en el Estándar de Datos para las Contrataciones Abiertas (EDCA) publicados por la Oficina Normativa de Contratación y Adquisiciones del Estado (ONCAE) y la Secretaría de finanzas (SEFIN) y proporciona a los usuarios finales una interface de programación de aplicaciones API REST (por sus siglas en inglés, application programming interface) que permite un mecanismo útil para la interoperabilidad entre diferentes sistemas de información. <br><br>
+
+            Los servicios web (GET) disponibles para usuarios finales proporcionan datos en formato JSON de procesos de contratación en las fases de Planificación, Licitación, Adjudicación, Contrato e Implementación en forma de Releses y Records lo que permite exploración y reutilización de los datos EDCA.<br><br>
+            
+            Este manual tiene como objetivo principal apoyar a los usuarios finales a conocer la forma de consumir datos de la API EDCA por lo que a continuación se describe cada uno de los servicios provistos:<br>
+        </p>
+        <h5 class="titularColor textoColorGrisNormal">
+            1. Listado de Releases (Lanzamientos): 
+         </h5>
+         <p class="textoAlineadoJustificado">
+            Proporciona un listado de los releases almacenados en la base de datos dentro de un paquete paginados de 10 en 10, disponible a través de una petición HTTP GET a la url <a class="" href="http://contratacionesabiertas.gob.hn/api/v1/release/">http://contratacionesabiertas.gob.hn/api/v1/release/</a> que retornará un objeto en formato JSON con las siguientes variables:
+         </p>
+         <ul>
+             <li><b>"releases":</b> Cantidad total de releases existentes en la base de datos.</li>
+             <li><b>"pages":</b> Cantidad total de páginas que contienen resultados.</li>
+             <li><b>"page":</b> Número de página que contiene los 10 resultados solicitados.</li>
+             <li><b>"next":</b> Enlace url a la página que contiene los 10 resultados siguientes, se muestra el valor de null en caso de no existir.</li>
+             <li><b>"previous":</b> Enlace url a la página que contiene los 10 resultados anteriores, se muestra el valor de null en caso de no existir.</li>
+             <li><b>"releasePackage":</b> Paquete de releases que contiene los datos de procesos de contratación incluyendo sus metadatos.</li>
+        </ul>
+        <p class="textoAlineadoJustificado">
+            Las primeras 5 variables proporcionan datos de paginación y son útiles para navegar y obtener los resultados, la última variable “releasePackage” es la que provee como máximo 10 procesos de contratación incluidos en un paquete de lanzamientos en el formato del estándar EDCA.
+        </p>
+        <h6 class="titularColor textoColorPrimario" style="font-size: inherit;">Los parámetros permitidos son: </h6>
+        <p class="textoAlineadoJustificado">
+            <b>"page":</b> Debe ser un número entero que identifica la página de la que se requiere obtener los resultados, en caso de que el parámetro no sea provisto en la url se devolverán los resultados de la página 1, a continuación, algunos ejemplos: 
+        </p>
+        <ul>
+            <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?page=1"><b>http://contratacionesabiertas.gob.hn/api/v1/release/?page=1</b></a><br>  Muestra los resultados de la página 1.</li>
+            <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?page=2"><b>http://contratacionesabiertas.gob.hn/api/v1/release/?page=2</b></a><br>  Muestra los resultados de la página 2.</li>
+            <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?page=155000"><b>http://contratacionesabiertas.gob.hn/api/v1/release/?page=155000</b></a><br>  Muestra los resultados de la página 155,000.</li>
+       </ul>
+       <p class="textoAlineadoJustificado">
+        <b>"publisher":</b> Este parámetro permite obtener los releases filtrados por un publicador en específico y puede tener como valor uno de las siguientes 2 cadenas de texto: “oncae” o “sefin” a continuación, algunos ejemplos: 
+    </p>
+    <ul>
+        <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?publisher=oncae"><b>http://contratacionesabiertas.gob.hn/api/v1/release/?publisher=oncae</b></a><br>  Retorna los releases publicados por la Oficina Normativa de Contratación y Adquisiciones del estado.</li>
+        <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?publisher=sefin"><b>http://contratacionesabiertas.gob.hn/api/v1/release/?publisher=sefin</b></a><br>  Retorna los releases publicados por la Secretaría de Finanzas. </li>
+        <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?publisher="><b>http://contratacionesabiertas.gob.hn/api/v1/release/?publisher=</b></a><br>  Retorna todos los releases almacenados en la base de datos del portal de contrataciones abiertas. </li>
+   </ul>
+   <p class="textoAlineadoJustificado">
+    También se pueden utilizar ambos parámetros en una misma petición HTTP GET, por ejemplo: 
+   </p>
+   <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/?page=2&publisher=oncae"><b>http://contratacionesabiertas.gob.hn/api/v1/release/?page=2&publisher=oncae</b></a></li>
+   <br>
+   <h5 class="titularColor textoColorGrisNormal">
+    2. Obtener un Release (Lanzamiento):
+ </h5>
+<p class="textoAlineadoJustificado">
+    Proporciona los datos de un release dentro de su paquete a través de una petición HTTP GET a la url 
+    <a href="http://contratacionesabiertas.gob.hn/api/v1/releas/{release.id}/">http://contratacionesabiertas.gob.hn/api/v1/releas/{release.id}/</a> enviando como parámetro el identificador del release (release.id) y retornará un objeto JSON en el formato del estándar EDCA. 
+</p>
+
+<h6 class="titularColor textoColorPrimario" style="font-size: inherit;">Los parámetros permitidos son: </h6>
+        <p class="textoAlineadoJustificado">
+            <b>"release.id":</b> Debe ser una cadena de texto que identifica un release, a continuación, algunos ejemplos:  
+        </p>
+        <ul>
+            <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/ocds-lcuori-224311/2-contract/"><b>http://contratacionesabiertas.gob.hn/api/v1/release/ocds-lcuori-224311/2-contract/</b></a><br>  
+                <ul style="list-style-type: circle;">
+                    <li>
+                        Retornara un objeto JSON con los datos del release identificado por: <b>ocds-lcuori-224311/2-contract/</b>
+                    </li>
+                    <li>
+                       En el ejemplo anterior release.id = ocds-lcuori-224311/2-contract/.
+                    </li>
+                </ul>
+            </li>
+            <li><a href="http://contratacionesabiertas.gob.hn/api/v1/release/P2017-807-1-4266-2017-12-29T00:01:48Z/ "><b>http://contratacionesabiertas.gob.hn/api/v1/release/P2017-807-1-4266-2017-12-29T00:01:48Z/ </b></a><br> 
+                <ul style="list-style-type: circle;">
+                    <li>
+                    Retornara un objeto JSON con los datos del release identificado por: <b>P2017-807-1-4266-2017-12-29T00:01:48Z</b>  
+                    </li>
+                    <li>
+                    En el ejemplo anterior release.id = P2017-807-1-4266-2017-12-29T00:01:48Z
+                    </li>
+                </ul> 
+            
+            </li>
+       </ul>
+       <br>
+       <h5 class="titularColor textoColorGrisNormal">
+        3. Listado de Records (Registros):
+     </h5>
+    <p class="textoAlineadoJustificado">
+        Proporciona un listado de los records almacenados en la base de datos dentro de un paquete paginados de 10 en 10, disponible a través de una petición HTTP GET a la url <a href="http://contratacionesabiertas.gob.hn/api/v1/record/">http://contratacionesabiertas.gob.hn/api/v1/record/</a> que retornará un objeto en formato JSON con las siguientes variables:
+    </p>
+    <ul>
+        <li><b>"records":</b> Cantidad total de records existentes en la base de datos. </li>
+        <li><b>"pages":</b> Cantidad total de páginas que contienen resultados. </li>
+        <li><b>"page":</b> Número de página que contiene los 10 resultados solicitados. </li>
+        <li><b>"next":</b> Enlace url a la página que contiene los 10 resultados siguientes, se muestra el valor de null en caso de no existir. </li>
+        <li><b>"previous":</b> Enlace url a la página que contiene los 10 resultados anteriores, se muestra el valor de null en caso de no existir. </li>
+        <li><b>"recordPackage":</b> Paquete de records que contiene los datos de procesos de contratación incluyendo sus metadatos. </li>
+   </ul>
+
+   <p class="textoAlineadoJustificado">
+    Las primeras 5 variables proporcionan datos de paginación y son útiles para navegar y obtener los resultados, la última variable “recordPackage” es la que provee como máximo 10 procesos de contratación incluidos en un paquete de lanzamientos en el formato del estándar EDCA.
+   </p>
+    
+    <h6 class="titularColor textoColorPrimario" style="font-size: inherit;">Los parámetros permitidos son: </h6>
+            <p class="textoAlineadoJustificado">
+                <b>"page":</b> Debe ser un número entero que identifica la página de la que se requiere obtener los resultados, en caso de que el parámetro no sea enviado en la url se devolverán los resultados de la página 1, a continuación, algunos ejemplos: 
+            </p>
+            <ul>
+                <li><a href="http://contratacionesabiertas.gob.hn/api/v1/record/?page=1"><b>http://contratacionesabiertas.gob.hn/api/v1/record/?page=1</b></a><br>  Muestra los resultados de la página 1.</li>
+                <li><a href="http://contratacionesabiertas.gob.hn/api/v1/record/?page=2"><b>http://contratacionesabiertas.gob.hn/api/v1/record/?page=2</b></a><br>  Muestra los resultados de la página 2.</li>
+                <li><a href="http://contratacionesabiertas.gob.hn/api/v1/record/?page=500"><b>http://contratacionesabiertas.gob.hn/api/v1/record/?page=500</b></a><br>  Muestra los resultados de la página 500.</li>
+           </ul>
+           <br>
+           <h5 class="titularColor textoColorGrisNormal">
+            4. Obtener un Record (Registro): 
+         </h5>
+        <p class="textoAlineadoJustificado">
+            Proporciona los datos de un record dentro de su paquete a través de una petición HTTP GET a la url <a href="http://contratacionesabiertas.gob.hn/api/v1/record/{ocid}/">http://contratacionesabiertas.gob.hn/api/v1/record/{ocid}/</a> enviando como parámetro el identificador único del proceso de contratación (OCID) y retornará un objeto JSON en el formato del estándar EDCA. 
+        </p>
+       <p class="textoAlineadoJustificado">
+        <b>"OCID":</b> Debe ser una cadena de texto que identifica de manera única el proceso de contratación, por ejemplo:   
+        </p>
+       <ul>
+        <li><a href="http://contratacionesabiertas.gob.hn/api/v1/record/ocds-lcuori-Zr5zxL-LPN-MPC-GAF-01-2015-2/ "><b>http://contratacionesabiertas.gob.hn/api/v1/record/ocds-lcuori-Zr5zxL-LPN-MPC-GAF-01-2015-2/ </b></a><br>  
+            <ul style="list-style-type: circle;">
+                <li>
+                    Retornará un objeto JSON con los datos del record identificado por: <b>ocds-lcuori-Zr5zxL-LPN-MPC-GAF-01-2015-2</b>
+                </li>
+                <li>
+                    En el ejemplo anterior OCID = ocds-lcuori-Zr5zxL-LPN-MPC-GAF-01-2015-2
+                </li>
+            </ul>
+        </li>
+        <li><a href="http://contratacionesabiertas.gob.hn/api/v1/record/ocds-lcuori-P2013-70-1-949/ "><b>http://contratacionesabiertas.gob.hn/api/v1/record/ocds-lcuori-P2013-70-1-949/</b></a><br> 
+            <ul style="list-style-type: circle;">
+                <li>
+                    Retornará un objeto JSON con los datos del record identificado por: <b>ocds-lcuori-P2013-70-1-949</b>  
+                </li>
+                <li>
+                    En el ejemplo anterior OCID = ocds-lcuori-P2013-70-1-949
+                </li>
+            </ul> 
+        
+        </li>
+   </ul>
+   <br>
+   <h5 class="titularColor textoColorGrisNormal">
+    5. Descarga masiva de archivos: 
+ </h5>
+ <p class="textoAlineadoJustificado">
+    Proporciona un listado con las urls para descarga de los archivos que contienen procesos de contratación en formatos JSON, CSV y XLSX a través de una petición HTTP GET a la url <a href="http://contratacionesabiertas.gob.hn/api/v1/descargas/">http://contratacionesabiertas.gob.hn/api/v1/descargas/</a> que retornará una lista con en formato JSON con objetos que contienen siguientes variables:
+ </p>
+ <ul>
+     <li><b>"urls"."csv": </b> Enlace url para descargar el archivo de releases en formato .csv </li>
+     <li><b>"urls"."json":</b> Enlace url para descargar el archivo de releases en formato .json</li>
+     <li><b>"urls"."xlsx": </b> Enlace url para descargar el archivo de releases en formato .xlsx </li>
+     <li><b>"urls"."md5": </b> Archivo .md5 del archivo. json de releases, útil para identificar si el paquete de raleases ha sufrido algún cambio. </li>
+     <li><b>"year": </b> Año de publicación del paquete de releases, extraído de “release.date”.</li>
+     <li><b>"month": </b> Mes de publicación del paquete de releases, extraído de “release.date”.</li>
+     
+     <li><b>"sistema":  </b> Nombre del sistema de información del cual se obtienen los datos, extraído de “release.sources.id”.</li>
+     
+     <li><b>"publicador": </b> Nombre del publicador de los datos, extraído de “releasePackage.publisher.name”.</li>
+</ul>
+<h6 class="titularColor textoColorPrimario" style="font-size: inherit;">Los parámetros permitidos son: </h6>
+        <p class="textoAlineadoJustificado">
+            Este servicio no tiene parámetros.  
+        </p>
+        <br>
+        <h5 class="titularColor textoColorPrimario">
+            Ejemplos de llamadas a Métodos de la API 
+         </h5>
+         <p  class="textoAlineadoJustificado">
+            Utilizar la API EDCA para usuarios finales es muy sencillo, únicamente basta abrir el navegador de internet de tu preferencia e ingresar la url del método que queremos utilizar esto permite familiarizarse con la respuesta retornada a través de una interface gráfica. También es posible realizar peticiones utilizando códigos en diferentes lenguajes de programación o utilizar una herramienta de testeo, por ejemplo: Postman.
+            <br><br>
+         A continuación, se muestran algunos ejemplos de llamadas a la API utilizando la herramienta Postman:
+         </p>
+         <p class="textoAlineadoJustificado">
+            <b>Ejemplo 1:</b> Realizar una llamada a la API para obtener un listado de records:  
+            </p>
+         <img src="/static/img/manual/ejemplo1.png" alt="Ejemplo 1" style="width: 100%;">
+         <p class="textoAlineadoJustificado">
+             <i class="textoColorGris">Imagen 1: Llamada a la API utilizando el método listado de records utilizando Postman. </i>
+            <br>
+            Explicación de los resultados en la imagen 1
+         </p>
+         <ol>
+            <li>El método que se utiliza para realizar la petición es: GET</li>
+            <li>El nombre de la url es:  <a href="http://contratacionesabiertas.gob.hn/api/v1/record/?page=2">http://contratacionesabiertas.gob.hn/api/v1/record/?page=2</a></li>
+            <li>La respuesta de la API son en formato JSON.</li>
+            <li>Se envía el parámetro page=2 para obtener los resultados de la segunda página.</li>
+            <li>Otras variables a tomar en cuenta es que se retorna un código 200 cuando la API logró procesar la solicitud de manera correcta, el tiempo estimado de respuesta fue de 2.05 segundos y el tamaño de los datos retornados es de 176.11 KB.   </li>
+       </ol>
+       <br>
+       <p class="textoAlineadoJustificado">
+        <b>Ejemplo 2:</b> Realizar una llamada a la API para obtener un record
+        </p>
+         <img src="/static/img/manual/ejemplo2.png" alt="Ejemplo 2" style="width: 100%;">
+         <p class="textoAlineadoJustificado">
+            <i class="textoColorGris">Imagen 2: Llamada a la API con el método obtener record utilizando Postman.  </i>
+           <br>
+           Explicación de los resultados en la imagen 2: 
+        </p>
+        <ol>
+           <li>El método que se utiliza para la petición es: GET</li>
+           <li>El nombre de la url es:  <a href="http://contratacionesabiertas.gob.hn/api/v1/record/ocds-lcuori-P2013-70-1-949/">http://contratacionesabiertas.gob.hn/api/v1/record/ocds-lcuori-P2013-70-1-949/</a></li>
+           <li>La respuesta de la API son en formato JSON.</li>
+           <li>No se envía un parámetro, ya que el identificador OCID este contenido en la url. </li>
+           <li>Otras variables a tomar en cuenta es que se retorna un código 200 cuando la API logró procesar la solicitud de manera correcta, el tiempo estimado de respuesta fue de 779 mili segundos y el tamaño de los datos retornados es de 23.6 KB.   </li>
+      </ol>
+         
+    
+
+      </div>
+   </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'js/api.js' %}"></script>
+{% endblock %}

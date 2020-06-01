@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Visualizaciones</title>
+{% endblock %}
+
+{% load static %}
+
+{% block container %}
+<div class="container tamanoMinimo">
+   <div class="row">
+      <div class="col-md-12">
+         <h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Visualizaciones</h1>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6 pb-6">
+         
+         <div class=" cajonSombreado visualization-edca-result mb-3" style="min-height: 300px;">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="javascript:AccederVisualizacion('/tableroProcesosPago/')">
+                        <img src="{% static 'img/visualizaciones/procesos_pago.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                     
+               </div>
+               <div class="col-md-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Tablero de Procesos de Pago
+                  </h5>
+                  <i>SEFIN</i>
+                  <p class="textoAlineadoJustificado">
+                    Estadísticas relacionadas con los procesos de pago de las contrataciones en Honduras.
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="javascript:AccederVisualizacion('/tableroProcesosPago/')" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="javascript:ObtenerEnlaceRed('twitter','/tableroProcesosPago')" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('facebook','/tableroProcesosPago')" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('whatsapp','/tableroProcesosPago')" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 pb-6">
+         <div class=" cajonSombreado visualization-edca-result mb-5"  style="min-height: 300px;">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="javascript:AccederVisualizacion('/tableroProcesosContratacion/')">
+                     <img src="{% static 'img/visualizaciones/procesos_contratacion.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                  
+               </div>
+               <div class="col-md-6 mb-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Tablero de Procesos de Contratación
+                  </h5>
+                  <i>ONCAE</i>
+                  <p class="textoAlineadoJustificado">
+                     Estadísticas relacionadas con los procesos de contratación de las contrataciones en Honduras. – Incluyendo todas las normativas.
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="javascript:AccederVisualizacion('/tableroProcesosContratacion/')" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="javascript:ObtenerEnlaceRed('twitter','/tableroProcesosContratacion/')" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('facebook','/tableroProcesosContratacion/')" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('whatsapp','/tableroProcesosContratacion/')" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+
+   </div>
+   <div class="row">
+      <div class="col-md-6 pb-6">
+         <div class=" cajonSombreado visualization-edca-result mb-5"  style="min-height: 300px;">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="javascript:AccederVisualizacion('/indicadoresProcesosContratacion/')">
+                     <img src="{% static 'img/visualizaciones/procesos_contratacion.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                  
+               </div>
+               <div class="col-md-6 mb-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Estadísticas Descriptivas de Procesos de Contratación
+                  </h5>
+                  <i>ONCAE</i>
+                  <p class="textoAlineadoJustificado">
+                     Estadísticas descriptivas de los procesos de contratación de las contrataciones en Honduras.  – Incluyendo todas las normativas.
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="javascript:AccederVisualizacion('/indicadoresProcesosContratacion/')" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="javascript:ObtenerEnlaceRed('twitter','/indicadoresProcesosContratacion/')" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('facebook','/indicadoresProcesosContratacion/')" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('whatsapp','/indicadoresProcesosContratacion/')" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 pb-6" style="">
+         <div class=" cajonSombreado visualization-edca-result mb-5"  style="min-height: 300px;">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="javascript:AccederVisualizacion('/pesosContratos/')">
+                     <img src="{% static 'img/visualizaciones/burbujas.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                  
+               </div>
+               <div class="col-md-6 mb-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Contratos por Institución
+                  </h5>
+                  <i>ONCAE</i>
+                  <p class="textoAlineadoJustificado">
+                     Monto de Contratos por Institución
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="javascript:AccederVisualizacion('/pesosContratos/')" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="javascript:ObtenerEnlaceRed('twitter','/pesosContratos/')" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('facebook','/pesosContratos/')" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="javascript:ObtenerEnlaceRed('whatsapp','/pesosContratos/')" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 pb-6" style="display: none">
+         
+         <div class=" cajonSombreado visualization-edca-result mb-3"  style="min-height: 300px;">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="/indicadoresProcesosPago">
+                        <img src="{% static 'img/visualizaciones/procesos_pago.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                     
+               </div>
+               <div class="col-md-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Indicadores de Procesos de Pago
+                  </h5>
+                  <i>ONCAE</i>
+                  <p class="textoAlineadoJustificado">
+                    Estadísticas relacionadas con los procesos de pago de las contrataciones en Honduras. – Incluyendo Todas las Normativas.
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="javascript:AccederVisualizacion('/indicadoresProcesosPago/')" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--
+   <div class="row">
+      <div class="col-md-6 pb-6">
+         
+         <div class=" cajonSombreado visualization-edca-result mb-3">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="/dashboard_sefin">
+                        <img src="{% static 'img/visualizaciones/procesos_pago.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                     
+               </div>
+               <div class="col-md-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Indicadores Procesos de Pago
+                  </h5>
+                  <i>Al año 2019</i>
+                  <p class="textoAlineadoJustificado">
+                    Estadísticas relacionadas con los procesos de pago de las contrataciones en Honduras.
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="/dashboard_sefin" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 pb-6">
+         <div class=" cajonSombreado visualization-edca-result mb-5">
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="/dashboard_oncae">
+                     <img src="{% static 'img/visualizaciones/procesos_contratacion.png' %}" alt="" class="visualizacionMiniatura" style="padding: 10px;box-sizing:border-box">
+                  </a>
+                  
+               </div>
+               <div class="col-md-6 mb-6">
+                  <h5 class="textoColorPrimario titularColor textoColorGrisNormal">
+                     Indicadores de Procesos de Contratación
+                  </h5>
+                  <i>Al año 2019</i>
+                  <p class="textoAlineadoJustificado">
+                     Estadísticas relacionadas con los procesos de contratación de las contrataciones en Honduras.
+                  </p>
+                  <div class="enlacesVisualizacion"><a href="/dashboard_oncae" class="botonGeneral fondoColorSecundario ">Visualizar</a>
+                     <a href="" class="compartirEnlace twitter"><i class="fab fa-twitter "></i></a>
+                     <a href="" class="compartirEnlace facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="" class="compartirEnlace whatsapp"><i class="fab fa-whatsapp"></i></a>    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>-->
+</div>
+{% endblock %}
+{% block script_content %}
+<script src="{% static 'js/visualizaciones.js' %}"></script>
+{% endblock %}

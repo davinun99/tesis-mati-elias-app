@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Preguntas</title>
+{% endblock %}
+
+{% load static %}
+
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/json-viewer/json-viewer.css' %}" >
+{% endblock %}
+
+{% block container %}
+<div class="container tamanoMinimo">
+   <div class="row">
+      <div class="col-md-12">
+         <h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Preguntas Frecuentes</h1>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-12">
+            <p class="textoAlineadoJustificado">
+            El Portal de Contrataciones Abiertas de Honduras, contiene un conjunto de datos publicado por multiples instituciones, con una licencia que permite su reutilización para cualquier propósito y se valida con el Estándar <a href="http://standard.open-contracting.org/latest/es/getting_started/">OCDS</a>. Los datos se cargan en diversos periodos dependiento de cada institución (Ejemplo: 1 dia, 1 Semana).
+            </p>
+      </div>
+   </div>
+   <div class="row">
+         <div class="col-md-12">
+            <h5 class="textoColorTitulo">¿Que se incluye en los tipos de datos JSON y CSV ?</h5>
+               <p class="textoAlineadoJustificado">
+               Se incluye el conjunto de datos de los procesos de contración en el Estándar <a href="http://standard.open-contracting.org/latest/es/getting_started/">OCDS</a>.
+               para que puedan ser utilizados en el formato que más sea conveniente para los usuarios finales.
+               </p>
+         </div>
+      </div>
+      <div class="row">
+            <div class="col-md-12">
+               <h5 class="textoColorTitulo">¿Que es un tipo de dato JSON?</h5>
+                  <p class="textoAlineadoJustificado">
+                        JSON es un formato ligero de intercambio de datos. Es fácil para las personas de leer y escribir. Es fácil para las máquinas analizar y generar.
+                        <br>
+                        Ejemplo: 
+                  </p>
+                     <div id="jsonEjemplo" class="cajonSombreado"></div>
+            </div>
+         </div>
+         <div class="row">
+               <div class="col-md-12 mb-5">
+                  <h5 class="textoColorTitulo">¿Que es un tipo de dato CSV ?</h5>
+                     <p class="textoAlineadoJustificado">
+                           Los archivos CSV son un tipo de documento en formato abierto sencillo para representar datos en forma de tabla, en las que las columnas se separan por comas (o punto y coma en donde la coma es el separador decimal: Chile, Perú, Argentina, España, Brasil...) y las filas por saltos de línea.
+                           <br>
+                           Ejemplo:
+                     </p>
+                     <div class=" ">
+                           <table class="tablaGeneral cajonSombreado ">
+                              <thead>
+                                 <tr>
+                                    <th class="textoAlineadoCentrado">
+                                       <span>ocid</span>
+                                    </th>
+                                    <th class="textoAlineadoCentrado">
+                                       <span>id</span>
+                                    </th>
+                                    <th class="textoAlineadoCentrado">
+                                          <span>date</span>
+                                       </th>
+                                       <th class="textoAlineadoCentrado">
+                                             <span>language</span>
+                                    </th>
+
+
+                                 </tr>
+                           </thead>
+                           <tbody>
+                                 <tr>
+                                       <td data-label="ocid">ocds-213czf-000-00001</td>
+                                       <td data-label="id">ocds-213czf-000-00001-05-contract</td>
+                                       <td data-label="date">2010-05-10T10:30:00Z</td>
+                                       <td data-label="language">es</td>
+                                 </tr>
+                                 <tr>
+                                       <td data-label="ocid">ocds-213czf-000-00034</td>
+                                       <td data-label="id">ocds-213czf-000-00034-05-contract</td>
+                                       <td data-label="date">2010-11-05T9:35:00Z</td>
+                                       <td data-label="language">es</td>
+                                 </tr>
+                                 <tr>
+                                       <td data-label="ocid">ocds-213czf-000-00001</td>
+                                       <td data-label="id">ocds-213czf-000-00001-05-contract</td>
+                                       <td data-label="date">2010-12-10T11:46:00Z</td>
+                                       <td data-label="language">es</td>
+                                 </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <p>Este conjunto de datos quedaría representado en el formato CSV de la siguiente manera:</p>
+                     <p class="textoColorTitulo cajonSombreado">ocid,id,date,language <br>
+                        ocds-213czf-000-00001,ocds-213czf-000-00001-05-contract,2010-05-10T10:30:00Z,es <br>
+                        ocds-213czf-000-00034,ocds-213czf-000-00034-05-contract,2010-11-05T9:35:00Z,es <br>
+                        ocds-213czf-000-00001,ocds-213czf-000-00001-05-contract,2010-12-10T11:46:00Z,es <br>
+                     </p>
+               </div>
+            </div>
+   
+</div>
+
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'plugins/json-viewer/json-viewer.js' %}"></script>
+<script src="{% static 'js/preguntas.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Compradores</title>
+{% endblock %}
+
+{% load static %}
+
+{% block head_style %}
+<!--<link rel="stylesheet" href="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.css' %}" > <link rel="stylesheet" type="text/css" href="{% static 'plugins/datetimepicker-0.1.39/DateTimePicker.css' %}"/>-->
+
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css' %}"/>
+  
+<!--[if lt IE 9]>
+ <link rel="stylesheet" type="text/css" href="{% static 'plugins/datetimepicker-0.1.39/DateTimePicker-ltie9.css' %}" />
+
+<![endif]-->
+
+         
+
+{% endblock %}
+
+{% block container %}
+
+<div class="container-fluid tamanoMinimo" style="max-width: 1600px">
+   <div class="row">
+      <div class="col-md-6 col-lg-6">
+         <h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Compradores</h1>
+
+      </div>
+      <div class="col-md-6 col-lg-6 pt-3 textoAlineadoDerecha">
+            <label class="switchEdca" style="vertical-align:middle" data-step="2" data-intro="Puedes mostrar solo dependencias o instituciones compradoras.">
+                  <input type="checkbox"  {% if dependencias == '1' %}checked{% endif %} id="dependencias">
+                  <span class="sliderEdca circular"></span>
+                  </label>
+                  <span style="padding: 5px;padding-top:10px;font-size: 15px;font-weight:900;font-family: poppins" class="textoColorGrisOscuro">Mostrar por Dependencias</span>
+      </div>
+   </div>
+   <div class="row mt-3 mb-3 ">
+      <div class="col-lg-6">
+         <div class="campoAzulBusquedaPadre normal" style="margin-left:0" data-step="1" data-intro="Puedes búscar un comprador, filtrando en todas las propiedades disponibles en la siguiente tabla, ingresando un texto aquí.">
+            <input class="form-control form-control-lg campoAzulBusqueda" type="text" placeholder="Busca un Comprador..." value="{% if nombre %}{{nombre}}{% endif %}" filtro="nombre">
+            <i class="fas fa-search cursorMano" id="buscarInformacion"></i>	
+         </div>
+      </div>
+      <div class="col-lg-6 textoAlineadoDerecha">
+            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">Mostrar&nbsp;</h5>
+            <select name=""  class="campoSeleccion ancho70 mt-3 enLinea" id="paginacionBusqueda">
+               <option value="5" {% if paginarPor == 5 %}selected{% endif %}>5</option>
+               <option value="10" {% if paginarPor == 10 %}selected{% endif %}>10</option>
+               <option value="20" {% if paginarPor == 20 %}selected{% endif %}>20</option>
+               <option value="50" {% if paginarPor == 50 %}selected{% endif %}>50</option>
+               <option value="100" {% if paginarPor == 100 %}selected{% endif %}>100</option>
+            </select>
+            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">&nbsp;Resultados</h5>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-12">
+         <div class=" cajonSombreado ">
+            <table class="tablaGeneral mostrarEncabezados" data-step="3" data-intro="Los resultados aparecerán en esta tabla.">
+               <thead>
+                  <tr>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="nombre" tipo="texto">
+                           <table class="alineado">
+                                 <tr><td><span toolTexto="buyer.name">Comprador</span></td><td><span class="ordenEncabezado" opcion="{{ordennombre}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordennombre == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordennombre == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                        
+                        
+                        <input class="campoBlancoTextoSeleccion " placeholder="Nombre" type="text" value="{% if nombre %}{{nombre}}{% endif %}">
+                     </th>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="cp" tipo="numero">
+                           <table class="alineado">
+                                 <tr><td><span toolTexto="Conteo de ocid">Procesos</span></td><td><span class="ordenEncabezado" opcion="{{ordencp}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordencp == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordencp == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                        
+                        
+                        <div class="contenedorFiltroNumerico">
+                              <input  class="campoBlancoTextoSeleccion elementoNumerico" placeholder="Número" opcion="<" type="text" value="{% if cp %}{{cp}}{% endif %}">
+                              <button class="btnFiltroNumerico">{% if operadorcp == '<' %}&lt;{% endif %}{% if operadorcp == '>' %}&gt;{% endif %}{% if operadorcp == '=' %}={% endif %}</button>
+                              <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                    <div class=" contenedorFiltroBusqueda" >
+                                       <div class="flechaArribaBlanca"></div>
+                                       <div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroProcesosMayor" name="selectorProcesos" opcion="<" {% if operadorcp == '<' %}checked{% endif %}>
+                                             <label for="filtroProcesosMayor" >Menor a &nbsp;<span>&lt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroProcesosMenor" name="selectorProcesos" opcion=">" {% if operadorcp == '>' %}checked{% endif %}>
+                                             <label for="filtroProcesosMenor" >Mayor a &nbsp;<span>&gt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroProcesosIgual" name="selectorProcesos" opcion="==" {% if operadorcp == '=' %}checked{% endif %}>
+                                             <label for="filtroProcesosIgual" >Igual a &nbsp;<span>=</span></label>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                        </div>
+                     </th>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="tmc" tipo="numero" >
+                           <table class="alineado">
+                                 <tr><td><span toolTexto="Suma de contracts[n].value.amount"> Total de Monto Contratado</span>
+                                 </td><td><span class="ordenEncabezado" opcion="{{ordentmc}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordentmc == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordentmc == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                         
+                        <div class="contenedorFiltroNumerico">
+                              <input  class="campoBlancoTextoSeleccion elementoNumerico" placeholder="Número" opcion="{{operadortmc}}" type="text" value="{% if tmc %}{{tmc}}{% endif %}">
+                              <button class="btnFiltroNumerico">{% if operadortmc == '<' %}&lt;{% endif %}{% if operadortmc == '>' %}&gt;{% endif %}{% if operadortmc == '=' %}={% endif %}</button>
+                              <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                    <div class=" contenedorFiltroBusqueda" >
+                                       <div class="flechaArribaBlanca"></div>
+                                       <div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroTotalMayor" name="selectorTotal" opcion="<" {% if operadortmc == '<' %}checked{% endif %}>
+                                             <label for="filtroTotalMayor" >Menor a &nbsp;<span>&lt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroTotalMenor" name="selectorTotal" opcion=">" {% if operadortmc == '>' %}checked{% endif %}>
+                                             <label for="filtroTotalMenor" >Mayor a &nbsp;<span>&gt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroTotalIgual" name="selectorTotal" opcion="==" {% if operadortmc == '=' %}checked{% endif %}>
+                                             <label for="filtroTotalIgual" >Igual a &nbsp;<span>=</span></label>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                        </div>
+                        </th>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="pmc" tipo="numero">
+                           <table class="alineado">
+                                 <tr><td> <span toolTexto="Promedio de contracts[n].value.amount">Promedio de Monto Contratado</span>
+                                 </td><td><span class="ordenEncabezado" opcion="{{ordenpmc}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordenpmc == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordenpmc == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                       
+                        <div class="contenedorFiltroNumerico">
+                              <input  class="campoBlancoTextoSeleccion elementoNumerico" placeholder="Número" opcion="{{operadorpmc}}" type="text" value="{% if pmc %}{{pmc}}{% endif %}" autocomplete="off">
+                              <button class="btnFiltroNumerico">{% if operadorpmc == '<' %}&lt;{% endif %}{% if operadorpmc == '>' %}&gt;{% endif %}{% if operadorpmc == '=' %}={% endif %}</button>
+                              <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                    <div class=" contenedorFiltroBusqueda" >
+                                       <div class="flechaArribaBlanca"></div>
+                                       <div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroPromedioMayor" name="selectorPromedio" opcion="<" {% if operadorpmc == '<' %}checked{% endif %}>
+                                             <label for="filtroPromedioMayor" >Menor a &nbsp;<span>&lt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroPromedioMenor" name="selectorPromedio" opcion=">" {% if operadorpmc == '>' %}checked{% endif %}>
+                                             <label for="filtroPromedioMenor" >Mayor a &nbsp;<span>&gt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroPromedioIgual" name="selectorPromedio" opcion="==" {% if operadorpmc == '>' %}checked{% endif %}>
+                                             <label for="filtroPromedioIgual" >Igual a &nbsp;<span>=</span></label>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                        </div>
+                     </th>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="mamc" tipo="numero">
+                           <table class="alineado">
+                                 <tr><td><span toolTexto="El mayor contracts[n].value.amount" >Mayor Monto Contratado</span>
+                                 </td><td><span class="ordenEncabezado" opcion="{{ordenmamc}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordenmamc == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordenmamc == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                        
+                        <div class="contenedorFiltroNumerico">
+                              <input  class="campoBlancoTextoSeleccion elementoNumerico" placeholder="Número" opcion="{{operadormamc}}" type="text" value="{% if mamc %}{{mamc}}{% endif %}">
+                              <button class="btnFiltroNumerico">{% if operadormamc == '<' %}&lt;{% endif %}{% if operadormamc == '>' %}&gt;{% endif %}{% if operadormamc == '=' %}={% endif %}</button>
+                              <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                    <div class=" contenedorFiltroBusqueda" >
+                                       <div class="flechaArribaBlanca"></div>
+                                       <div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroMayorMayor" name="selectorMayor" opcion="<" {% if operadormamc == '<' %}checked{% endif %}>
+                                             <label for="filtroMayorMayor" >Menor a &nbsp;<span>&lt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroMayorMenor" name="selectorMayor" opcion=">" {% if operadormamc == '>' %}checked{% endif %}>
+                                             <label for="filtroMayorMenor" >Mayor a &nbsp;<span>&gt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroMayorIgual" name="selectorMayor" opcion="==" {% if operadormamc == '>' %}checked{% endif %}>
+                                             <label for="filtroMayorIgual" >Igual a &nbsp;<span>=</span></label>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                        </div>
+                        </th>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="memc" tipo="numero">
+                           <table class="alineado">
+                                 <tr><td><span toolTexto="El menor contracts[n].value.amount">Menor Monto Contratado</span>
+                                 </td><td><span class="ordenEncabezado" opcion="{{ordenmemc}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordenmemc == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordenmemc == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                        
+                        <div class="contenedorFiltroNumerico">
+                              <input  class="campoBlancoTextoSeleccion elementoNumerico" placeholder="Número" opcion="{{operadormemc}}" type="text" value="{% if memc %}{{memc}}{% endif %}">
+                              <button class="btnFiltroNumerico">{% if operadormemc == '<' %}&lt;{% endif %}{% if operadormemc == '>' %}&gt;{% endif %}{% if operadormemc == '=' %}={% endif %}</button>
+                              <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                    <div class=" contenedorFiltroBusqueda" >
+                                       <div class="flechaArribaBlanca"></div>
+                                       <div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroMenorMayor" name="selectorMenor" opcion="<" {% if operadormemc == '<' %}checked{% endif %}>
+                                             <label for="filtroMenorMayor" >Menor a &nbsp;<span>&lt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroMenorMenor" name="selectorMenor" opcion=">" {% if operadormemc == '>' %}checked{% endif %}>
+                                             <label for="filtroMenorMenor" >Mayor a &nbsp;<span>&gt;</span></label>
+                                          </div>
+                                          <div class="OpcionFiltroBusquedaNumerico">
+                                             <input type="radio" id="filtroMenorIgual" name="selectorMenor" opcion="==" {% if operadormemc == '=' %}checked{% endif %}>
+                                             <label for="filtroMenorIgual" >Igual a &nbsp;<span>=</span></label>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                        </div>
+                     </th>
+                     <th class="textoAlineadoCentrado campoFiltrado" filtro="fup" tipo="fecha">
+                           <table class="alineado">
+                                 <tr>
+                                    <td><span toolTexto="Último awards[n].date"> Fecha de Último Proceso</span>
+                                 </td>
+                                 <td><span class="ordenEncabezado" opcion="{{ordenfup}}">
+                                       <div class="contenedorFlechasOrden">
+                                             <i class="fas fa-sort-up flechaArriba" {% if ordenfup == 'descendente' %}style="display:none"{% endif %}></i>
+                                             <i class="fas fa-sort-down flechaAbajo" {% if ordenfup == 'ascendente' %}style="display:none"{% endif %}></i>
+                                       </div>
+                                    </span></td></tr>
+                              </table>
+      
+                           
+                           <div class="contenedorFiltroNumerico">
+                                 <input  id="adjudicacionColumna" class="campoBlancoTextoSeleccion fecha" placeholder="YYYY-MM-DD" autocomplete="off" opcion="{{operadorfup}}" type="text" value="{% if fup %}{{fup}}{% endif %}" >
+                                 <button class="btnFiltroNumerico">{% if operadorfup == '<' %}&lt;{% endif %}{% if operadorfup == '>' %}&gt;{% endif %}{% if operadorfup == '=' %}={% endif %}</button>
+                                 <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                       <div class=" contenedorFiltroBusqueda" >
+                                          <div class="flechaArribaBlanca"></div>
+                                          <div>
+                                             <div class="OpcionFiltroBusquedaNumerico">
+                                                <input type="radio" id="filtroFechaMayor" name="selectorFecha" opcion="<" {% if operadorfup == '<' %}checked{% endif %}>
+                                                <label for="filtroFechaMayor" >Menor a &nbsp;<span>&lt;</span></label>
+                                             </div>
+                                             <div class="OpcionFiltroBusquedaNumerico">
+                                                <input type="radio" id="filtroFechaMenor" name="selectorFecha" opcion=">" {% if operadorfup == '>' %}checked{% endif %}>
+                                                <label for="filtroFechaMenor" >Mayor a &nbsp;<span>&gt;</span></label>
+                                             </div>
+                                             <div class="OpcionFiltroBusquedaNumerico">
+                                                <input type="radio" id="filtroFechaIgual" name="selectorFecha" opcion="==" {% if operadorfup == '=' %}checked{% endif %}>
+                                                <label for="filtroFechaIgual" >Igual a &nbsp;<span>=</span></label>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                           </div>
+                        </th>
+                  </tr>
+               </thead>
+               <tbody id="resultadosCompradores">
+                  
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0" >Mostrando <span id="inicioResultado">0</span> a <span id="finResultado">0</span> de <span id="totalResultado">0</span> Compradores</h5>
+      </div>
+      <div class="col-md-6 textoAlineadoDerecha">
+            <h4 class="textoAlineadoDerecha mb-0 descargaIconos enLinea alineadoArriba" style="margin-top:18px">
+                  <span  class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaJSON"><i class="fas fa-file-download"></i>&nbsp;.JSON</span>
+                  <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaCSV"><i class="fas fa-file-download"></i>&nbsp;.CSV</span>
+                  <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaXLSX"><i class="fas fa-file-download"></i>&nbsp;.XLSX</span>
+               </h4>
+               <h4 class="enLinea mb-0 mt-3 enLinea alineadoArriba" onclick="location.href='/preguntas'">
+                  <div class="textoAlineadoCentrado cursorMano botonAyuda transicion" id="informacionTipoDatos" >
+                        <i class="fas fa-question"></i>
+                     </div>
+                     
+               </h4>
+         
+      </div>
+      <div class="col-md-12 textoAlineadoCentrado">
+         <nav class="navegacionTablaGeneral" data-step="3" data-intro="Puedes navegar entre los diversos resultados aquí.">
+           </nav>
+      </div>
+   </div>
+</div>
+<div id="dtBox"></div>
+{% endblock %}
+
+{% block script_content %}
+<!--<script src="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>-->
+<!--[if lt IE 9]>
+ <script type="text/javascript" src="{% static 'plugins/datetimepicker-0.1.39/DateTimePicker-ltie9.js' %}"></script>
+   <![endif]-->
+
+<!-- For i18n Support <script type="text/javascript" src="{% static 'plugins/datetimepicker-0.1.39/DateTimePicker.js' %}"></script> <script type="text/javascript" src="{% static 'plugins/datetimepicker-0.1.39/i18n/DateTimePicker-i18n.js' %}">-->
+
+<script src="{% static 'plugins/jquery-mask-1.14.15/jquery.mask.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-datetimepicker/moment-with-locales.js' %}"></script>
+
+<script src="{% static 'plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'plugins/autoNumeric-4.1.0/autoNumeric.min.js' %}"></script>
+
+<script src="{% static 'js/compradores.js' %}"></script>
+{% endblock %}

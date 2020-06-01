@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Inicio</title>
+{% endblock %}
+
+{% block container %}
+{% load static %}
+
+<div class="container-fluid fondoColorPrimario fondoPrincipalInicio">
+      <div class="container-fluid">
+         <div class="row contenedorBusquedaInicial"  >
+            <div class="contenedorBotonBlancoFiltroBusqueda">
+               <button class="botonBlancoFiltroBusqueda toolTip" id="botonBlancoFiltroBusquedaInicio" toolTexto="Selecciona un Filtro" data-step="2" data-intro="Puedes seleccionar un filtro para realizar tu búsqueda.">
+               <i class="fas fa-filter"></i>	
+               </button>
+               <div class="preContenedorFiltroBusqueda animated fadeIn">
+                  <div class=" contenedorFiltroBusqueda ">
+                     <div class="flechaArribaBlanca"></div>
+                     <div>
+                        <div class="OpcionFiltroBusqueda">
+                           <input type="radio" id="metodoProceso" name="selector" checked>
+                           <label for="metodoProceso" class="etiquetaOpcionFiltroBusqueda textoColorPrimario" >Procesos de Contratación</label>
+                        </div>
+                        <div class="OpcionFiltroBusqueda">
+                           <input type="radio" id="metodoContrato" name="selector" >
+                           <label for="metodoContrato" class="etiquetaOpcionFiltroBusqueda textoColorPrimario">Contratos</label>
+                        </div>
+                        <div class="OpcionFiltroBusqueda">
+                           <input type="radio" id="metodoPago" name="selector" >
+                           <label for="metodoPago" class="etiquetaOpcionFiltroBusqueda textoColorPrimario" >Procesos de Pago</label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="campoBlancoBusquedaPadre" data-step="1" data-intro="Puedes buscar un texto relacionado con el titulo o descripción de un proceso de contratación, contrato, nombres de proveedores o compradores.">
+               <input class="form-control form-control-lg campoBlancoBusqueda toolTip" toolPosicion="bottom" toolTexto="Ingresa un texto a buscar" type="text" placeholder="Busca una contratación..." id="campoBlancoBusquedaProcesos">
+               <i class="fas fa-search cursorMano toolTip" toolTexto="Haz click para buscar" id="campoBlancoBusquedaProcesosBoton" title="Buscar"></i>	
+            </div>
+         </div>
+         <div class="row">
+            <h1 class="tituloInicio">
+               Busca, explora y visualiza las contrataciones <br>de las instituciones del gobierno de Honduras
+            </h1>
+         </div>
+
+         <div class="row mt-5 mb-3 contenedorEstadisticaInicial animated fadeIn" style="display:none">
+            <div class="col-6 col-sm-2 col-md-2 col-lg-2 offset-lg-1 offset-md-1 offset-sm-1 p-2">
+               <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="proveedores" toolTexto="<b>Cantidad de Proveedores</b><br><div style='text-align:left'>Fuente de Datos:<br>- HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones.<br>- Módulo de Difusión Directa de Contratos.<br>- Catálogo Electrónico.<br>- Sistema de Administración Financiera Integrada (SIAFI).<div>">0</div>
+               <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+               <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Proveedores</div>
+            </div>
+            <div class="col-6 col-sm-2 col-md-2 col-lg-2 p-2">
+                  <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="contratos" toolTexto="<b>Cantidad de Contratos</b><br><div style='text-align:left'>Fuente de Datos:<br>- HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones.<br>- Módulo de Difusión Directa de Contratos.<br>- Catálogo Electrónico.<div>">0</div>
+                  <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+                  <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Contratos</div>
+               </div>
+            <div class="col-6 col-sm-2 col-md-2 col-lg-2 p-2">
+               <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="procesos" toolTexto="<b>Cantidad de Procesos de Contratación</b><br><div style='text-align:left'>Fuente de Datos:<br>- HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones.<br>- Módulo de Difusión Directa de Contratos.<br>- Catálogo Electrónico.<div>">0</div>
+               <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+               <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Procesos <span> de Contratación</span></div>
+            </div>
+            <div class="col-6 col-sm-2 col-md-2 col-lg-2 p-2">
+                  <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="pagos" toolTexto="<b>Cantidad de Procesos de Pago</b><br><div style='text-align:left'>Fuente de Datos:<br>- Sistema de Administración Financiera Integrada (SIAFI).<div>">0</div>
+                  <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+                  <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Procesos <span> de Pago</span></div>
+               </div>
+            
+            <div class="col-12 col-sm-2 col-md-2 col-lg-2 p-2">
+                  <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="compradores" toolTexto="<b>Cantidad de Dependencias Compradoras</b><br><div style='text-align:left'>Fuente de Datos:<br>- HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones.<br>- Módulo de Difusión Directa de Contratos.<br>- Catálogo Electrónico.<br>- Sistema de Administración Financiera Integrada (SIAFI).<div>">0</div>
+                  <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+                  <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1"  >Compradores</div>
+               </div>
+         </div>
+      </div>
+      <img src="{% static 'img/landing/iconosEdca.svg' %}" class="fondoIconos" style="display:none">
+   </div>
+   <div class="container">
+      <div class="row mt-5 mb-5">
+         <div class="col-md-6">
+            <div class="col-md-12">
+               <h2 class="textoColorPrimario mt-0 textoTitulo textoAlineadoCentrado">API Disponible</h2>
+               <p class="lead textoAlineadoCentrado">Implementa la API del Portal de Contrataciones Abiertas de Honduras en el sitio de tu institucion o tu propio proyecto. <a href="/servicio">Accede</a></p>
+            </div>
+            <div class="col-md-12">
+               <img src="{% static 'img/landing/api.png' %}" style="max-height: 300px;margin:0 auto;display: block">
+            </div>
+         </div>
+
+         <div class="col-md-12 d-md-none d-lg-none d-xl-none">
+               <div class="separadorElementosInicio"></div>
+            </div>
+         <div class="col-md-6">
+            <div class="col-md-12">
+               <img src="{% static 'img/landing/bulkdownload.png' %}" style="max-height: 300px;margin:0 auto;display: block">
+            </div>
+            <div class="col-md-12">
+               <h2 class="textoColorPrimario mt-0 textoTitulo textoAlineadoCentrado">Descarga de Datos</h2>
+               <p class="lead textoAlineadoCentrado">Descarga los Datos para analizarlos en tu Computadora. <a href="/descargas">Descargas</a></p>
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="separadorElementosInicio"></div>
+         </div>
+
+
+         
+         <div class="col-md-12">
+               <div class="col-md-12">
+                  <img src="{% static 'img/landing/politica.png' %}" style="max-height: 300px;margin:0 auto;display: block">
+               
+                  <h2 class="textoColorPrimario mt-0 textoTitulo textoAlineadoCentrado">Política de Publicación</h2>
+                  <p class="lead textoAlineadoCentrado">Visualiza la Política de Publicación del Portal de Contrataciones Abiertas de Honduras. <br><a href="/static/pdf/Politica_de_publicacion_EDCA_ONCAE.pdf">Política de Publicación, ONCAE</a><br><a href="/static/pdf/POLITICA_EDCA-SEFIN_v3-4_20191031v1819.pdf">Política de Publicación, SEFIN</a></p>
+               </div>
+            </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'js/inicio.js' %}"></script>
+
+<script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function () {
+      var form = document.getElementById("form_buscar");
+
+      document.getElementById("botonBusquedaProceso").addEventListener("click", function () {
+        form.submit();
+      });
+    });
+</script>
+{% endblock %}
+

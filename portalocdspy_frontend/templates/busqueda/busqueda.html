@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Busqueda</title>
+{% endblock %}
+
+
+{% load static %}
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/elastic-list/style.css' %}" >
+{% endblock %}
+  
+{% block container %}
+      <div class="container  busquedaEspaciadoHorizontal tamanoMinimo">
+         <div class="contenedorFiltrosBusqueda" data-step="3" data-intro="Puedes aplicar un filtro según el método de busqueda que hayas seleccionado.">
+            <h4 class="textoColorPrimario tituloFiltrosMenu titularColor">
+               Filtros 
+               <div class="cursorMano cerrarContenedorFiltrosBusqueda" style="display:none"><i class="fas fa-times textoColorGris"></i></div>
+            </h4>
+            <div class="filtrosContenedoFiltrosBusqueda">
+            <!--<div class="filtroBusquedaPagina">
+                  <div class="tituloFiltroBusquedaPagina">
+                    Moneda
+                  </div>
+                  <div class="opcionesFiltroBusquedaPagina">
+                    <div class="opcionFiltroBusquedaPagina" value="HNL">
+                     <i class="fas"></i>
+                     <span>HNL (30)</span>
+                    </div>
+                    <div class="opcionFiltroBusquedaPagina" value="USD">
+                     <i class="fas"></i>
+                     <span>USD (15)</span>  
+                    </div>
+                  </div>
+                  </div>
+                  <div class="filtroBusquedaPagina">
+                  <div class="tituloFiltroBusquedaPagina">
+                   Comprador
+                  </div>
+                  <div class="opcionesFiltroBusquedaPagina">
+                   <div class="opcionFiltroBusquedaPagina" value="HNL">
+                    <i class="fas"></i>
+                    <span>AMDC</span>  
+                   </div>
+                   <div class="opcionFiltroBusquedaPagina" value="USD">
+                    <i class="fas"></i>
+                    <span>INE</span> 
+                   </div>
+                  </div>
+                  </div>
+                  
+                  <div class="filtroBusquedaPagina">
+                  <div class="tituloFiltroBusquedaPagina">
+                   Categoría
+                  </div>
+                  <div class="opcionesFiltroBusquedaPagina">
+                   <div class="opcionFiltroBusquedaPagina" value="HNL">
+                    <i class="fas"></i>
+                    <span>Obras</span>   
+                   </div>
+                   <div class="opcionFiltroBusquedaPagina" value="USD">
+                    <i class="fas"></i>
+                    <span>Bienes</span>  
+                   </div>
+                   <div class="opcionFiltroBusquedaPagina" value="USD">
+                     <i class="fas"></i>
+                     <span>Servicios</span>  
+                    </div>
+                  </div>
+                  </div>
+                  <div class="filtroBusquedaPagina">
+                  <div class="tituloFiltroBusquedaPagina">
+                   Selección
+                  </div>
+                  <div class="opcionesFiltroBusquedaPagina">
+                   <div class="opcionFiltroBusquedaPagina" value="HNL">
+                    <i class="fas"></i>
+                    <span>Compras Menores</span> 
+                   </div>
+                   <div class="opcionFiltroBusquedaPagina" value="USD">
+                    <i class="fas"></i>
+                    <span>Concurso Privado</span>   
+                   </div>
+                   <div class="opcionFiltroBusquedaPagina" value="USD">
+                     <i class="fas"></i>
+                     <span>Concurso Público Nacional</span>  
+                    </div>
+                    <div class="opcionFiltroBusquedaPagina" value="USD">
+                     <i class="fas"></i>
+                     <span>Concurso Público Internacional</span>    
+                    </div>
+                  </div>
+                  </div>-->
+               <div id="elastic-list">
+
+
+                     <div class="list-container col-md-12 2">
+                           <div class="panel panel-default ">
+                               <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                               <input type="text" class="elastic-filter" placeholder="" >
+                               <ul class="list-group" id="ulmonedas">
+                                    <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="list-container col-md-12 2">
+                           <div class="panel panel-default ">
+                               <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                               <input type="text" class="elastic-filter" placeholder="" >
+                               <ul class="list-group" id="ulmonedas">
+                                    <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="list-container col-md-12 2">
+                           <div class="panel panel-default ">
+                               <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                               <input type="text" class="elastic-filter" placeholder="" >
+                               <ul class="list-group" id="ulmonedas">
+                                    <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="list-container col-md-12 2">
+                           <div class="panel panel-default ">
+                               <div class="panel-heading cargaEfecto"  style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                               <input type="text" class="elastic-filter" placeholder="" >
+                               <ul class="list-group" id="ulmonedas">
+                                    <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                                      <li class="list-group-item" >
+                                          <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                          <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                      </li>
+                               </ul>
+                           </div>
+                       </div>
+                      
+                       
+                      
+               </div>
+            </div>
+         </div>
+         <div class="contenedorResultadosBusqueda">
+            <div class="container-fluid">
+               <div class="row  ">
+                     <h4 class="textoColorPrimario tituloFiltrosMenu titularColor">
+                           Búsqueda
+                        </h4>
+                  <div class="campoAzulBusquedaPadre"  data-step="1" data-intro="Según el texto que ingreses en este campo puedes buscar, filtrando por alguno de los filtros que hayas seleccionado.">
+                     <input class="form-control form-control-lg campoAzulBusqueda toolTip" toolPosicio="bottom" toolTexto="Ingresa un texto a buscar" id="campoBusquedaProceso" type="text" placeholder="Busca una contratación..." title="Busca una contratación..." value="{% if request.GET.term %}{{request.GET.term}}{% endif %}" autocomplete="off">
+                     <i class="fas fa-search cursorMano toolTip" toolTexto="Haz click para buscar" id="botonBusquedaProceso"></i> 
+                  </div>
+                  <div class="contenedorBotonAzulFiltroBusqueda"  style="display:none">
+                     <button class="botonAzulFiltroBusqueda" title="Filtros">
+                     <i class="fas fa-filter"></i> 
+                     </button>
+                  </div>
+                  
+                     <div  class="metodoBusquedaContenedor anchoTotal mt-3 mb-3 textoAlineadoCentrado " data-step="2" data-intro="Puedes seleccionar un método de búsqueda para realizar un filtrado por procesos de contratación, contratos y procesos de pagos.">
+                           <div class="btn-group sombraBasica" role="group" aria-label="Metodo de Busqueda" >
+                              <a href="javascript:void(0)" id="opcionProcesosContratacion" name="metodoBusqueda" toolTexto="Buscar en Procesos de Contratación de HonduCompras 1, ONCAE" metodo="proceso"  class="btn btn-primary fondoColorSecundario {% if 'proceso' == request.GET.metodo %}activo{% endif %}"><span>Procesos de Contratación </span></a>
+                              <a href="javascript:void(0)" id="opcionContratos" name="metodoBusqueda" toolTexto="Buscar en Contratos Provenientes de Sistemas de ONCAE" metodo="contrato"  class="btn btn-primary fondoColorSecundario {% if 'contrato' == request.GET.metodo %}activo{% endif %}"><span>Contratos</span></a>
+                              <a href="javascript:void(0)" id="opcionProcesosPago" name="metodoBusqueda" toolTexto="Buscar en Procesos de Pago Provenientes de Sistemas de SEFIN" metodo="pago"  class="btn btn-primary fondoColorSecundario {% if 'pago' == request.GET.metodo %}activo{% endif %}"><span>Procesos de Pago</span></a>
+                               </div>
+                          <!-- <div class="OpcionFiltroBusqueda">
+                                 <input type="radio" id="opcionProcesosContratacion" name="metodoBusqueda" metodo="proceso" {% if 'proceso' == request.GET.metodo %}checked{% endif %}>
+                                 <label for="opcionProcesosContratacion" class="etiquetaOpcionFiltroBusqueda textoColorPrimario textoTitular2Grues">Procesos de Contratación</label>
+                              </div>
+                              <div class="OpcionFiltroBusqueda">
+                                    <input type="radio" id="opcionContratos" name="metodoBusqueda" metodo="contrato" {% if 'contrato' == request.GET.metodo %}checked{% endif %}>
+                                    <label for="opcionContratos" class="etiquetaOpcionFiltroBusqueda textoColorPrimario ">Contratos</label>
+                                 </div>
+                                 <div class="OpcionFiltroBusqueda">
+                                       <input type="radio" id="opcionProcesosPago" name="metodoBusqueda" metodo="pago" {% if 'pago' == request.GET.metodo %}checked{% endif %} >
+                                       <label for="opcionProcesosPago" class="etiquetaOpcionFiltroBusqueda textoColorPrimario ">Procesos de Pago</label>
+                                    </div>-->
+                     </div>
+                     <div>
+                        <p>
+                           {% if 'proceso' == request.GET.metodo %}<b class="textoColorGris">* Buscar en Procesos de Contratación de HonduCompras 1.0</b>{% endif %}
+                           {% if 'contrato' == request.GET.metodo %}<b class="textoColorGris">* Buscar en Contratos de HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones, Módulo de Difusión Directa de Contratos y Catálogo Electrónico.</b>{% endif %}
+                           {% if 'pago' == request.GET.metodo %}<b class="textoColorGris">* Buscar en Procesos de Pago de Sistema de Administración Financiera Integrada (SIAFI).</b>{% endif %}
+                           
+                           
+                       
+                        </p>
+                     </div>
+                 
+               </div>
+            </div>
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="contenedorFiltrosx cajonSombreado anchoTotal">
+                     <div class="row">
+                        <div class="col-6 col-sm-7 col-md-6">
+                           <div class="tituloFiltrosAplicados">Filtros Aplicados:</div>
+                        </div>
+                        <div class="col-6 col-sm-5 col-md-6 textoAlineadoIzquierda" id="contenedorSinFiltros">
+                           
+                             <h4 class="textoColorPrimario titularColor">Ninguno</h4>
+                           </div>
+                        <div class="col-6 col-sm-5 col-md-6 textoAlineadoDerecha" id="contenedorFiltros" style="display: none">
+
+                           <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros">Quitar Todos</a>
+                        </div>
+                     </div>
+                     <div class="row" id="listaFiltrosAplicados">
+                        <!--<div class="grupoEtiquetaFiltro col-md-12 mb-1">
+                           <div class="grupoEtiquetaTitulo">
+                              Moneda:
+                           </div>
+                           <div class="filtrosAplicados">
+                              <div class="etiquetaFiltro">
+                                 USD
+                                 <i class="fas fa-times"></i>
+                              </div>
+                              <div class="etiquetaFiltro">
+                                 HNL
+                                 <i class="fas fa-times"></i>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="grupoEtiquetaFiltro col-md-12 mb-1">
+                           <div class="grupoEtiquetaTitulo">
+                              Seleccion:
+                           </div>
+                           <div class="filtrosAplicados">
+                              <div class="etiquetaFiltro">
+                                 Concurso Público Nacional
+                                 <i class="fas fa-times"></i>
+                              </div>
+                              <div class="etiquetaFiltro">
+                                 Compras Menores
+                                 <i class="fas fa-times"></i>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="grupoEtiquetaFiltro col-md-12 mb-1">
+                           <div class="grupoEtiquetaTitulo">
+                              Categoria:
+                           </div>
+                           <div class="filtrosAplicados">
+                              <div class="etiquetaFiltro">
+                                 Obras
+                                 <i class="fas fa-times"></i>
+                              </div>
+                              <div class="etiquetaFiltro">
+                                 Bienes
+                                 <i class="fas fa-times"></i>
+                              </div>
+                           </div>
+                        </div>-->
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+            <div class="container-fluid mt-3">
+               <div class="row">
+                  <div class="informacionResultadosBusqueda cajonSombreado anchoTotal" data-step="4" data-intro="Puedes ver un resumen de resultados en esta sección.">
+                     <div class="row elementosResultadosResumen">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                           <table>
+                              <tbody>
+                                 <tr >
+                                    <td class="tituloTablaCaracteristicas pb-1" id="textoTotalBusqueda">Total de </td>
+                                    <td class="contenidoTablaCaracteristicas pb-1"> 
+                                       &nbsp;<span class="botonGeneral fondoColorPrimario cargaEfecto" id="totalProcesos">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="tituloTablaCaracteristicas pb-1">Promedio de Monto:</td>
+                                    <td class="contenidoTablaCaracteristicas pb-1"> 
+                                       <span class="botonGeneral fondoColorPrimario cargaEfecto" id="promedioMonto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                           <table>
+                              <tbody>
+                                 <tr >
+                                    <td class="tituloTablaCaracteristicas pb-1">Total de Compradores:</td>
+                                    <td class="contenidoTablaCaracteristicas pb-1"> 
+                                       &nbsp;<span class="botonGeneral fondoColorPrimario cargaEfecto" id="totalCompradores">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="tituloTablaCaracteristicas pb-1"> Total de Proveedores:</td>
+                                    <td class="contenidoTablaCaracteristicas pb-1"> 
+                                       &nbsp;<span class="botonGeneral fondoColorPrimario cargaEfecto" id="totalProveedores">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="container-fluid contenedorBusqueda pt-2 mb-5" >
+               <div class="row" data-step="5" data-intro="Una vez que buscaste, los resultados aparecen en esta sección, según el método de búsqueda podrás acceder a diversas propiedades del resultado.">
+                     <div class="col-12 col-sm-12 col-md-12 p-0">
+                           <h4 class="textoColorGris titularColor">Ordenar por: &nbsp;<span>
+                                 <select name="" id="parametrosOrden" class="form-controlx seleccionCampoBlanco" style="display: inline-block;width: 250px;border-radius: 19px;">
+                                    <option value="">Seleccionar</option>
+                                 </select>
+                                 <label class="switchEdca" style="vertical-align:middle;margin:0" toolTexto="Orden Ascendente o Descendente">
+                                    <input type="checkbox" id="ordenBusqueda">
+                                    <span class="sliderEdca circular"></span>
+                                    </label>
+                                    <span style="padding: 5px;/*padding-top:10px;*/font-size: 18px;font-weight:900;font-family: poppins" class="textoColorPrimario">ASC</span>
+      
+                           </span>
+                        </h4>
+                           
+                        </div>
+                  <div class="col-12 col-sm-6 col-md-6 p-0">
+                     <h4 class="textoColorPrimario titularColor">Resultados </h4>
+                     
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 textoAlineadoDerecha">
+                     <h4 class="descargaIconos enLinea"><span  class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaJSON"><i class="fas fa-file-download"></i>&nbsp;.JSON</span><span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion"  id="descargaCSV"><i class="fas fa-file-download"></i>&nbsp;.CSV</span><span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion"  id="descargaXLSX"><i class="fas fa-file-download"></i>&nbsp;.XLSX</span></h4>
+                     
+                     <h4 class="enLinea mb-0 enLinea alineadoArriba" onclick="location.href='/preguntas'">
+                           <div class="textoAlineadoCentrado cursorMano botonAyuda transicion toolTip" id="informacionTipoDatos" toolTexto="¿Que son estos tipos de datos?">
+                                 <i class="fas fa-question"></i>
+                              </div>
+                        </h4>
+                  </div>
+                  
+                  <div id="listaResultadosBusqueda" class="col-12 col-sm-12 col-md-12 p-0">
+
+                        <div class="resultadoBusquedaProceso transicion cajonSombreado anchoTotal"> <div class="p-1"> <div class="textoTituloResultadoBusqueda"> <div class="row"> <div class="col-12 col-sm-8 col-md-8 col-lg-9"><span class="cargaEfecto" style="border-radius: 10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="col-12 col-sm-4 col-md-4 col-lg-3"> <div class="textoAlineadoDerecha"><span class="textoColorGris textoAlineadoDerecha toolTip enLinea" class="cargaEfecto" style="border-radius: 10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></div></div></div></div><div class="contenedorProceso"> <div class="contenedorTablaCaracteristicas"> <table class=""> <tbody class=""> <tr class=""> <td class="tituloTablaCaracteristicas" tabindex="0" style="outline: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></td></tr><tr class=""> <td class="tituloTablaCaracteristicas" tabindex="0" style="outline: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"> <span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span> </td></tr><tr class=""> <td class="tituloTablaCaracteristicas" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"><span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></td></tr><tr class=""> <td class="tituloTablaCaracteristicas" tabindex="0" style="outline: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"> <span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></td></tr></tbody> </table> </div><div class="contenedorTablaCaracteristicas"> <table class="anchoTotal"> <tbody class=""> <tr class=""> <td class="textoAlineadoDerecha"> <div class="montoTotalProceso"> <div class="contenedorMonto"> <div class="textoColorGris"><span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></div><br><div class="valorMonto" style="line-height: unset"><span class="cargaEfecto" style="border-radius: 20px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="textoColorPrimario">&nbsp;&nbsp;<span class="cargaEfecto" style="border-radius: 20px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></div></div></div></td></tr></tbody> </table> </div></div></div>
+
+                        <div class="resultadoBusquedaProceso transicion cajonSombreado anchoTotal"> <div class="p-1"> <div class="textoTituloResultadoBusqueda"> <div class="row"> <div class="col-12 col-sm-8 col-md-8 col-lg-9"><span class="cargaEfecto" style="border-radius: 10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="col-12 col-sm-4 col-md-4 col-lg-3"> <div class="textoAlineadoDerecha"><span class="textoColorGris textoAlineadoDerecha toolTip enLinea" class="cargaEfecto" style="border-radius: 10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></div></div></div></div><div class="contenedorProceso"> <div class="contenedorTablaCaracteristicas"> <table class=""> <tbody class=""> <tr class=""> <td class="tituloTablaCaracteristicas" tabindex="0" style="outline: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></td></tr><tr class=""> <td class="tituloTablaCaracteristicas" tabindex="0" style="outline: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"> <span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span> </td></tr><tr class=""> <td class="tituloTablaCaracteristicas" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"><span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></td></tr><tr class=""> <td class="tituloTablaCaracteristicas" tabindex="0" style="outline: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="contenidoTablaCaracteristicas"> <span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></td></tr></tbody> </table> </div><div class="contenedorTablaCaracteristicas"> <table class="anchoTotal"> <tbody class=""> <tr class=""> <td class="textoAlineadoDerecha"> <div class="montoTotalProceso"> <div class="contenedorMonto"> <div class="textoColorGris"><span class="cargaEfecto" style="border-radius: 10px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></div><br><div class="valorMonto" style="line-height: unset"><span class="cargaEfecto" style="border-radius: 20px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="textoColorPrimario">&nbsp;&nbsp;<span class="cargaEfecto" style="border-radius: 20px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></div></div></div></td></tr></tbody> </table> </div></div></div>
+
+                  </div>
+               
+                  <div class="col-md-12 textoAlineadoCentrado">
+                     <nav class="navegacionTablaGeneral">
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'plugins/elastic-list/data.js' %}"></script>
+<script src="{% static 'plugins/elastic-list/elastic-list.js' %}"></script>
+<script src="{% static 'js/busqueda.js' %}"></script>
+{% endblock %}

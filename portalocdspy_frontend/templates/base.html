@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% block head_content %}{% endblock %}
+
+      {% load static %}
+      <meta name="description" content="Portal del Estándar de Datos de Contrataciones Abiertas en Honduras"/>
+      <meta name="keywords" content="OCDS, EDCA, Honduras, ONCAE, Contrataciones, Abiertas"/>
+      <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+      <link rel="stylesheet" href="{% static 'plugins/bootstrap-4.3.1/css/bootstrap.min.css' %}">
+      {% block head_style %}{% endblock %}
+      <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+      <link rel="stylesheet" href="{% static 'plugins/fontawesome-free-5.8.2/css/all.min.css' %}" >
+      <link rel="stylesheet" href="{% static 'plugins/animate-3.7.0/animate.css' %}">
+      <link rel="stylesheet" href="{% static 'plugins/intro.js-2.9.3/introjs.min.css' %}">
+      <link rel="stylesheet" href="{% static 'plugins/alerty-0.0.1/alerty.min.css' %}">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" >
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149122958-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149122958-1');
+      </script>
+
+    </head>
+   <body>
+       {% include "nav.html" %}
+
+       {% block container %}
+       {% endblock %}
+
+       
+       
+{% if request.path != '/tableroProcesosContratacion/' and request.path != '/indicadoresProcesosContratacion/' and request.path != '/tableroProcesosPago/' %}{% include "footer.html" %}{% endif %}
+
+      <script type="text/javascript" src="{% static 'plugins/intro.js-2.9.3/intro.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/polyfill.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/jquery-3.4.1/jquery-3.4.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/bootstrap-4.3.1/js/bootstrap.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/countto/jquery.countTo.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/popper-1.15.0/popper.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/tippy-4.3.1/index.all.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/fileSaver-2.0.2/FileSaver.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/sheetJs-0.15.3/xlsx.full.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'plugins/alerty-0.0.1/alerty.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/general.js' %}"></script>
+      {% block script_content %}{% endblock %}
+    </body>
+</html>

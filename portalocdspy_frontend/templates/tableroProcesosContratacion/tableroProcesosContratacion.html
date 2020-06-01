@@ -1,0 +1,507 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Procesos de Contratación</title>
+{% endblock %}
+
+{% load static %}
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/elastic-list/style.css' %}" >
+{% endblock %}
+{% block container %}
+<div class="container-fluid  busquedaEspaciadoHorizontal elementosDashboard">
+   
+   <div class="contenedorFiltrosBusqueda">
+      <h4 class="textoColorPrimario tituloFiltrosMenu titularColor">
+         Filtros <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros2" style="font-size: 10px;float:right;display: none;" toolTexto="Quitar Todos los Filtros"> Quitar</a>
+         <div class="cursorMano cerrarContenedorFiltrosBusqueda" style="display:none"><i class="fas fa-times textoColorGris"></i></div>
+        
+      </h4>
+      <div id="extencionFiltrosAplicados" class="mb-1 d-none d-sm-block d-md-block d-lg-block d-xl-block">
+
+         </div>
+      <div class="filtrosContenedoFiltrosBusqueda ">
+         <div id="elastic-list" class="contenedorListaElasticaEspacio">
+               <div class="list-container col-md-12 2">
+                     <div class="panel panel-default ">
+                         <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                         <input type="text" class="elastic-filter" placeholder="" >
+                         <ul class="list-group" id="ulmonedas">
+                              <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                         </ul>
+                     </div>
+                 </div>
+                 <div class="list-container col-md-12 2">
+                     <div class="panel panel-default ">
+                         <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                         <input type="text" class="elastic-filter" placeholder="" >
+                         <ul class="list-group" id="ulmonedas">
+                              <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                         </ul>
+                     </div>
+                 </div>
+                 <div class="list-container col-md-12 2">
+                     <div class="panel panel-default ">
+                         <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                         <input type="text" class="elastic-filter" placeholder="" >
+                         <ul class="list-group" id="ulmonedas">
+                              <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                         </ul>
+                     </div>
+                 </div>
+                 <div class="list-container col-md-12 2">
+                     <div class="panel panel-default ">
+                         <div class="panel-heading cargaEfecto"  style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                         <input type="text" class="elastic-filter" placeholder="" >
+                         <ul class="list-group" id="ulmonedas">
+                              <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                                <li class="list-group-item" >
+                                    <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                </li>
+                         </ul>
+                     </div>
+                 </div>
+         </div>
+      </div>
+   </div>
+      <div class="contenedorResultadosBusqueda" style="padding-right:0">
+   
+         <div class="container-fluid contenedorBusqueda mb-5 removerEspacio" style="/*padding-right:15px*/">
+            <div class="row">
+               <div class="col-12 ">
+                  <h4 class="textoColorPrimario tituloFiltrosMenux titularColor">
+                     <table class="" style="table-layout: fixed;width: 100%;border-collapse: collapse;border:none">
+                        <tr>
+                           <td>
+                                 <span>
+                                       Tablero de Procesos de Contratación
+                                 </span>
+                                 <!--<div>
+                                    <p style="margin:0">
+                                       <span style="color:red">*</span>
+                                       <b class="textoColorGris">No Definido corresponde a los contratos de "Compras Menores" y las órdenes de compra de "Catálogo Electrónico".</b>
+                                    </p>
+                                 </div>
+                              -->
+                           </td>
+                           <td style="width: 70px;">
+                                 <div class="contenedorBotonAzulFiltroBusqueda"  style="display:none;margin-right: 10px;">
+                                       <button class="botonAzulFiltroBusqueda" title="Filtros">
+                                       <i class="fas fa-filter"></i> 
+                                       </button>
+                                    </div>
+                           </td>
+                        </tr>
+                     </table>
+                     
+                     
+                     
+                  </h4>
+                  <div class="cajonFiltrosAplicadosDashboard  cajonSombreado" id="filtrosAplicadosItems" style="position: fixed;right: 28px;z-index: 1; min-width: 280px;">
+
+                     <div class="row">
+                                       <div class="col-6 col-sm-7 col-md-6">
+                                          <div class="tituloFiltrosAplicados textoAlineadoIzquierda">Filtros Aplicados:</div>
+                                       </div>
+                                       <div class="col-6 col-sm-5 col-md-6 textoAlineadoIzquierda" id="contenedorSinFiltros">
+                                          
+                                            <h4 class="textoColorPrimario titularColor" style="margin-top:3px">Ninguno</h4>
+                                       </div>
+                                       <div class="col-6 col-sm-5 col-md-6 textoAlineadoDerecha" id="contenedorFiltros" style="display: none">
+               
+                                          <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros" style="font-size: 10px"> Quitar Todos</a>
+                                       </div>
+                                       <div class="col-12" id="listaFiltrosAplicados">
+               
+                                       
+                                       </div>
+                     </div>
+                    <!--<div class="row textoAlineadoDerecha pt-2" id="listaFiltrosAplicados"></div>-->
+                  </div>
+               </div>
+               
+               
+            </div>
+            <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-4 ">
+                        <div class="cajonSombreado ">
+                              <div class="tituloGrafico">
+                              <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Procesos de Contratación por Tipo de Contrato</h4>
+                              </div>
+                              <div class="contenedorGrafico">
+                              <div class="grafico" id="CantidadProcesosTipoContrato"  style="height: 350px"></div>
+                              <div>
+                                 <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                    <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos.
+                                 </p>
+                              </div>
+                              </div>
+                        </div>
+                        </div>
+
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-4">
+                           <div class="cajonSombreado " style="height: 100%;">
+                                 <div class="tituloGrafico">
+                                 <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Contratos por Tipo de Contrato</h4>
+                                 </div>
+                                 <div class="contenedorGrafico">
+                                 <div class="grafico" id="MontoProcesosTipoContrato"  style="height: 350px"></div>
+                                 <div>
+                                    <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                       <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                                    </p>
+                                 </div>
+                                 </div>
+                                 </div>
+                           </div>
+                           </div>
+
+
+                           <div class="row">
+                                 <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-4">
+                                       <div class="cajonSombreado ">
+                                             <div class="tituloGrafico">
+                                             <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Procesos de Contratación por Modalidad de Contratación</h4>
+                                             </div>
+                                             <div class="contenedorGrafico">
+                                             <div class="grafico minAlto_500"  id="CantidadProcesosModalidadContratacion"  style="height: 500px"></div>
+                                             <div>
+                                                <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                                   <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos.
+                                                </p>
+                                             </div>
+                                             </div>
+                                       </div>
+                                       </div>
+                                       
+                                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-4">
+                                                   <div class="cajonSombreado " style="height: 100%;">
+                                                         <div class="tituloGrafico">
+                                                         <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Contratos por Modalidad de Contratación</h4>
+                                                         </div>
+                                                         <div class="contenedorGrafico">
+                                                         <div class="grafico minAlto_500" id="MontoContratosModalidadContratacion"  style="height: 500px"></div>
+                                                         <div>
+                                                            <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                                               <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                                                            </p>
+                                                         </div>
+                                                         </div>
+                                                   </div>
+                                                   </div>
+                           </div>
+                        
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad y Porcentaje de Procesos de Contratación Iniciados con Relación al Total por Mes</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico" id="cantidadProcesos"  style="height: 400px"></div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. 
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Procesos de Contratación
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico cantidadProcesos" id="cantidadPagosCajas"  style="/*min-height: 300px*/">
+                           <div class="row">
+                                 <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                    <div class="p-2">
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadProcesosPromedio">0</span></div>
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" >Promedio Mensual</div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                       <div class="p-2">
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadProcesosMayor">0</span></div>
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" >Mayor Mensual</div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                          <div class="p-2">
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadProcesosMenor">0</span></div>
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" >Menor Mensual</div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                             <div class="p-2">
+                                             <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadProcesosTotal">0</span></div>
+                                             <div class="titularColor textoAlineadoDerecha textoColorGris" >Total en el Año</div>
+                                             </div>
+                                          </div>
+                           </div>
+                           
+                           </div>
+                           <div>
+                              <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                 <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. 
+                              </p>
+                           </div>
+                     </div>
+                  </div>
+               </div>
+         
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Contratos por Mes</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico" id="montoProcesos"  style="height: 400px"></div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <div class="col-md-12 mt-4">
+                     <div class="cajonSombreado">
+                        <div class="tituloGrafico">
+                           <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Contratos
+                        </div>
+                        <div class="contenedorGrafico">
+                           <div class="grafico cantidadContratos" id="cantidadPagosCajas"  style="/*min-height: 300px*/">
+                              <div class="row">
+                                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                       <div class="p-2">
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadContratosPromedio">0</span></div>
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" >Promedio Mensual</div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                          <div class="p-2">
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadContratosMayor">0</span></div>
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" >Mayor Mensual</div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                             <div class="p-2">
+                                             <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadContratosMenor">0</span></div>
+                                             <div class="titularColor textoAlineadoDerecha textoColorGris" >Menor Mensual</div>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="p-2">
+                                                <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadContratosTotal">0</span></div>
+                                                <div class="titularColor textoAlineadoDerecha textoColorGris" >Total en el Año</div>
+                                                </div>
+                                             </div>
+                              </div>
+                              
+                              </div>
+                              <div>
+                                 <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                    <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                                 </p>
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12 mt-4">
+                     <div class="cajonSombreado">
+                        <div class="tituloGrafico">
+                           <h4 class="titularCajonSombreado textoAlineadoCentrado">Montos de Contratos</h4>
+                        </div>
+                        
+                        <div class="contenedorGrafico">
+                           <div class="grafico montoContratos" id="montosPagosCajas"  style="/*min-height: 300px*/">
+                           <div class="row">
+                                 <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                    <div class="pt-2 pb-2">
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 20px;line-height: 20px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoContratosPromedio">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" >Promedio Mensual</div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                       <div class="pt-2 pb-2">
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 20px;line-height: 20px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoContratosMayor">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" >Mayor Mensual</div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                          <div class="pt-2 pb-2">
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 20px;line-height: 20px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoContratosMenor">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" >Menor Mensual</div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                             <div class="pt-2 pb-2">
+                                             <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 20px;line-height: 20px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoContratosTotal">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                             <div class="titularColor textoAlineadoDerecha textoColorGris" >Total en el Año</div>
+                                             </div>
+                                          </div>
+                           </div>
+                           
+                           </div>
+                           <div>
+                              <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                 <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado"> Cantidad de Procesos de Contratación por Etapas</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico" id="CantidadProcesosEtapas"  style="height: 300px"></div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Tiempo Promedio por Etapas de Procesos de Contratación</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico" id="tiempoPromedioEtapas"  style="height: 700px"></div>
+
+                        
+                        
+                        <div>
+                           <p>
+                              <span style="color:red">*</span>
+                              <span class="textoColorNegro">
+                                 <b>I etapa:</b> Desde la invitación a ofertar hasta la recepción de las ofertas. <br>
+                                 <span>&nbsp;&nbsp;</span><b>II etapa:</b> Desde el inicio de la evaluación de las ofertas hasta la suscripción del contrato.
+                              </span><br>
+                              
+                           </p>
+                        </div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. 
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Top 10 Compradores por Montos de Contrato</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico" id="top10Compradores"  style="height: 700px"></div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Top 10 Proveedores por Montos de Contrato</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico minAlto_850" id="top10Proveedores"  style="height: 750px"></div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+         
+         
+            </div>
+            {% include "../footer.html" %}
+         </div>
+         
+      </div>
+     
+   </div>
+<div class="container" style="display: none">
+      <img src="{% static 'img/oncae.jpg' %}" style="width:100%"  alt="">
+</div>
+{% endblock %}
+{% block script_content %}
+<script src="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/echarts-4.2.1/dist/echarts.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/elastic-list/data.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/elastic-list/elastic-list.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/tableroProcesosContratacion.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Acerca</title>
+{% endblock %}
+
+{% load static %}
+
+{% block container %}
+<div class="container-fluid fondoColorPrimario fondoPrincipalPagina tamanoMinimo">
+<div class="container">
+   <div class="row pb-2">
+      <div class="col-md-12 mt-5 mb-5"><h1 class="textoColorBlanco textoTitular1Grueso textoAlineadoCentrado">Acerca del Portal de Contrataciones Abiertas de Honduras</h1></div>
+      <div class="col-md-12">
+         <h4 class="textoColorBlanco textoTitular2Grueso">
+               ¿Que son los datos abiertos?
+         </h4>
+         <p class="textoColorBlanco textoAlineadoJustificado textoParrafoResaltado">
+               Son datos que pueden ser libremente usados, reusados y redistribuidos por cualquiera, sujeto solamente, a lo sumo, a requisitos de atribución y redistribución con la misma licencia. Fuente: Open Knowledge International.
+         </p>
+      </div>
+      <div class="col-md-12">
+         <div class="divisorTextos fondoColorBlanco mt-3 mb-4"></div>
+      </div>
+      <div class="col-md-12">
+            <h4 class="textoColorBlanco textoTitular2Grueso">
+                  ¿Que es el  Estándar de Datos de las Contrataciones Abiertas (EDCA)?
+            </h4>
+            <p class="textoColorBlanco textoAlineadoJustificado textoParrafoResaltado">
+                  El Estándar de Datos para las Contrataciones Abiertas (OCDS por sus siglas en inglés) permite la divulgación de datos y documentos de todas las etapas del proceso de contratación mediante la definición de un modelo de datos común. Se creó para apoyar a las organizaciones a aumentar la transparencia de la contratación y permitir un análisis más profundo de los datos de contrataciones por una amplia gama de usuarios.
+                  <a href="http://standard.open-contracting.org/latest/es/" class="textoColorBlanco enlaceFondoColor">Accede a la documentación del estándar</a>
+                  
+            </p>
+         </div>
+         <div class="col-md-12">
+               <div class="divisorTextos fondoColorBlanco mt-3 mb-4"></div>
+            </div>
+            <div class="col-md-12">
+                  <h4 class="textoColorBlanco textoTitular2Grueso">
+                        ¿Como surge el Portal de Contrataciones Abiertas de Honduras?
+                  </h4>
+                  <p class="textoColorBlanco textoAlineadoJustificado textoParrafoResaltado">
+                        El portal nace como un proyecto del <a href="https://www.worldbank.org/" class="textoColorBlanco enlaceFondoColor">Banco Mundial</a>  con fondos de <a href="https://www.usaid.gov/honduras" class="textoColorBlanco enlaceFondoColor">USAID</a>, en conjunto con el trabajo realizado por el <a href="https://www.presidencia.gob.hn/" class="textoColorBlanco enlaceFondoColor">Gobierno de Honduras</a>  y sus diversas instituciones.
+                        Con la finalidad de fomentar la transparencia y hacer llegar a las personas la Información de los procesos de contratación del estado de Honduras.
+                     
+                        
+                  </p>
+               </div>
+   </div>
+   
+</div>
+</div>
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'js/acerca.js' %}"></script>
+{% endblock %}

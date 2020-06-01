@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Estadísticas Descriptivas de Procesos de Contratación</title>
+{% endblock %}
+
+{% load static %}
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/elastic-list/style.css' %}" >
+{% endblock %}
+{% block container %}
+<div class="container-fluid  busquedaEspaciadoHorizontal elementosDashboard" >
+      
+      <div class="contenedorFiltrosBusqueda" >
+         <h4 class="textoColorPrimario tituloFiltrosMenu titularColor">
+            Filtros <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros2" style="font-size: 10px;float:right;display: none;" toolTexto="Quitar Todos los Filtros"> Quitar</a>
+            <div class="cursorMano cerrarContenedorFiltrosBusqueda" style="display:none"><i class="fas fa-times textoColorGris"></i></div>
+         </h4>
+         <div id="extencionFiltrosAplicados" class="mb-1 d-none d-sm-block d-md-block d-lg-block d-xl-block">
+
+            </div>
+         <div class="filtrosContenedoFiltrosBusqueda">
+           
+            <div id="elastic-list" class="contenedorListaElasticaEspacio">
+                  <div class="list-container col-md-12 2">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <input type="text" class="elastic-filter" placeholder="" >
+                            <ul class="list-group" id="ulmonedas">
+                                 <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="list-container col-md-12 2">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <input type="text" class="elastic-filter" placeholder="" >
+                            <ul class="list-group" id="ulmonedas">
+                                 <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="list-container col-md-12 2">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading cargaEfecto" style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <input type="text" class="elastic-filter" placeholder="" >
+                            <ul class="list-group" id="ulmonedas">
+                                 <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="list-container col-md-12 2">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading cargaEfecto"  style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <input type="text" class="elastic-filter" placeholder="" >
+                            <ul class="list-group" id="ulmonedas">
+                                 <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                                   <li class="list-group-item" >
+                                       <div class="badge cargaEfecto">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                       <div class="elastic-data">&nbsp;&nbsp;&nbsp;</div>
+                                   </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+         </div>
+      </div>
+      <div class="contenedorResultadosBusqueda" style="padding-right:0">
+   
+       
+         <div class="container-fluid contenedorBusqueda mb-5 removerEspacio" >
+            <div class="row">
+               <div class="col-12">
+                  <h4 class="textoColorPrimario titularColor">
+                     
+                     <table class="" style="table-layout: fixed;width: 100%;border-collapse: collapse;border:none">
+                           <tr>
+                              <td>
+                                    <span>
+                                       Estadísticas Descriptivas de Procesos de Contratación 
+                                    </span>
+                                    <!--<div>
+                                       <p style="margin:0">
+                                          <span style="color:red">*</span>
+                                          <b class="textoColorGris">No Definido corresponde a los contratos de "Compras Menores" y las órdenes de compra de "Catálogo Electrónico".</b>
+                                       </p>
+                                    </div>-->
+                              </td>
+                              <td style="width: 70px;">
+                                    <div class="contenedorBotonAzulFiltroBusqueda"  style="display:none;margin-right: 10px;">
+                                          <button class="botonAzulFiltroBusqueda" title="Filtros">
+                                          <i class="fas fa-filter"></i> 
+                                          </button>
+                                       </div>
+                              </td>
+                           </tr>
+                        </table>
+                  </h4>
+                  <div class="cajonFiltrosAplicadosDashboard  cajonSombreado " id="filtrosAplicadosItems" style="position: fixed;right: 28px;z-index: 1; min-width: 280px;">
+
+                     <div class="row">
+                                       <div class="col-6 col-sm-7 col-md-6">
+                                          <div class="tituloFiltrosAplicados textoAlineadoIzquierda">Filtros Aplicados:</div>
+                                       </div>
+                                       <div class="col-6 col-sm-5 col-md-6 textoAlineadoIzquierda" id="contenedorSinFiltros">
+                                          
+                                            <h4 class="textoColorPrimario titularColor" style="margin-top:3px">Ninguno</h4>
+                                       </div>
+                                       <div class="col-6 col-sm-5 col-md-6 textoAlineadoDerecha" id="contenedorFiltros" style="display: none">
+               
+                                          <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros" style="font-size: 10px"> Quitar Todos</a>
+                                       </div>
+                                       <div class="col-12" id="listaFiltrosAplicados">
+                        
+                                                
+                                       </div>
+                     </div>
+                  </div>
+               </div>
+   
+            </div>
+            <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-4 ">
+                        <div class="cajonSombreado">
+                              <div class="tituloGrafico">
+                              <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Contratos por Tipo de Contrato</h4>
+                              </div>
+                              <div class="contenedorGrafico">
+                              <div class="grafico minAlto_400" id="CantidadContratosTipoContrato"  style="height: 400px"></div>
+                              <div>
+                                 <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                    <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                                 </p>
+                              </div>
+                              </div>
+                        </div>
+                        </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-4 ">
+                                                <div class="cajonSombreado">
+                                                      <div class="tituloGrafico">
+                                                      <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto Contratado por Tipo de Contrato</h4>
+                                                      </div>
+                                                      <div class="contenedorGrafico">
+                                                      <div class="grafico minAlto_400" id="MontoContratosTipoContrato"  style="height: 400px"></div>
+                                                      <div>
+                                                         <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                                            <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                                                         </p>
+                                                      </div>
+                                                      </div>
+                                                </div>
+                                                </div>
+
+                                                <div class="col-md-12 mt-4">
+                                                   <div class="cajonSombreado">
+                                                      <div class="tituloGrafico">
+                                                         <h4 class="titularCajonSombreado textoAlineadoCentrado"> Diez Instituciones con Mayor Monto Acumulado en Contratos y su Cantidad 
+                                                      </div>
+                                                      <div class="contenedorGrafico">
+                                                         <div class="grafico" id="top10InstitucionesMontos"  style="height: 700px"></div>
+                                                         <div>
+                                                            <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                                               <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                                                            </p>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-12 mt-4">
+                                                   <div class="cajonSombreado">
+                                                      <div class="tituloGrafico">
+                                                         <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Contrato por Catálogo Electrónico</h4>
+                                                      </div>
+                                                      <div class="contenedorGrafico">
+                                                         <div class="grafico" id="montoCatalogoElectronico"  style="height: 800px"></div>
+                                                         <div>
+                                                            <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                                               <b >Fuente de Datos:</b> Catálogo Electrónico.
+                                                            </p>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-12 mt-4">
+                                                      <div class="cajonSombreado">
+                                                         <div class="tituloGrafico">
+                                                            <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Contrato por Compra Conjunta</h4>
+                                                         </div>
+                                                         <div class="contenedorGrafico">
+                                                            <div class="grafico" id="montoCompraConjunta"  style="height: 800px"></div>
+                                                            <div>
+                                                               <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                                                                  <b >Fuente de Datos:</b> Catálogo Electrónico.
+                                                               </p>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+
+
+
+               <div class="col-md-12 mt-4">
+                  <div class="cajonSombreado">
+                     <div class="tituloGrafico">
+                        <h4 class="titularCajonSombreado textoAlineadoCentrado">Modalidad de Contratación por Monto y Cantidad de contratos</h4>
+                     </div>
+                     <div class="contenedorGrafico">
+                        <div class="grafico" id="modalidadMontoCantidad"  style="height: 600px"></div>
+                        <div>
+                           <p class="textoColorGrisNormal" style="font-size: 8pt;">
+                              <b >Fuente de Datos:</b> HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones. Módulo de Difusión Directa de Contratos. Catálogo Electrónico.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+        
+            
+              
+            
+            </div>
+         </div>
+         {% include "../footer.html" %}
+      </div>
+   </div>
+<div class="container" style="display: none">
+      <img src="{% static 'img/oncae.jpg' %}" style="width:100%"  alt="">
+</div>
+{% endblock %}
+{% block script_content %}
+<script src="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'plugins/echarts-4.2.1/dist/echarts.min.js' %}"></script>
+<script src="{% static 'plugins/elastic-list/data.js' %}"></script>
+<script src="{% static 'plugins/elastic-list/elastic-list.js' %}"></script>
+<script src="{% static 'js/indicadoresProcesosContratacion.js' %}"></script>
+{% endblock %}

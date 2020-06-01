@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Procesos de Pago</title>
+{% endblock %}
+
+{% load static %}
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/elastic-list/style.css' %}" >
+{% endblock %}
+{% block container %}
+
+<div class="container-fluid  busquedaEspaciadoHorizontal elementosDashboard">
+   
+   <div class="contenedorFiltrosBusqueda">
+      <h4 class="textoColorPrimario tituloFiltrosMenu titularColor">
+         Filtros <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros2" style="font-size: 10px;float:right;display: none;" toolTexto="Quitar Todos los Filtros"> Quitar</a>
+         <div class="cursorMano cerrarContenedorFiltrosBusqueda" style="display:none"><i class="fas fa-times textoColorGris"></i></div>
+      </h4>
+      <div id="extencionFiltrosAplicados" class="mb-1 d-none d-sm-block d-md-block d-lg-block d-xl-block">
+
+         </div>
+      <div class="filtrosContenedoFiltrosBusqueda">
+        
+         <div id="elastic-list" class="contenedorListaElasticaEspacio">
+
+         </div>
+      </div>
+   </div>
+   <div class="contenedorResultadosBusqueda">
+
+  
+      <div class="container-fluid contenedorBusqueda mb-5" >
+         <div class="row">
+            <div class="col-12">
+               <h4 class="textoColorPrimario titularColor">
+                  
+                  <table class="" style="table-layout: fixed;width: 100%;border-collapse: collapse;border:none">
+                        <tr>
+                           <td>
+                                 <span>
+                                       Tablero de Procesos de Pago
+                                 </span>
+                           </td>
+                           <td style="width: 70px;">
+                                 <div class="contenedorBotonAzulFiltroBusqueda"  style="display:none;margin-right: 10px;">
+                                       <button class="botonAzulFiltroBusqueda" title="Filtros">
+                                       <i class="fas fa-filter"></i> 
+                                       </button>
+                                    </div>
+                           </td>
+                        </tr>
+                     </table>
+               </h4>
+               <div class="cajonFiltrosAplicadosDashboard  cajonSombreado " id="filtrosAplicadosItems" style="position: fixed;right: 28px;z-index: 1; min-width: 280px;">
+
+                  <div class="row">
+                                    <div class="col-6 col-sm-7 col-md-6">
+                                       <div class="tituloFiltrosAplicados textoAlineadoIzquierda">Filtros Aplicados:</div>
+                                    </div>
+                                    <div class="col-6 col-sm-5 col-md-6 textoAlineadoIzquierda" id="contenedorSinFiltros">
+                                       
+                                         <h4 class="textoColorPrimario titularColor" style="margin-top:3px">Ninguno</h4>
+                                       </div>
+                                    <div class="col-6 col-sm-5 col-md-6 textoAlineadoDerecha" id="contenedorFiltros" style="display: none">
+            
+                                       <a href="javascript:void(0)" class="botonGeneral fondoColorSecundario" id="quitarFiltros" style="font-size: 10px"> Quitar Todos</a>
+                                    </div>
+                                    <div class="col-12" id="listaFiltrosAplicados">
+                           
+                                                   
+                                    </div>
+                                 </div>
+               </div>
+            </div>
+
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Pagos por Mes</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="cantidadPagos"  style="height: 400px"></div>
+                  </div>
+               </div>
+            </div>
+      
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Pagos por Mes</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="montoPagos"  style="height: 400px"></div>
+                     <div>
+                        <p>
+                           <span style="color:red">*</span>
+                           <b class="textoColorGris">Los montos usados son las transferencias sin retenciones</b>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Pagos por Año</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="cantidadPagosCajas"  style="/*min-height: 300px*/">
+                        <div class="row">
+                              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                 <div class="p-2">
+                                 <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadPagosPromedio">0</span></div>
+                                 <div class="titularColor textoAlineadoDerecha textoColorGris" >Promedio</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                    <div class="p-2">
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadPagosMayor">0</span></div>
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" >Mayor</div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                       <div class="p-2">
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadPagosMenor">0</span></div>
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" >Menor</div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                          <div class="p-2">
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" style="font-size: 50px;line-height: 40px"><span data-speed="300" data-refresh-interval="20" data-from="0" data-to="0" class="conteo" id="CantidadPagosTotal">0</span></div>
+                                          <div class="titularColor textoAlineadoDerecha textoColorGris" >Total</div>
+                                          </div>
+                                       </div>
+                        </div>
+                        
+                        </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Montos de Pagos por Año</h4>
+                  </div>
+                  
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="montosPagosCajas"  style="/*min-height: 300px*/">
+                     <div class="row">
+                           <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                              <div class="pt-2 pb-2">
+                              <div class="titularColor textoAlineadoDerecha textoColorGris"  style="font-size: 20px;line-height: 20px"><span data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoPagosPromedio">0</span> <span class="textoColorPrimario">HNL</span></div>
+                              <div class="titularColor textoAlineadoDerecha textoColorGris" >Promedio</div>
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                 <div class="pt-2 pb-2">
+                                 <div class="titularColor textoAlineadoDerecha textoColorGris"  style="font-size: 20px;line-height: 20px"><span data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoPagosMayor">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                 <div class="titularColor textoAlineadoDerecha textoColorGris" >Mayor</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                    <div class="pt-2 pb-2">
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris"  style="font-size: 20px;line-height: 20px"><span data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoPagosMenor">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                    <div class="titularColor textoAlineadoDerecha textoColorGris" >Menor</div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                       <div class="pt-2 pb-2">
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris"  style="font-size: 20px;line-height: 20px"><span data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" class="conteo moneda" id="MontoPagosTotal">0</span> <span class="textoColorPrimario">HNL</span></div>
+                                       <div class="titularColor textoAlineadoDerecha textoColorGris" >Total</div>
+                                       </div>
+                                    </div>
+                     </div>
+                     
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--
+            <div class="col-md-6 mt-4">
+               <div class="cajonSombreado" style="min-height: 350px">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Cantidad de Procesos de Pago por Etapa en la que se Encuentran</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="cantidadPagosEtapas"  style="height: 300px"></div>
+                  </div>
+               </div>
+            </div>-->
+
+            
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado" style="min-height: 350px">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Etapas de Pagos Realizados en un Proceso de Compra</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="montoPagosEtapas"  style="height: 300px"></div>
+                     <div>
+                           <p>
+                              <span style="color:red">*</span>
+                              <b class="textoColorGris">Para este gráfico solo aplican los filtros de; Institución Compradora y Año</b>
+                           </p>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            <!--<div class="col-md-6 mt-4">
+               <div class="cajonSombreado" style="min-height: 350px">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Monto de Procesos de Pago por Etapa en la que se Encuentran</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="montoPagosEtapas"  style="height: 300px"></div>
+                  </div>
+               </div>
+            </div>-->
+            <div class="col-md-12 mt-4" style="display: none;">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Tiempo Promedio por Etapas</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="tiempoPromedioEtapas"  style="height: 400px"></div>
+                    
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Top 10 Compradores por Monto Pagado</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="top10Compradores"  style="height: 600px;max-width: 100%;"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Top 10 Proveedores por Monto Pagado y Moneda</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="top10Proveedores"  style="height: 600px"></div>
+                  </div>
+               </div>
+            </div>
+      <!--
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Segregación de Montos de Contratos</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico" id="segregacionMontosContratos"  style="height: 300px"></div>
+                  </div>
+               </div>
+            </div>-->
+
+            <div class="col-md-12 mt-4">
+               <div class="cajonSombreado">
+                  <div class="tituloGrafico">
+                     <h4 class="titularCajonSombreado textoAlineadoCentrado">Top 10 de Objetos de Gasto por Cantidad de Procesos</h4>
+                  </div>
+                  <div class="contenedorGrafico">
+                     <div class="grafico minAlto_700" id="Top10CantidadProcesosObjetosGasto"  style="height: 500px"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% include "../footer.html" %}
+   </div>
+</div>
+<div class="container-fluid">
+   <img src="{% static 'img/sefin.jpg' %}" style="width:100%;display: none;"  alt="">
+ 
+  
+</div>
+{% endblock %}
+{% block script_content %}
+<script src="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<!--
+<script src="{% static 'plugins/elastic-list/data.js' %}"></script>
+<script src="{% static 'plugins/elastic-list/elastic-list.js' %}"></script>-->
+<script src="{% static 'plugins/echarts-4.2.1/dist/echarts.min.js' %}"></script>
+<script src="{% static 'js/tableroProcesosPago.js' %}"></script>
+{% endblock %}
