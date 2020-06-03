@@ -18,79 +18,6 @@
                <div class="cursorMano cerrarContenedorFiltrosBusqueda" style="display:none"><i class="fas fa-times textoColorGris"></i></div>
             </h4>
             <div class="filtrosContenedoFiltrosBusqueda">
-            <!--<div class="filtroBusquedaPagina">
-                  <div class="tituloFiltroBusquedaPagina">
-                    Moneda
-                  </div>
-                  <div class="opcionesFiltroBusquedaPagina">
-                    <div class="opcionFiltroBusquedaPagina" value="HNL">
-                     <i class="fas"></i>
-                     <span>HNL (30)</span>
-                    </div>
-                    <div class="opcionFiltroBusquedaPagina" value="USD">
-                     <i class="fas"></i>
-                     <span>USD (15)</span>  
-                    </div>
-                  </div>
-                  </div>
-                  <div class="filtroBusquedaPagina">
-                  <div class="tituloFiltroBusquedaPagina">
-                   Comprador
-                  </div>
-                  <div class="opcionesFiltroBusquedaPagina">
-                   <div class="opcionFiltroBusquedaPagina" value="HNL">
-                    <i class="fas"></i>
-                    <span>AMDC</span>  
-                   </div>
-                   <div class="opcionFiltroBusquedaPagina" value="USD">
-                    <i class="fas"></i>
-                    <span>INE</span> 
-                   </div>
-                  </div>
-                  </div>
-                  
-                  <div class="filtroBusquedaPagina">
-                  <div class="tituloFiltroBusquedaPagina">
-                   Categoría
-                  </div>
-                  <div class="opcionesFiltroBusquedaPagina">
-                   <div class="opcionFiltroBusquedaPagina" value="HNL">
-                    <i class="fas"></i>
-                    <span>Obras</span>   
-                   </div>
-                   <div class="opcionFiltroBusquedaPagina" value="USD">
-                    <i class="fas"></i>
-                    <span>Bienes</span>  
-                   </div>
-                   <div class="opcionFiltroBusquedaPagina" value="USD">
-                     <i class="fas"></i>
-                     <span>Servicios</span>  
-                    </div>
-                  </div>
-                  </div>
-                  <div class="filtroBusquedaPagina">
-                  <div class="tituloFiltroBusquedaPagina">
-                   Selección
-                  </div>
-                  <div class="opcionesFiltroBusquedaPagina">
-                   <div class="opcionFiltroBusquedaPagina" value="HNL">
-                    <i class="fas"></i>
-                    <span>Compras Menores</span> 
-                   </div>
-                   <div class="opcionFiltroBusquedaPagina" value="USD">
-                    <i class="fas"></i>
-                    <span>Concurso Privado</span>   
-                   </div>
-                   <div class="opcionFiltroBusquedaPagina" value="USD">
-                     <i class="fas"></i>
-                     <span>Concurso Público Nacional</span>  
-                    </div>
-                    <div class="opcionFiltroBusquedaPagina" value="USD">
-                     <i class="fas"></i>
-                     <span>Concurso Público Internacional</span>    
-                    </div>
-                  </div>
-                  </div>-->
                <div id="elastic-list">
 
 
@@ -216,29 +143,12 @@
                            <div class="btn-group sombraBasica" role="group" aria-label="Metodo de Busqueda" >
                               <a href="javascript:void(0)" id="opcionProcesosContratacion" name="metodoBusqueda" toolTexto="Buscar en Procesos de Contratación de HonduCompras 1, ONCAE" metodo="proceso"  class="btn btn-primary fondoColorSecundario {% if 'proceso' == request.GET.metodo %}activo{% endif %}"><span>Procesos de Contratación </span></a>
                               <a href="javascript:void(0)" id="opcionContratos" name="metodoBusqueda" toolTexto="Buscar en Contratos Provenientes de Sistemas de ONCAE" metodo="contrato"  class="btn btn-primary fondoColorSecundario {% if 'contrato' == request.GET.metodo %}activo{% endif %}"><span>Contratos</span></a>
-                              <a href="javascript:void(0)" id="opcionProcesosPago" name="metodoBusqueda" toolTexto="Buscar en Procesos de Pago Provenientes de Sistemas de SEFIN" metodo="pago"  class="btn btn-primary fondoColorSecundario {% if 'pago' == request.GET.metodo %}activo{% endif %}"><span>Procesos de Pago</span></a>
                                </div>
-                          <!-- <div class="OpcionFiltroBusqueda">
-                                 <input type="radio" id="opcionProcesosContratacion" name="metodoBusqueda" metodo="proceso" {% if 'proceso' == request.GET.metodo %}checked{% endif %}>
-                                 <label for="opcionProcesosContratacion" class="etiquetaOpcionFiltroBusqueda textoColorPrimario textoTitular2Grues">Procesos de Contratación</label>
-                              </div>
-                              <div class="OpcionFiltroBusqueda">
-                                    <input type="radio" id="opcionContratos" name="metodoBusqueda" metodo="contrato" {% if 'contrato' == request.GET.metodo %}checked{% endif %}>
-                                    <label for="opcionContratos" class="etiquetaOpcionFiltroBusqueda textoColorPrimario ">Contratos</label>
-                                 </div>
-                                 <div class="OpcionFiltroBusqueda">
-                                       <input type="radio" id="opcionProcesosPago" name="metodoBusqueda" metodo="pago" {% if 'pago' == request.GET.metodo %}checked{% endif %} >
-                                       <label for="opcionProcesosPago" class="etiquetaOpcionFiltroBusqueda textoColorPrimario ">Procesos de Pago</label>
-                                    </div>-->
                      </div>
                      <div>
                         <p>
                            {% if 'proceso' == request.GET.metodo %}<b class="textoColorGris">* Buscar en Procesos de Contratación de HonduCompras 1.0</b>{% endif %}
                            {% if 'contrato' == request.GET.metodo %}<b class="textoColorGris">* Buscar en Contratos de HonduCompras 1.0 - Módulo de Difusión de Compras y Contrataciones, Módulo de Difusión Directa de Contratos y Catálogo Electrónico.</b>{% endif %}
-                           {% if 'pago' == request.GET.metodo %}<b class="textoColorGris">* Buscar en Procesos de Pago de Sistema de Administración Financiera Integrada (SIAFI).</b>{% endif %}
-                           
-                           
-                       
                         </p>
                      </div>
                  
