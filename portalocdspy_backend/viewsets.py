@@ -30,12 +30,16 @@ from itertools import chain
 
 import ocds_bulk_download
 
+
+OCDS_INDEX = 'ocds'
+CONTRACT_INDEX = 'contracts'
+TRANSACTION_INDEX = 'transactions'
+
 def ElasticSearchDefaultConnection():
 	url = settings.ELASTICSEARCH_DSL_HOST
 	usuario = settings.ELASTICSEARCH_USER
 	contrasena = settings.ELASTICSEARCH_PASS
 	tiempo = settings.ELASTICSEARCH_TIMEOUT
-
 	cliente = Elasticsearch(url, timeout=tiempo, http_auth=(usuario, contrasena))
 
 	return cliente
@@ -226,10 +230,10 @@ class Index(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		oncae = Search(using=cliente, index='edca')
-		sefin = Search(using=cliente, index='edca')
-		todos = Search(using=cliente, index='edca')
-		sp = Search(using=cliente, index='edca')
+		oncae = Search(using=cliente, index=OCDS_INDEX)
+		sefin = Search(using=cliente, index=OCDS_INDEX)
+		todos = Search(using=cliente, index=OCDS_INDEX)
+		sp = Search(using=cliente, index=OCDS_INDEX)
 
 		oncae = oncae.exclude('match_phrase', doc__compiledRelease__sources__id=sourceSEFIN)
 
@@ -357,7 +361,7 @@ class Buscador(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		#Source
 		campos = ['doc.compiledRelease', 'extra']
@@ -621,7 +625,7 @@ class RecordAPIView(APIView):
 
 	def get(self, request, format=None):
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 		results = s[0:10].execute()
 
 		context = results.hits.hits
@@ -632,7 +636,7 @@ class RecordDetail(APIView):
 
 	def get(self, request, pk=None, format=None):
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 		s = s.filter('match_phrase', doc__ocid__keyword=pk)
 
 		results = s[0:1].execute()
@@ -653,7 +657,7 @@ class FiltroAniosProveedoresSEFIN(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		ss = Search(using=cliente, index='transaction')
+		ss = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		ss.aggs.metric(
 			'anios', 
@@ -1218,7 +1222,7 @@ class Proveedor(APIView):
 	def get(self, request, partieId=None, format=None):
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		qPartieId = Q('match_phrase', doc__compiledRelease__parties__id__keyword=partieId) 
 		s = s.query('nested', inner_hits={"size":1}, path='doc.compiledRelease.parties', query=qPartieId)
@@ -1255,7 +1259,7 @@ class ContratosDelProveedor(APIView):
 		end = start + paginarPor
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 
 		qPartieId = Q('match_phrase', suppliers__id=partieId) 
 		s = s.query('nested', path='suppliers', query=qPartieId)
@@ -1445,7 +1449,7 @@ class PagosDelProveedor(APIView):
 		end = start + paginarPor
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 
 		#Filtros
 		filtros = []
@@ -1609,7 +1613,7 @@ class ProductosDelProveedor(APIView):
 		end = start + paginarPor
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s.aggs.metric('productos','nested', path='items')
 
@@ -1695,7 +1699,7 @@ class ProductosDelProveedor(APIView):
 		# ]
 
 		# for p in productos:
-		# 	ss = Search(using=cliente, index='contract')
+		# 	ss = Search(using=cliente, index=CONTRACT_INDEX)
 		# 	ss = ss.filter('match_phrase', items__classification__description__keyword=producto["clasificacion"])
 		# 	ss = ss.source(campos)
 		# 	results = ss[0:100].execute()
@@ -1769,7 +1773,7 @@ class Compradores(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 		
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		filtros = []
 		if nombre.replace(' ',''):
@@ -2085,7 +2089,7 @@ class Comprador(APIView):
 			tipoIdentificador = 'nombre'
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		partieId = urllib.parse.unquote_plus(partieId)
 
@@ -2103,7 +2107,7 @@ class Comprador(APIView):
 		results = s[0:1].execute()
 
 		if len(results) == 0:
-			s = Search(using=cliente, index='edca')
+			s = Search(using=cliente, index=OCDS_INDEX)
 			qPartieId = Q('match_phrase', extra__buyerFullName__keyword=partieId)
 			s = s.query(qPartieId)
 			s = s.sort({"doc.compiledRelease.date": {"order":"desc"}})
@@ -2167,7 +2171,7 @@ class ProcesosDelComprador(APIView):
 		end = start + paginarPor
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		#Mostrando 
 		campos = [
@@ -2422,7 +2426,7 @@ class ContratosDelComprador(APIView):
 		end = start + paginarPor
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 
@@ -2657,7 +2661,7 @@ class PagosDelComprador(APIView):
 		end = start + paginarPor
 
 		cliente = ElasticSearchDefaultConnection()
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 
 		#Filtros
 		filtros = []
@@ -2842,9 +2846,9 @@ class FiltrosDashboardSEFIN(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
-		ss = Search(using=cliente, index='transaction')
+		ss = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		cantidadInstituciones = 50
 		cantidadProveedores = 50
@@ -2985,7 +2989,7 @@ class GraficarCantidadDePagosMes(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		# Filtros
 		if institucion.replace(' ', ''):
@@ -3106,7 +3110,7 @@ class GraficarMontosDePagosMes(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		# Filtros
 		if institucion.replace(' ', ''):
@@ -3215,8 +3219,8 @@ class EstadisticaMontoDePagos(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
-		ss = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
+		ss = Search(using=cliente, index=TRANSACTION_INDEX)
 		# Filtros
 		if institucion.replace(' ', ''):
 			s = s.filter('match_phrase', extra__buyerFullName=institucion)
@@ -3311,7 +3315,7 @@ class EstadisticaCantidadDePagos(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		# Filtros
 		if institucion.replace(' ', ''):
@@ -3394,7 +3398,7 @@ class TopCompradoresPorMontoPagado(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		# Filtros
 		if institucion.replace(' ', ''):
@@ -3480,7 +3484,7 @@ class TopProveedoresPorMontoPagado(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		# Filtros
 		if institucion.replace(' ', ''):
@@ -3566,7 +3570,7 @@ class TopObjetosDeGastoPorMontoPagado(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='transaction')
+		s = Search(using=cliente, index=TRANSACTION_INDEX)
 
 		# Filtros
 		if institucion.replace(' ', ''):
@@ -3650,7 +3654,7 @@ class EtapasPagoProcesoDeCompra(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		# Filtros
 		s = s.filter('match_phrase', doc__compiledRelease__sources__id=sourceSEFIN)
@@ -3758,14 +3762,14 @@ class FiltrosDashboardONCAE(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
-		ss = Search(using=cliente, index='contract')
-		sss = Search(using=cliente, index='contract')
-		ssss = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
+		sss = Search(using=cliente, index=CONTRACT_INDEX)
+		ssss = Search(using=cliente, index=OCDS_INDEX)
 
-		sFecha = Search(using=cliente, index='edca')
-		ssFecha = Search(using=cliente, index='contract')
-		sssFecha = Search(using=cliente, index='contract')
+		sFecha = Search(using=cliente, index=OCDS_INDEX)
+		ssFecha = Search(using=cliente, index=CONTRACT_INDEX)
+		sssFecha = Search(using=cliente, index=CONTRACT_INDEX)
 
 		# Excluyendo procesos de SEFIN
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
@@ -4349,7 +4353,7 @@ class GraficarProcesosPorCategorias(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
 		s = s.filter('exists', field='doc.compiledRelease.tender.id')
@@ -4453,7 +4457,7 @@ class GraficarProcesosPorModalidad(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
 		s = s.filter('exists', field='doc.compiledRelease.tender.id')
@@ -4564,7 +4568,7 @@ class GraficarCantidadDeProcesosMes(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
 		s = s.filter('exists', field='doc.compiledRelease.tender.id')
@@ -4687,7 +4691,7 @@ class EstadisticaCantidadDeProcesos(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
 		s = s.filter('exists', field='doc.compiledRelease.tender.id')
@@ -4795,7 +4799,7 @@ class GraficarProcesosPorEtapa(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
+		s = Search(using=cliente, index=OCDS_INDEX)
 
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
 		s = s.filter('exists', field='doc.compiledRelease.tender.id')
@@ -4907,8 +4911,8 @@ class GraficarMontosDeContratosMes(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id__keyword=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id__keyword=settings.SOURCE_SEFIN_ID)
@@ -5133,8 +5137,8 @@ class EstadisticaCantidadDeContratos(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id__keyword=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id__keyword=settings.SOURCE_SEFIN_ID)
@@ -5356,8 +5360,8 @@ class EstadisticaMontosDeContratos(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id__keyword=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id__keyword=settings.SOURCE_SEFIN_ID)
@@ -5567,8 +5571,8 @@ class GraficarContratosPorCategorias(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -5735,8 +5739,8 @@ class GraficarContratosPorModalidad(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -5904,8 +5908,8 @@ class TopCompradoresPorMontoContratado(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -6105,8 +6109,8 @@ class TopProveedoresPorMontoContratado(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -6306,8 +6310,8 @@ class GraficarProcesosTiposPromediosPorEtapa(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='edca')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=OCDS_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', doc__compiledRelease__sources__id=settings.SOURCE_SEFIN_ID)
 		s = s.filter('exists', field='doc.compiledRelease.tender.id')
@@ -6489,8 +6493,8 @@ class IndicadorMontoContratadoPorCategoria(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -6662,8 +6666,8 @@ class IndicadorCantidadProcesosPorCategoria(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -6842,8 +6846,8 @@ class IndicadorTopCompradores(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -7071,7 +7075,7 @@ class IndicadorCatalogoElectronico(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 		s = s.filter('match_phrase', extra__sources__id='catalogo-electronico')
 
 		#Solo ordenes de compra en estado impreso
@@ -7146,7 +7150,7 @@ class IndicadorCatalogoElectronico(APIView):
 		)
 
 		s.aggs["items"]["porCatalogo"].metric(
-			'contract', 
+			CONTRACT_INDEX, 
 			'reverse_nested'
 		)
 
@@ -7217,7 +7221,7 @@ class IndicadorCompraConjunta(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
 		s = s.filter('match_phrase', extra__sources__id='catalogo-electronico')
 
 		#Solo ordenes de compra en estado impreso
@@ -7292,7 +7296,7 @@ class IndicadorCompraConjunta(APIView):
 		)
 
 		s.aggs["items"]["porCatalogo"].metric(
-			'contract', 
+			CONTRACT_INDEX, 
 			'reverse_nested'
 		)
 
@@ -7358,8 +7362,8 @@ class IndicadorContratosPorModalidad(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -7544,8 +7548,8 @@ class CompradoresPorCantidadDeContratos(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		s = Search(using=cliente, index='contract')
-		ss = Search(using=cliente, index='contract')
+		s = Search(using=cliente, index=CONTRACT_INDEX)
+		ss = Search(using=cliente, index=CONTRACT_INDEX)
 
 		s = s.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
 		ss = ss.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
@@ -7719,8 +7723,8 @@ class FiltrosVisualizacionesONCAE(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		ssFecha = Search(using=cliente, index='contract')
-		sssFecha = Search(using=cliente, index='contract')
+		ssFecha = Search(using=cliente, index=CONTRACT_INDEX)
+		sssFecha = Search(using=cliente, index=CONTRACT_INDEX)
 
 		# Excluyendo procesos de SEFIN
 		ssFecha = ssFecha.exclude('match_phrase', extra__sources__id=settings.SOURCE_SEFIN_ID)
