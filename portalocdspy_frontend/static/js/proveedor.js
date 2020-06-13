@@ -827,7 +827,7 @@ function AgregarFilaPago(resultados,selector,i){
             ),
             $('<td>',{'data-label':'Suma de Todos los Pagos' ,class:'textoAlineadoDerecha'}).append(
               resultados[i]&&resultados[i]._source&&resultados[i]._source.extra&&Validar(resultados[i]._source.extra.sumTransactions)?
-              [ValorMoneda(resultados[i]._source.extra.sumTransactions),$('<span>',{class:'textoColorPrimario',text:' HNL'})]:''
+              [ValorMoneda(resultados[i]._source.extra.sumTransactions),$('<span>',{class:'textoColorPrimario',text:' PYG'})]:''
               
               
               ),

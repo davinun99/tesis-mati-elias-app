@@ -226,55 +226,19 @@ class Index(APIView):
 	def get(self, request, format=None):
 
 		precision = 40000
-		sourceSEFIN = 'HN.SIAFI2'
+		sourceSEFIN = 'dncp-sicp'
 
 		cliente = ElasticSearchDefaultConnection()
 
 		oncae = Search(using=cliente, index=OCDS_INDEX)
-		sefin = Search(using=cliente, index=OCDS_INDEX)
-		todos = Search(using=cliente, index=OCDS_INDEX)
 		sp = Search(using=cliente, index=OCDS_INDEX)
 
-		oncae = oncae.exclude('match_phrase', doc__compiledRelease__sources__id=sourceSEFIN)
-
-		sefin = sefin.filter('match_phrase', doc__compiledRelease__sources__id=sourceSEFIN)
+		oncae = oncae.filter('match_phrase', doc__compiledRelease__sources__id=sourceSEFIN)
 
 		oncae.aggs.metric(
-			'contratos', 
-			'nested', 
-			path='doc.compiledRelease.contracts'
-		)
-
-		sefin.aggs.metric(
 			'contratos',
 			'nested',
 			path='doc.compiledRelease.contracts'
-		)
-
-		sefin.aggs.metric(
-			'procesos_pagos',
-			'value_count',
-			field='doc.compiledRelease.ocid.keyword'
-		)
-
-		todos.aggs.metric(
-			'contratos',
-			'nested',
-			path='doc.compiledRelease.contracts'
-		)
-
-		# todos.aggs["contratos"].metric(
-		# 	'distinct_suppliers',
-		# 	'cardinality',
-		# 	precision_threshold=precision,
-		# 	field='doc.compiledRelease.contracts.suppliers.id.keyword'
-		# )
-
-		todos.aggs.metric(
-			'distinct_buyers',
-			'cardinality',
-			precision_threshold=precision,
-			field='doc.compiledRelease.buyer.id.keyword'
 		)
 		
 		oncae.aggs["contratos"].metric(
@@ -298,19 +262,10 @@ class Index(APIView):
 			size=100000
 		)
 
-		sefin.aggs["contratos"].metric(
-			'proveedores_sefin',
-			'terms',
-			field='doc.compiledRelease.contracts.implementation.transactions.payee.id.keyword',
-			size=100000
-		)
-
 		resultsONCAE = oncae.execute()
-		resultsSEFIN = sefin.execute()
-		resultsTODOS = todos.execute()
 
 		diccionario_proveedores = []
-		dfProveedores = pd.DataFrame(resultsSEFIN.aggregations.contratos.proveedores_sefin.to_dict()["buckets"])
+		dfProveedores = pd.DataFrame(resultsONCAE.aggregations.contratos.proveedores_sefin.to_dict()["buckets"])
 
 		if resultsONCAE.aggregations.contratos.proveedores_oncae.to_dict()["buckets"]:
 			dfProveedores = dfProveedores.append(resultsONCAE.aggregations.contratos.proveedores_oncae.to_dict()["buckets"])
@@ -320,14 +275,16 @@ class Index(APIView):
 		else:
 			cantidad_proveedores = 0
 
+		#print('Cantidad de proveedores ' + cantidad_proveedores )
+
 		# dfProveedores.to_csv(r'proveedores.csv', sep='\t', encoding='utf-8')
 
 		context = {
-			# "elasticsearch": cantidad_proveedores,
+			"elasticsearch": cantidad_proveedores,
 			"contratos": resultsONCAE.aggregations.contratos.distinct_contracts.value,
 			"procesos": resultsONCAE.aggregations.procesos_contratacion.value,
-			"pagos": resultsSEFIN.aggregations.procesos_pagos.value,
-			"compradores": resultsTODOS.aggregations.distinct_buyers.value,
+			#"pagos": resultsSEFIN.aggregations.procesos_pagos.value,
+			#"compradores": resultsTODOS.aggregations.distinct_buyers.value,
 			"proveedores": cantidad_proveedores
 		}
 
@@ -366,21 +323,24 @@ class Buscador(APIView):
 		#Source
 		campos = ['doc.compiledRelease', 'extra']
 		s = s.source(campos)
-
 		#Filtros
+
 		s.aggs.metric('contratos', 'nested', path='doc.compiledRelease.contracts')
 
 		s.aggs["contratos"].metric('monedas', 'terms', field='doc.compiledRelease.contracts.value.currency.keyword')
 
 		s.aggs["contratos"]["monedas"].metric("nProcesos", "reverse_nested")
 
+		
+
 		s.aggs.metric('metodos_de_seleccion', 'terms', field='doc.compiledRelease.tender.procurementMethodDetails.keyword')
 
 		s.aggs.metric('instituciones', 'terms', field='extra.parentTop.name.keyword', size=10000)
 
-		s.aggs.metric('categorias', 'terms', field='doc.compiledRelease.tender.localProcurementCategory.keyword')
+		s.aggs.metric('categorias', 'terms', field='doc.compiledRelease.tender.mainProcurementCategory.keyword')
 
-		s.aggs.metric('organismosFinanciadores', 'terms', field='doc.compiledRelease.planning.budget.budgetBreakdown.classifications.organismo.keyword', size=2000)
+
+		s.aggs.metric('organismosFinanciadores', 'terms', field='doc.compiledRelease.planning.budget.budgetBreakdown.classifications.financiador.keyword', size=2000)
 
 		if metodo == 'pago' or metodo == 'contrato':
 			s.aggs.metric('años', 'date_histogram', field='doc.compiledRelease.date', interval='year', format='yyyy', min_doc_count=1)
@@ -388,6 +348,7 @@ class Buscador(APIView):
 			s.aggs.metric('años', 'date_histogram', field='doc.compiledRelease.tender.tenderPeriod.startDate', interval='year', format='yyyy', min_doc_count=1)
 
 		#resumen
+
 		s.aggs["contratos"].metric(
 			'promedio_montos_contrato', 
 			'avg', 
@@ -413,11 +374,11 @@ class Buscador(APIView):
 			precision_threshold=precision, 
 			field='doc.compiledRelease.contracts.implementation.transactions.payee.id.keyword'
 		)
-
+		
 		s.aggs.metric(
-			'compradores_total', 
-			'cardinality', 
-			precision_threshold=precision, 
+			'compradores_total',
+			'cardinality',
+			precision_threshold=precision,
 			field='doc.compiledRelease.buyer.id.keyword'
 		)
 
@@ -425,11 +386,11 @@ class Buscador(APIView):
 			s = s.filter('exists', field='doc.compiledRelease.tender.id')
 
 			# Temporal
-			s = s.filter('exists', field='doc.compiledRelease.tender.localProcurementCategory')
+			s = s.filter('exists', field='doc.compiledRelease.tender.mainProcurementCategory')
 
 			s.aggs.metric(
-				'procesos_total', 
-				'value_count', 
+				'procesos_total',
+				'value_count',
 				field='doc.compiledRelease.ocid.keyword'
 			)
 
@@ -453,7 +414,6 @@ class Buscador(APIView):
 				'value_count', 
 				field='doc.compiledRelease.ocid.keyword'
 			)
-
 		if moneda.replace(' ', ''): 
 			if urllib.parse.unquote(moneda) == noMoneda or urllib.parse.unquote(moneda) == noMonedaPago:
 				qqMoneda = Q('exists', field='doc.compiledRelease.contracts.value.currency') 
@@ -471,7 +431,7 @@ class Buscador(APIView):
 			s = s.filter('match_phrase', extra__parentTop__name__keyword=institucion)
 
 		if categoria.replace(' ', ''):
-			s = s.filter('match_phrase', doc__compiledRelease__tender__localProcurementCategory=categoria)
+			s = s.filter('match_phrase', doc__compiledRelease__tender__mainProcurementCategory=categoria)
 
 		if year.replace(' ', ''):
 			if metodo == 'pago' or metodo == 'contrato':
@@ -479,7 +439,7 @@ class Buscador(APIView):
 			else:
 				s = s.filter('range', doc__compiledRelease__tender__tenderPeriod__startDate={'gte': datetime.date(int(year), 1, 1), 'lt': datetime.date(int(year)+1, 1, 1)})
 
-		if term: 
+		if term:
 			if metodo == 'proceso':
 				s = s.filter('match', doc__compiledRelease__tender__description=term)
 
@@ -497,11 +457,11 @@ class Buscador(APIView):
 		mappingSort = {
 			"year":"doc.compiledRelease.date",
 			"institucion":"doc.compiledRelease.buyer.name.keyword",
-			"categoria": "doc.compiledRelease.tender.localProcurementCategory.keyword",
+			"categoria": "doc.compiledRelease.tender.mainProcurementCategory.keyword",
 			"modalidad": "doc.compiledRelease.tender.procurementMethodDetails.keyword",
 			"proveedor": "doc.compiledRelease.contracts.implementation.transactions.payee.name.keyword" if metodo == 'pago' else 'doc.compiledRelease.contracts.suppliers.name.keyword',
 			"monto": "doc.compiledRelease.contracts.extra.sumTransactions" if metodo == 'pago' else 'doc.compiledRelease.contracts.value.amount',
-			"organismo":"doc.compiledRelease.planning.budget.budgetBreakdown.classifications.organismo.keyword",
+			"organismo":"doc.compiledRelease.planning.budget.budgetBreakdown.classifications.financiador.keyword",
 		}
 
 		if ordenarPor.replace(' ',''):

@@ -33,7 +33,7 @@ var estadosContrato={
  * Moneda por defecto de a mostrar
  * @type {string} defaultMoneda
  */   
-var defaultMoneda='HNL';
+var defaultMoneda='PYG';
 
 /**
  * Nombres de meses en el transcurso de un año

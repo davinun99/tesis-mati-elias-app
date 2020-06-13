@@ -180,7 +180,7 @@ PAGINATE_BY = 10
 
 SOURCE_SEFIN_ID = 'HN.SIAFI2'
 
-
+"""
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -199,3 +199,4 @@ LOGGING = {
         },
     },
 }
+"""
