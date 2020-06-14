@@ -1,0 +1,17 @@
+image: docker:latest
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
+
+stages:
+  - deploy
+
+docker-build:
+  stage: deploy
+  script:
+    - docker stop ocds_backend || true
+    - docker build -t ocds_backend .
+    - docker run --name ocds_backend -d -p 8000:8000 ocds_backend
+
