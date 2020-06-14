@@ -490,7 +490,7 @@ function mouseover(d) {
 			"<strong>Modalidad de Compra </strong> " + d.tipo_procedimiento + "<br>" +
 			"<strong>Código de contrato</strong> " + d.codigo_contratacion + "<br>" +
 			"<strong>Fecha firma contrato </strong> " + moment(d.fecha_firma_contrato.split(" ")[0]).format('YYYY-MM-DD') + 
-			"<br><strong>Monto</strong> " + ValorMoneda(d.monto_adjudicado)+ " HNL ")
+			"<br><strong>Monto</strong> " + ValorMoneda(d.monto_adjudicado)+ " PYG ")
 			.style("visibility", "visible").style("display", "block");
 			//.style("display", "static");
 	//d3.select(this).style("fill-opacity", function(d) { return 0.8; });

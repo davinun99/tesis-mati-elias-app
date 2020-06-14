@@ -689,7 +689,7 @@ function InicializarMontoPagos(){
                     var cadena=e[0].name+'<br>';
 
                 e.forEach(function(valor,indice){
-                    cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value):valor.value) +' '+(valor.seriesIndex==0?'HNL':'%')+'<br>'
+                    cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value):valor.value) +' '+(valor.seriesIndex==0?'PYG':'%')+'<br>'
                 });
                 return cadena;
                 }
@@ -741,12 +741,12 @@ function InicializarMontoPagos(){
                     name: 'Monto',
                     min: 0,
                     axisLabel: {
-                        formatter: '{value} HNL'
+                        formatter: '{value} PYG'
                     },
                     name:'Lempiras',
                     axisPointer: {
                         label: {
-                            formatter: '{value} HNL'
+                            formatter: '{value} PYG'
                         }
                     }
                 },
@@ -808,13 +808,13 @@ function InicializarMontoPagos(){
                                 name: 'Monto',
                                 min: 0,
                                 axisLabel: {
-                                    formatter: '{value} HNL',
+                                    formatter: '{value} PYG',
                                     rotate:65
                                 },
                                 name:'Lempiras',
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 }
                             },
@@ -887,7 +887,7 @@ function MontoPagosEtapas(){
                     }
                 },
                 formatter:  function (e){
-                    return "{b0}<br>{a0} {c0} HNL ({p0}%)".replace('{p0}',ValorNumerico(datos.resultados.porcentajes[e[0].dataIndex].toFixed(2) ) ).replace('{a0}',e[0].marker).replace('{b0}',e[0].name).replace('{c0}',ValorMoneda( e[0].value));
+                    return "{b0}<br>{a0} {c0} PYG ({p0}%)".replace('{p0}',ValorNumerico(datos.resultados.porcentajes[e[0].dataIndex].toFixed(2) ) ).replace('{a0}',e[0].marker).replace('{b0}',e[0].name).replace('{c0}',ValorMoneda( e[0].value));
                 }
             },
             grid: {
@@ -925,7 +925,7 @@ function MontoPagosEtapas(){
                         axisLabel: {
                                 formatter: function (e){
                                     
-                                    return "{c} HNL ".replace('{c}',ValorMoneda( e) );
+                                    return "{c} PYG ".replace('{c}',ValorMoneda( e) );
                                     
                                 },rotate:45,
                                 showMinLabel:false
@@ -933,7 +933,7 @@ function MontoPagosEtapas(){
                             
                         axisPointer: {
                             label: {
-                                formatter: '{value} HNL'
+                                formatter: '{value} PYG'
                             }
                         }
                 }
@@ -963,7 +963,7 @@ function MontoPagosEtapas(){
                         fontSize:20,
                         align:'right',
                         formatter:  function (e){
-                            return "{c} HNL".replace('{c}',ValorMoneda( e.value));
+                            return "{c} PYG".replace('{c}',ValorMoneda( e.value));
                         }
                     }
                 }
@@ -984,7 +984,7 @@ function MontoPagosEtapas(){
                                 axisLabel: {
                                         formatter: function (e){
                                             
-                                            return "{c} HNL ".replace('{c}',ValorMoneda( e) );
+                                            return "{c} PYG ".replace('{c}',ValorMoneda( e) );
                                             
                                         },
                                         rotate:90,
@@ -993,7 +993,7 @@ function MontoPagosEtapas(){
                                     
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 }
                         }
@@ -1029,7 +1029,7 @@ function MontoPagosEtapas(){
                                 fontSize:20,
                                 align:'right',
                                 formatter:  function (e){
-                                    return "{c} HNL".replace('{c}',ValorMoneda( e.value));
+                                    return "{c} PYG".replace('{c}',ValorMoneda( e.value));
                                 }
                             }
                         }
@@ -1089,7 +1089,7 @@ function Top10Compradores(){
                             var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
             
                             e.forEach(function(valor,indice){
-                                cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'HNL':'')+'<br>'
+                                cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'PYG':'')+'<br>'
                             });
                             return cadena;
                         }
@@ -1117,13 +1117,13 @@ function Top10Compradores(){
                         {
                             type: 'value',
                             axisLabel: {
-                                formatter: '{value} HNL',
+                                formatter: '{value} PYG',
                                 rotate:45,
                             showMinLabel:false
                             },
                             axisPointer: {
                                 label: {
-                                    formatter: '{value} HNL'
+                                    formatter: '{value} PYG'
                                 }
                             }
                         }
@@ -1175,7 +1175,7 @@ function Top10Compradores(){
                                         fontSize:15,
                                     position: 'right',
                                     formatter: function (e){
-                                        return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                        return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                     }
                                 }
                             },
@@ -1227,13 +1227,13 @@ function Top10Compradores(){
                                 {
                                     type: 'value',
                                     axisLabel: {
-                                        formatter: '{value} HNL',
+                                        formatter: '{value} PYG',
                                         rotate:65,
                                     showMinLabel:false
                                     },
                                     axisPointer: {
                                         label: {
-                                            formatter: '{value} HNL'
+                                            formatter: '{value} PYG'
                                         }
                                     }
                                 }
@@ -1254,7 +1254,7 @@ function Top10Compradores(){
                                                 fontSize:11,
                                             position: 'right',
                                             formatter: function (e){
-                                                return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                                return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                             }
                                         }
                                     },
@@ -1317,7 +1317,7 @@ MostrarReloj('#top10Proveedores',true);
                                     var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
                     
                                     e.forEach(function(valor,indice){
-                                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'HNL':'')+'<br>'
+                                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'PYG':'')+'<br>'
                                     });
                                     return cadena;
                                 }
@@ -1349,13 +1349,13 @@ MostrarReloj('#top10Proveedores',true);
                             xAxis:  {
                                 type: 'value',
                                 axisLabel: {
-                                    formatter: '{value} HNL',
+                                    formatter: '{value} PYG',
                                     rotate:45,
                             showMinLabel:false
                                 },
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 }
                             },
@@ -1373,7 +1373,7 @@ MostrarReloj('#top10Proveedores',true);
                             },
                             series: [
                                 {
-                                    name: 'Monto de Contrato, Pagados en HNL',
+                                    name: 'Monto de Contrato, Pagados en PYG',
                                     type: 'bar',
                                     stack: 'Monto de Contrato',
                                     label: {
@@ -1384,7 +1384,7 @@ MostrarReloj('#top10Proveedores',true);
                                             fontSize:15,
                                             position: 'right',
                                             formatter: function (e){
-                                                return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                                return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                             },
                                             color:'gray'
                                         }
@@ -1427,19 +1427,19 @@ MostrarReloj('#top10Proveedores',true);
                                     yAxis: {
                                         type: 'value',
                                         axisLabel: {
-                                            formatter: '{value} HNL',
+                                            formatter: '{value} PYG',
                                             rotate:65,
                                     showMinLabel:false
                                         },
                                         axisPointer: {
                                             label: {
-                                                formatter: '{value} HNL'
+                                                formatter: '{value} PYG'
                                             }
                                         }
                                     },
                                     series: [
                                         {
-                                            name: 'Monto de Contrato, Pagados en HNL',
+                                            name: 'Monto de Contrato, Pagados en PYG',
                                             type: 'bar',
                                             stack: 'Monto de Contrato',
                                             label: {
@@ -1450,7 +1450,7 @@ MostrarReloj('#top10Proveedores',true);
                                                     fontSize:15,
                                                     position: 'right',
                                                     formatter: function (e){
-                                                        return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                                        return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                                     }
                                                 }
                                             },

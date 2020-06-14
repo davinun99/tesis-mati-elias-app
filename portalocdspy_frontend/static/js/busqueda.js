@@ -280,7 +280,7 @@ function MostrarResumen(datos){
   $('#totalCompradores').html(ValorNumerico(datos.resumen.compradores_total));
     $('#totalProcesos').html(ValorNumerico(datos.resumen.procesos_total));
     $('#totalProveedores').html(ValorNumerico(datos.resumen.proveedores_total));
-    $('#promedioMonto').html(ValorMoneda(datos.resumen.monto_promedio)+' HNL');
+    $('#promedioMonto').html(ValorMoneda(datos.resumen.monto_promedio)+' PYG');
 }
 function MostrarResultados(datos){
   $('#listaResultadosBusqueda').html('')

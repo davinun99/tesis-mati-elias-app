@@ -19,6 +19,12 @@ urlpatterns = [
 	path('inicio/', viewsets.Index.as_view()),
 	path('buscador/', viewsets.Buscador.as_view()),
 
+	path('compradores/', viewsets.Compradores.as_view()),
+	path('compradores/<path:partieId>/procesos/', viewsets.ProcesosDelComprador.as_view()),
+	path('compradores/<path:partieId>/contratos/', viewsets.ContratosDelComprador.as_view()),
+	path('compradores/<path:partieId>/pagos/', viewsets.PagosDelComprador.as_view()),
+	path('compradores/<path:partieId>/', viewsets.Comprador.as_view()),
+
 	path('dashboardoncae/filtros/', viewsets.FiltrosDashboardONCAE.as_view()),
 	path('dashboardoncae/procesosporcategoria/', viewsets.GraficarProcesosPorCategorias.as_view()),
 	path('dashboardoncae/procesospormodalidad/', viewsets.GraficarProcesosPorModalidad.as_view()),

@@ -19,7 +19,7 @@ var dataElastic = [
         "name": "Munich University",
         "city": "Munich",
         "country": "Germany",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -43,7 +43,7 @@ var dataElastic = [
         "name": "Leiden University",
         "city": "Leiden",
         "country": "the Netherlands",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -67,7 +67,7 @@ var dataElastic = [
         "name": "Amsterdam University",
         "city": "Amsterdam",
         "country": "the Netherlands",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
         
@@ -92,7 +92,7 @@ var dataElastic = [
         "name": "École Polytechnique",
         "city": "Paris",
         "country": "France",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -116,7 +116,7 @@ var dataElastic = [
         "name": "École municipale de physique et de chimie industrielles (Municipal School of Industrial Obras and Chemistry)",
         "city": "Paris",
         "country": "France",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -140,7 +140,7 @@ var dataElastic = [
         "name": "",
         "city": "",
         "country": "",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -164,7 +164,7 @@ var dataElastic = [
         "name": "Sorbonne University",
         "city": "Paris",
         "country": "France",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -188,7 +188,7 @@ var dataElastic = [
         "name": "Royal Institution of Great Britain",
         "city": "London",
         "country": "United Kingdom",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -212,7 +212,7 @@ var dataElastic = [
         "name": "Kiel University",
         "city": "Kiel",
         "country": "Germany",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -236,7 +236,7 @@ var dataElastic = [
         "name": "University of Cambridge",
         "city": "Cambridge",
         "country": "United Kingdom",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -260,7 +260,7 @@ var dataElastic = [
         "name": "University of Chicago",
         "city": "Chicago, IL",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -284,7 +284,7 @@ var dataElastic = [
         "name": "CERN",
         "city": "Geneva",
         "country": "Switzerland",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -308,7 +308,7 @@ var dataElastic = [
         "name": "Max-Planck-Institut für Festkörperforschung",
         "city": "Stuttgart",
         "country": "Federal Republic of Germany",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -332,7 +332,7 @@ var dataElastic = [
         "name": "Fritz-Haber-Institut der Max-Planck-Gesellschaft",
         "city": "Berlin",
         "country": "Federal Republic of Germany",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -356,7 +356,7 @@ var dataElastic = [
         "name": "IBM Zurich Research Laboratory",
         "city": "Rüschlikon",
         "country": "Switzerland",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -380,7 +380,7 @@ var dataElastic = [
         "name": "IBM Zurich Research Laboratory",
         "city": "Rüschlikon",
         "country": "Switzerland",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Concurso Público Nacional",
         "proveedor":'Proveedor 4'
   },
@@ -740,7 +740,7 @@ var dataElastic = [
         "name": "Princeton University",
         "city": "Princeton, NJ",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 4'
   },
@@ -764,7 +764,7 @@ var dataElastic = [
         "name": "Princeton University",
         "city": "Princeton, NJ",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 2'
   },
@@ -788,7 +788,7 @@ var dataElastic = [
         "name": "McMaster University",
         "city": "Hamilton, Ontario",
         "country": "Canada",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 4'
   },
@@ -812,7 +812,7 @@ var dataElastic = [
         "name": "Massachusetts Institute of Technology (MIT)",
         "city": "Cambridge, MA",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 1'
   },
@@ -836,7 +836,7 @@ var dataElastic = [
         "name": "Stanford University",
         "city": "Stanford, CA",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 1'
   },
@@ -860,7 +860,7 @@ var dataElastic = [
         "name": "University of California",
         "city": "Irvine, CA",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 1'
   },
@@ -884,7 +884,7 @@ var dataElastic = [
         "name": "Cornell University",
         "city": "Ithaca, NY",
         "country": "USA",
-        "coin":"HNL",
+        "coin":"PYG",
         "selection":"Compras Menores",
         "proveedor":'Proveedor 1'
   }  ];

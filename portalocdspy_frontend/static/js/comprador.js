@@ -634,7 +634,7 @@ function ObtenerFilasSubTablaPagos(datos){
                         
                     ),
                     $('<td>', { 'data-label': 'Monto del Pago' }).append(
-                        datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ? [ValorMoneda(datos.implementation.transactions[i].value.amount), $('<span>', { class: 'textoColorPrimario', text: ' '+(datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'HNL') })] : ''
+                        datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ? [ValorMoneda(datos.implementation.transactions[i].value.amount), $('<span>', { class: 'textoColorPrimario', text: ' '+(datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'PYG') })] : ''
                     ),
                     $('<td>', { 'data-label': 'Fecha del Pago' }).append(
                         $('<span>', { class: datos.implementation.transactions[i].date&&datos.implementation.transactions[i].date != 'NaT' ? '' : 'textoColorGris' }).text(
@@ -722,7 +722,7 @@ function AgregarFilaPago(resultados,selector,i){
 
             ),
             $('<td>', { 'data-label': 'Suma de Todos los Pagos', class: 'textoAlineadoDerecha' }).append(
-                resultados[i] && resultados[i]._source && resultados[i]._source.extra && Validar(resultados[i]._source.extra.sumTransactions) ? [ValorMoneda(resultados[i]._source.extra.sumTransactions), $('<span>', { class: 'textoColorPrimario', text: ' HNL' })] : ''
+                resultados[i] && resultados[i]._source && resultados[i]._source.extra && Validar(resultados[i]._source.extra.sumTransactions) ? [ValorMoneda(resultados[i]._source.extra.sumTransactions), $('<span>', { class: 'textoColorPrimario', text: ' PYG' })] : ''
 
 
             ),
@@ -837,7 +837,7 @@ function AgregarResultadosProcesosComprador(datos, selector) {
                      : $('<span>', { class: 'textoColorGris' }).text('No Disponible')
                 ),
                 $('<td>', { 'data-label': 'Monto Contratado', class: 'textoAlineadoDerecha' }).append(
-                    resultados[i]._source.doc.compiledRelease && resultados[i]._source.doc.compiledRelease.tender && resultados[i]._source.doc.compiledRelease.tender.extra && resultados[i]._source.doc.compiledRelease.tender.extra && Validar(resultados[i]._source.doc.compiledRelease.tender.extra.sumContracts) ? [ValorMoneda(resultados[i]._source.doc.compiledRelease.tender.extra.sumContracts), $('<span>', { class: 'textoColorPrimario', text: ' HNL' })] : $('<span>', { class: 'textoColorGris' }).text('No Disponible')
+                    resultados[i]._source.doc.compiledRelease && resultados[i]._source.doc.compiledRelease.tender && resultados[i]._source.doc.compiledRelease.tender.extra && resultados[i]._source.doc.compiledRelease.tender.extra && Validar(resultados[i]._source.doc.compiledRelease.tender.extra.sumContracts) ? [ValorMoneda(resultados[i]._source.doc.compiledRelease.tender.extra.sumContracts), $('<span>', { class: 'textoColorPrimario', text: ' PYG' })] : $('<span>', { class: 'textoColorGris' }).text('No Disponible')
                 )
             )
         );

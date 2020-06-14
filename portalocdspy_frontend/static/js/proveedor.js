@@ -631,7 +631,7 @@ function CargarContratosProveedor(){
                         
                     ),
                     $('<td>', { 'data-label': 'Monto del Pago' }).append(
-                        datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ? [ValorMoneda(datos.implementation.transactions[i].value.amount), $('<span>', { class: 'textoColorPrimario', text: ' '+(datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'HNL') })] : ''
+                        datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ? [ValorMoneda(datos.implementation.transactions[i].value.amount), $('<span>', { class: 'textoColorPrimario', text: ' '+(datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'PYG') })] : ''
                     ),
                     $('<td>', { 'data-label': 'Fecha del Pago' }).append(
                         $('<span>', { class: datos.implementation.transactions[i].date&&datos.implementation.transactions[i].date != 'NaT' ? '' : 'textoColorGris' }).text(
@@ -702,7 +702,7 @@ function AgregarFilaPago(resultados,selector,i){
                                               ),
                                               'montoPago':(
                                                 datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ?( 
-                                                  ValorMoneda(datos.implementation.transactions[i].value.amount)+ ' '+ (datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'HNL') ): ''
+                                                  ValorMoneda(datos.implementation.transactions[i].value.amount)+ ' '+ (datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'PYG') ): ''
                                               ),
                                               'fechaPago':(
                                                 datos.implementation.transactions[i].date && datos.implementation.transactions[i].date != 'NaT' ? ObtenerFecha(datos.implementation.transactions[i].date, 'fecha') : ''
@@ -735,7 +735,7 @@ function AgregarFilaPago(resultados,selector,i){
                                               ),
                                               'montoPago':(
                                                 datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ?( 
-                                                  ValorMoneda(datos.implementation.transactions[i].value.amount)+ ' '+ (datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'HNL') ): ''
+                                                  ValorMoneda(datos.implementation.transactions[i].value.amount)+ ' '+ (datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'PYG') ): ''
                                               ),
                                               'fechaPago':(
                                                 datos.implementation.transactions[i].date && datos.implementation.transactions[i].date != 'NaT' ? ObtenerFecha(datos.implementation.transactions[i].date, 'fecha') : ''
@@ -768,7 +768,7 @@ function AgregarFilaPago(resultados,selector,i){
                                               ),
                                               'montoPago':(
                                                 datos.implementation.transactions[i].value && Validar(datos.implementation.transactions[i].value.amount) ?( 
-                                                  ValorMoneda(datos.implementation.transactions[i].value.amount)+ ' '+ (datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'HNL') ): ''
+                                                  ValorMoneda(datos.implementation.transactions[i].value.amount)+ ' '+ (datos.implementation.transactions[i].date.currency?datos.implementation.transactions[i].date.currency:'PYG') ): ''
                                               ),
                                               'fechaPago':(
                                                 datos.implementation.transactions[i].date && datos.implementation.transactions[i].date != 'NaT' ? ObtenerFecha(datos.implementation.transactions[i].date, 'fecha') : ''
@@ -883,7 +883,7 @@ function AgregarFilaPago(resultados,selector,i){
           ),
                 $('<td>',{'data-label':'Monto de Productos Adjudicados' ,class:'textoAlineadoDerecha'}).append(
                 resultados[i]&&Validar(resultados[i].monto)?
-                [ValorMoneda(resultados[i].monto),$('<span>',{class:'textoColorPrimario',text:' HNL'})]:''
+                [ValorMoneda(resultados[i].monto),$('<span>',{class:'textoColorPrimario',text:' PYG'})]:''
                 
                 
                 )

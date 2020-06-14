@@ -729,7 +729,7 @@ function InicializarMontoProcesos(){
                     var cadena=e[0].name+'<br>';
 
                 e.forEach(function(valor,indice){
-                    cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?valor.value:ValorMoneda(valor.value)) +' '+(valor.seriesIndex==0?'%':'HNL')+'<br>'
+                    cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?valor.value:ValorMoneda(valor.value)) +' '+(valor.seriesIndex==0?'%':'PYG')+'<br>'
                 });
                 return cadena;
             }
@@ -801,12 +801,12 @@ function InicializarMontoProcesos(){
                     name: 'Monto',
                     min: 0,
                     axisLabel: {
-                        formatter: '{value} HNL'
+                        formatter: '{value} PYG'
                     },
                     name:'Lempiras',
                     axisPointer: {
                         label: {
-                            formatter: '{value} HNL'
+                            formatter: '{value} PYG'
                         }
                     }
                 }
@@ -842,7 +842,7 @@ function InicializarMontoProcesos(){
                     show:true,
                     color:'#c4c4c4',
                     formatter:function (e){
-                        return ValorMoneda(e.value)  +' HNL'
+                        return ValorMoneda(e.value)  +' PYG'
                     },
                     fontFamily:'Poppins',
                     fontWeight:600,
@@ -1348,7 +1348,7 @@ function MontoProcesosTipoContrato(){
     
                     var cadena=valor.name+'<br>';
                    
-                    cadena=cadena+' '+valor.marker+' '+ValorMoneda(valor.value)+' '+'HNL'+' ('+valor.percent+'%)'+'<br>';
+                    cadena=cadena+' '+valor.marker+' '+ValorMoneda(valor.value)+' '+'PYG'+' ('+valor.percent+'%)'+'<br>';
                     return cadena;
                 }
             },
@@ -1380,7 +1380,7 @@ function MontoProcesosTipoContrato(){
                     label:{
                         color:'gray',
                         formatter:function (e){
-                            return ''+e.name+' \n'+ValorMoneda(e.value) +' HNL ('+ ValorMoneda(e.percent) +'%)'
+                            return ''+e.name+' \n'+ValorMoneda(e.value) +' PYG ('+ ValorMoneda(e.percent) +'%)'
                         }
                     }
                 }
@@ -1617,7 +1617,7 @@ var datosPastel=[];
 
                 var cadena=valor.name+'<br>';
                
-                cadena=cadena+' '+valor.marker+' '+ValorMoneda(valor.value)+' '+'HNL'+' ('+valor.percent+'%)'+'<br>';
+                cadena=cadena+' '+valor.marker+' '+ValorMoneda(valor.value)+' '+'PYG'+' ('+valor.percent+'%)'+'<br>';
                 return cadena;
             }
         },
@@ -1655,7 +1655,7 @@ var datosPastel=[];
                 label:{
                     color:'gray',
                     formatter:function (e){
-                        return ''+e.name+' \n'+ValorMoneda(e.value) +' HNL ('+ ValorMoneda(e.percent) +'%)'
+                        return ''+e.name+' \n'+ValorMoneda(e.value) +' PYG ('+ ValorMoneda(e.percent) +'%)'
                     }
                 }
             }
@@ -1675,7 +1675,7 @@ var datosPastel=[];
                         bottom:0,
                         right:'center',
                         formatter: function (e){
-                            return e +'. '+ ValorMoneda(datosPastel.filter(function(data){ if(data.name===e){return true;}}).length?datosPastel.filter(function(data){ if(data.name===e){return true;}})[0].value:0)+' HNL';
+                            return e +'. '+ ValorMoneda(datosPastel.filter(function(data){ if(data.name===e){return true;}}).length?datosPastel.filter(function(data){ if(data.name===e){return true;}})[0].value:0)+' PYG';
                         }
                     }
                     ,tooltip:{
@@ -1774,7 +1774,7 @@ var grafico=echarts.init(document.getElementById('top10Compradores'));
                     var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
     
                     e.forEach(function(valor,indice){
-                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'HNL':'')+'<br>'
+                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'PYG':'')+'<br>'
                     });
                     return cadena;
                 }
@@ -1801,13 +1801,13 @@ var grafico=echarts.init(document.getElementById('top10Compradores'));
                 {
                     type: 'value',
                     axisLabel: {
-                        formatter: '{value} HNL',
+                        formatter: '{value} PYG',
                         rotate:45,
                     showMinLabel:false
                     },
                     axisPointer: {
                         label: {
-                            formatter: '{value} HNL'
+                            formatter: '{value} PYG'
                         }
                     },
                     textStyle:{
@@ -1859,7 +1859,7 @@ var grafico=echarts.init(document.getElementById('top10Compradores'));
                                 fontSize:15,
                             position: 'right',
                             formatter: function (e){
-                                return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                             },
                             color:'gray'
                         }
@@ -1912,13 +1912,13 @@ var grafico=echarts.init(document.getElementById('top10Compradores'));
                         {
                             type: 'value',
                             axisLabel: {
-                                formatter: '{value} HNL',
+                                formatter: '{value} PYG',
                                 rotate:65,
                             showMinLabel:false
                             },
                             axisPointer: {
                                 label: {
-                                    formatter: '{value} HNL'
+                                    formatter: '{value} PYG'
                                 }
                             }
                         }
@@ -1941,7 +1941,7 @@ var grafico=echarts.init(document.getElementById('top10Compradores'));
                                     fontSize:15,
                                     position: 'top',
                                     formatter: function (e){
-                                        return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                        return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                     }
                                 }
                             },
@@ -2010,7 +2010,7 @@ var opciones = {
                 var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
 
                 e.forEach(function(valor,indice){
-                    cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'HNL':'')+'<br>'
+                    cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :valor.value) +' '+(valor.seriesIndex==0?'PYG':'')+'<br>'
                 });
                 return cadena;
             }
@@ -2038,13 +2038,13 @@ var opciones = {
                 type: 'value',
                 
                                 axisLabel: {
-                                    formatter: '{value} HNL',
+                                    formatter: '{value} PYG',
                                     rotate:45,
                             showMinLabel:false
                                 },
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 },
                                 name:'Monto\nContratado'
@@ -2090,7 +2090,7 @@ var opciones = {
                         fontSize:15,
                         position: 'right',
                         formatter: function (e){
-                            return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                            return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                         },
                         color:'gray'
                     }
@@ -2145,13 +2145,13 @@ var opciones = {
                     {
                         type: 'value',
                                         axisLabel: {
-                                            formatter: '{value} HNL',
+                                            formatter: '{value} PYG',
                                             rotate:65,
                                     showMinLabel:false
                                         },
                                         axisPointer: {
                                             label: {
-                                                formatter: '{value} HNL'
+                                                formatter: '{value} PYG'
                                             }
                                         }
                     }
@@ -2171,7 +2171,7 @@ var opciones = {
                                 fontSize:15,
                                 position: 'top',
                                 formatter: function (e){
-                                    return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                    return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                 }
                             }
                         },

@@ -124,10 +124,10 @@
           ),
           $('<td>',{'data-label':'RTN' ,class:'textoAlineadoDerecha'}).text(resultados[i].id),
           $('<td>',{'data-label':'Contratos' ,class:'textoAlineadoCentrado'}).text(ValorNumerico(resultados[i].procesos)),
-          $('<td>',{'data-label':'Total de Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].total_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
-          $('<td>',{'data-label':'Promedio de Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].promedio_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
-          $('<td>',{'data-label':'Mayor Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].mayor_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
-          $('<td>',{'data-label':'Menor Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].menor_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
+          $('<td>',{'data-label':'Total de Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].total_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
+          $('<td>',{'data-label':'Promedio de Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].promedio_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
+          $('<td>',{'data-label':'Mayor Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].mayor_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
+          $('<td>',{'data-label':'Menor Monto Pagado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].menor_monto_pagado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
           $('<td>',{'data-label':'Fecha de Última Transacción' ,class:'textoAlineadoCentrado'}).append(
             $('<span>',{class:resultados[i].fecha_ultimo_proceso&&resultados[i].fecha_ultimo_proceso!='NaT'?'':'textoColorGris' }).text(
               resultados[i].fecha_ultimo_proceso&&resultados[i].fecha_ultimo_proceso!='NaT'?ObtenerFecha(resultados[i].fecha_ultimo_proceso,'fecha'):'No Disponible'

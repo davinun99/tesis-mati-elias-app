@@ -1,0 +1,970 @@
+{% extends "base.html" %} {% block head_content %}
+<title>Portal de Contrataciones Abiertas de Honduras - Comprador</title>
+{% endblock %} {% load static %} {% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.css' %}"> {% endblock %} {% block container %}
+<div class="container-fluid tamanoMinimo" style="max-width: 1600px;position: relative;">
+    <input type="hidden" value="{{id}}" id="compradorId">
+    <div class="contenedorInformacion">
+    </div>
+    <div class="row" style="display:none" id="noEncontrado">
+        <div class="col-md-12 cajonSombreado fondoColorPrimario mt-5 fondoContrataciones" style="background-color: #3B53A4">
+
+            <h1 class="titularColor textoColorBlanco p-5 m-5" style="font-size: 2rem">No se Econtró el Comprador.</h1>
+
+        </div>
+    </div>
+    <div class="contenedorTablas" style="display: none">
+        <div class="row">
+
+            <div class="col-md-12 mt-5">
+                <div class=" cajonSombreado " id="cajonProcesos" data-step="3" data-intro="Puedes ver el historial de procesos de contratación en los que ha participado este comprador.">
+
+                    <div class="row">
+                        <div class="col-md-12 mt-2">
+                            <!--<h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Procesos de Contratación</h1>-->
+                            <h4 class="text-primary-edcax titularCajonSombreado">Procesos de Contratación</h4>
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-3 ">
+                        <div class="col-lg-6">
+                            <div class="campoAzulBusquedaPadre normal" style="margin-left:0">
+                                <input class="form-control form-control-lg campoAzulBusqueda" type="text" placeholder="Busca un proceso de Contratación..." filtro="compradorPro">
+                                <i class="fas fa-search cursorMano" id="buscarInformacionProcesos"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 textoAlineadoDerecha">
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">Mostrar&nbsp;</h5>
+                            <select name="" id="paginacionBusquedaProceso" class="campoSeleccion ancho70 mt-3 enLinea">
+                                 <option value="5" {% if paginarPorPro == 5 %}selected{% endif %}>5</option>
+                                 <option value="10" {% if paginarPorPro == 10 %}selected{% endif %}>10</option>
+                                 <option value="20" {% if paginarPorPro == 20 %}selected{% endif %}>20</option>
+                                 <option value="50" {% if paginarPorPro == 50 %}selected{% endif %}>50</option>
+                                 <option value="100" {% if paginarPorPro == 100 %}selected{% endif %}>100</option>
+                           </select>
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">&nbsp;Resultados</h5>
+                        </div>
+                    </div>
+                    <table class="tablaGeneral mostrarEncabezados">
+                        <thead>
+                            <tr>
+
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="compradorPro" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="buyer.name">Dependencia</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordencompradorPro}}">
+                                                <div class="contenedorFlechasOrden">
+                                                      <i class="fas fa-sort-up flechaArriba" {% if ordencompradorPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                      <i class="fas fa-sort-down flechaAbajo" {% if ordencompradorPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                </div>
+                                             </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if ocidPro %}{{ocidPro}}{% endif %}">
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="ocidPro" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="ocid">ID del Proceso</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenocidPro}}">
+                                                      <div class="contenedorFlechasOrden">
+                                                            <i class="fas fa-sort-up flechaArriba" {% if ordenocidPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                            <i class="fas fa-sort-down flechaAbajo" {% if ordenocidPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                      </div>
+                                                   </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if ocidPro %}{{ocidPro}}{% endif %}">
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="tituloPro" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="planning.rationale">Título del Proceso</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordentituloPro}}">
+                                                            <div class="contenedorFlechasOrden">
+                                                                  <i class="fas fa-sort-up flechaArriba" {% if ordentituloPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                  <i class="fas fa-sort-down flechaAbajo" {% if ordentituloPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                            </div>
+                                                         </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if tituloPro %}{{tituloPro}}{% endif %}">
+                                </th>
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="categoriaCompraPro" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="tender.additionalProcurementCategories">Modalidad de Compra</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordencategoriaCompraPro}}">
+                                                                  <div class="contenedorFlechasOrden">
+                                                                        <i class="fas fa-sort-up flechaArriba" {% if ordencategoriaCompraPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                        <i class="fas fa-sort-down flechaAbajo" {% if ordencategoriaCompraPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                                  </div>
+                                                               </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if categoriaCompraPro %}{{categoriaCompraPro}}{% endif %}">
+                                </th>
+
+
+
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="fechaPublicacionPro" tipo="fecha">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="tender.date">Fecha de Publicación de la licitación</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenfechaPublicacionPro}}">
+                                                                           <div class="contenedorFlechasOrden">
+                                                                                 <i class="fas fa-sort-up flechaArriba" {% if ordenfechaPublicacionPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                                 <i class="fas fa-sort-down flechaAbajo" {% if ordenfechaPublicacionPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                                           </div>
+                                                                        </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion fecha" placeholder="YYYY-MM-DD" autocomplete="off" opcion="<" type="text" value="{% if fechaPublicacionPro %}{{fechaPublicacionPro}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadorfechaPublicacionPro == '<' %}&lt;{% endif %}{% if operadorfechaPublicacionPro == '>' %}&gt;{% endif %}{% if operadorfechaPublicacionPro == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMayorfechaPublicacionPro" name="selectorFechafechaPublicacionPro" opcion="<" {% if operadorfechaPublicacionPro == '<' %}checked{% endif %}>
+                                                        <label for="filtroFechaMayorfechaPublicacionPro">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMenorfechaPublicacionPro" name="selectorFechafechaPublicacionPro" opcion=">" {% if operadorfechaPublicacionPro == '>' %}checked{% endif %}>
+                                                        <label for="filtroFechaMenorfechaPublicacionPro">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaIgualfechaPublicacionPro" name="selectorFechafechaPublicacionPro" opcion="==" {% if operadorfechaPublicacionPro == '=' %}checked{% endif %}>
+                                                        <label for="filtroFechaIgualfechaPublicacionPro">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="fechaRecepcionPro" tipo="fecha">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="tender.tenderPeriod.startDate">Fecha de recepción de ofertas</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenfechaRecepcionPro}}">
+                                                                              <div class="contenedorFlechasOrden">
+                                                                                    <i class="fas fa-sort-up flechaArriba" {% if ordenfechaRecepcionPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                                    <i class="fas fa-sort-down flechaAbajo" {% if ordenfechaRecepcionPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                                              </div>
+                                                                           </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion fecha" placeholder="YYYY-MM-DD" autocomplete="off" opcion="<" type="text" value="{% if fechaRecepcionPro %}{{fechaRecepcionPro}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadorfechaRecepcionPro == '<' %}&lt;{% endif %}{% if operadorfechaRecepcionPro == '>' %}&gt;{% endif %}{% if operadorfechaRecepcionPro == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMayofechaRecepcionPro" name="selectorFechafechaRecepcionPro" opcion="<" {% if operadorfechaRecepcionPro == '<' %}checked{% endif %}>
+                                                        <label for="filtroFechaMayorfechaRecepcionPro">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMenorfechaRecepcionPro" name="selectorFechafechaRecepcionPro" opcion=">" {% if operadorfechaRecepcionPro == '>' %}checked{% endif %}>
+                                                        <label for="filtroFechaMenorfechaRecepcionPro">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaIgualfechaRecepcionPro" name="selectorFechafechaRecepcionPro" opcion="==" {% if operadorfechaRecepcionPro == '=' %}checked{% endif %}>
+                                                        <label for="filtroFechaIgualfechaRecepcionPro">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+
+
+
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="estadoPro" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="planning, tender,awards, contracts">Estado</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenestadoPro}}">
+                                                   <div class="contenedorFlechasOrden">
+                                                         <i class="fas fa-sort-up flechaArriba" {% if ordenestadoPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                         <i class="fas fa-sort-down flechaAbajo" {% if ordenestadoPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                   </div>
+                                                </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <!--<input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if estadoPro %}{{estadoPro}}{% endif %}">-->
+                                    <select class="campoBlancoTextoSeleccion" placeholder="Nombre"  type="text" >
+                                        <option value="" >Seleccionar Todos</option>
+                                        <option value="planning" {% if estadoPro == 'planning' %}selected{% endif %}>Planeación</option>
+                                        <option value="tender" {% if estadoPro == 'tender' %}selected{% endif %}>Licitación</option>
+                                        <option value="awards" {% if estadoPro == 'awards' %}selected{% endif %}>Adjudicación</option>
+                                        <option value="contracts" {% if estadoPro == 'contracts' %}selected{% endif %}>Contrato</option>
+                                        <option value="implementation" {% if estadoPro == 'implementation' %}selected{% endif %}>Implementación</option>
+                                        
+                                     </select>
+                                </th>
+
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="montoContratadoPro" tipo="numero">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="Suma de contracts[n].value.amount">Monto Contratado</span></td>
+                                            </td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenmontoContratadoPro}}">
+                                                   <div class="contenedorFlechasOrden">
+                                                         <i class="fas fa-sort-up flechaArriba" {% if ordenmontoContratadoPro == 'descendente' %}style="display:none"{% endif %}></i>
+                                                         <i class="fas fa-sort-down flechaAbajo" {% if ordenmontoContratadoPro == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                   </div>
+                                                </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion elementoNumerico" decimal="true" placeholder="Número" opcion="<" type="text" value="{% if montoContratadoPro %}{{montoContratadoPro}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadormontoContratadoPro == '<' %}&lt;{% endif %}{% if operadormontoContratadoPro == '>' %}&gt;{% endif %}{% if operadormontoContratadoPro == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMayormontoContratadoPro" name="selectorMenormontoContratadoPro" opcion="<" {% if operadormontoContratadoPro == '<' %}checked{% endif %}>
+                                                        <label for="filtroMenorMayormontoContratadoPro">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMenormontoContratadoPro" name="selectorMenormontoContratadoPro" opcion=">" {% if operadormontoContratadoPro == '>' %}checked{% endif %}>
+                                                        <label for="filtroMenorMenormontoContratadoPro">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorIgualmontoContratadoPro" name="selectorMenormontoContratadoPro" opcion="==" {% if operadormontoContratadoPro == '=' %}checked{% endif %}>
+                                                        <label for="filtroMenorIgualmontoContratadoPro">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="resultadosProcesosComprador">
+                            <!--
+                     <tr class="filaSubTabla transicion contratos" toolTexto="Puedes ver una subtabla de contratos haciendo CLICK">
+
+                        <td data-label="Dependencia"><a href="/comprador/" class="enlaceTablaGeneral">Departamento Central</a> </td>
+                        <td data-label="ID Proceso"><a href="/proceso" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                        <td data-label="Título del Proceso"><a href="/proceso" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                        <td data-label="Categoría de Compra">Lorem ipsum dolor sit amet consect</td>
+                        <td data-label="Monto Estimado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                        <td data-label="Fecha de Publicación de la licitación">2018-02-19 10:02:54</td>
+                        <td data-label="Fecha de recepción de ofertas">2018-02-19 10:02:54</td>
+                        <td data-label="Estado">Contratado</td>
+                        <td data-label="Monto Pagado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                        <td data-label="Monto Contratado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                     </tr>
+                     <tr class="filaSubTabla transicion contratos" toolTexto="Puedes ver una subtabla de contratos haciendo CLICK">
+
+                           <td data-label="Dependencia"><a href="/comprador/" class="enlaceTablaGeneral">Departamento Central</a> </td>
+                           <td data-label="ID Proceso"><a href="/proceso" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                           <td data-label="Título del Proceso"><a href="/proceso" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                           <td data-label="Categoría de Compra">Lorem ipsum dolor sit amet consect</td>
+                           <td data-label="Monto Estimado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                           <td data-label="Fecha de Publicación de la licitación">2018-02-19 10:02:54</td>
+                           <td data-label="Fecha de recepción de ofertas">2018-02-19 10:02:54</td>
+                           <td data-label="Estado">Contratado</td>
+                           <td data-label="Monto Pagado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                           <td data-label="Monto Contratado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                        </tr>
+                        <tr class="filaSubTabla transicion contratos" toolTexto="Puedes ver una subtabla de contratos haciendo CLICK">
+
+                              <td data-label="Dependencia"><a href="/comprador/" class="enlaceTablaGeneral">Departamento Central</a> </td>
+                              <td data-label="ID Proceso"><a href="/proceso" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                              <td data-label="Título del Proceso"><a href="/proceso" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                              <td data-label="Categoría de Compra">Lorem ipsum dolor sit amet consect</td>
+                              <td data-label="Monto Estimado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Fecha de Publicación de la licitación">2018-02-19 10:02:54</td>
+                              <td data-label="Fecha de recepción de ofertas">2018-02-19 10:02:54</td>
+                              <td data-label="Estado">Contratado</td>
+                              <td data-label="Monto Pagado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Monto Contratado">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                           </tr>-->
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0">Mostrando <span class="inicioResultado ProcesosComprador">0</span> a <span class="finResultado ProcesosComprador">0</span> de <span class="totalResultado ProcesosComprador">0</span> Procesos</h5>
+
+                        </div>
+                        <div class="col-md-6 textoAlineadoCentrado">
+                            <nav class="navegacionTablaGeneral ProcesosComprador">
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!--cajon-->
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12 textoAlineadoDerecha">
+                <h4 class="textoAlineadoDerecha mb-0 descargaIconos enLinea alineadoArriba" style="margin-top:18px">
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaJSONProcesos"><i class="fas fa-file-download"></i>&nbsp;.JSON</span>
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaCSVProcesos"><i class="fas fa-file-download"></i>&nbsp;.CSV</span>
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaXLSXProcesos"><i class="fas fa-file-download"></i>&nbsp;.XLSX</span>
+                </h4>
+                <h4 class="enLinea mb-0 mt-3 enLinea alineadoArriba" onclick="location.href='/preguntas'">
+                    <div class="textoAlineadoCentrado cursorMano botonAyuda transicion" id="informacionTipoDatos">
+                        <i class="fas fa-question"></i>
+                    </div>
+
+                </h4>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" cajonSombreado " id="cajonContratos" data-step="4" data-intro="Puedes ver los contratos de este comprador con sus proveedores.">
+                    <div class="row">
+                        <div class="col-md-12 mt-2">
+                            <h4 class="text-primary-edcax titularCajonSombreado">Contratos del Comprador</h4>
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-3 ">
+                        <div class="col-lg-6">
+                            <div class="campoAzulBusquedaPadre normal" style="margin-left:0">
+                                <input class="form-control form-control-lg campoAzulBusqueda" type="text" placeholder="Busca un contrato..." filtro="tituloCon">
+                                <i class="fas fa-search cursorMano" id="buscarInformacionContratos"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 textoAlineadoDerecha">
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">Mostrar&nbsp;</h5>
+                            <select name="" id="paginacionBusquedaContrato" class="campoSeleccion ancho70 mt-3 enLinea">
+                                    <option value="5" {% if paginarPorCon == 5 %}selected{% endif %}>5</option>
+                                    <option value="10" {% if paginarPorCon == 10 %}selected{% endif %}>10</option>
+                                    <option value="20" {% if paginarPorCon == 20 %}selected{% endif %}>20</option>
+                                    <option value="50" {% if paginarPorCon == 50 %}selected{% endif %}>50</option>
+                                    <option value="100" {% if paginarPorCon == 100 %}selected{% endif %}>100</option>
+                                 </select>
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">&nbsp;Resultados</h5>
+                        </div>
+                    </div>
+                    <table class="tablaGeneral mostrarEncabezados">
+                        <thead>
+                            <tr>
+                                <!--<th class="textoAlineadoCentrado">
+                                 <table class="alineado">
+                                       <tr><td><span toolTexto="buyer.name">Dependencia</span></td><td><span class="ordenEncabezado" opcion="neutro">
+                                             <div class="contenedorFlechasOrden">
+                                                   <i class="fas fa-sort-up flechaArriba"></i>
+                                                   <i class="fas fa-sort-down flechaAbajo"></i>
+                                             </div>
+                                          </span></td></tr>
+                                    </table>
+            
+                                 
+                                 
+                                 <input class="campoBlancoTextoSeleccion" placeholder="Nombre">
+                                 </th>-->
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="proveedorCon" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].suppliers[n].name">Proveedor</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenproveedorCon}}">
+                                                         <div class="contenedorFlechasOrden">
+                                                               <i class="fas fa-sort-up flechaArriba" {% if ordenproveedorCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                               <i class="fas fa-sort-down flechaAbajo" {% if ordenproveedorCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                         </div>
+                                                      </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if proveedorCon %}{{proveedorCon}}{% endif %}">
+                                </th>
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="tituloCon" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].title">Título del Contrato</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordentituloCon}}">
+                                                               <div class="contenedorFlechasOrden">
+                                                                     <i class="fas fa-sort-up flechaArriba" {% if ordentituloCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                     <i class="fas fa-sort-down flechaAbajo" {% if ordentituloCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                               </div>
+                                                            </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if tituloCon %}{{tituloCon}}{% endif %}">
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="descripcionCon" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td> <span toolTexto="contracts[n].description">Descripción</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordendescripcionCon}}">
+                                                                     <div class="contenedorFlechasOrden">
+                                                                           <i class="fas fa-sort-up flechaArriba" {% if ordendescripcionCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                           <i class="fas fa-sort-down flechaAbajo" {% if ordendescripcionCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                                     </div>
+                                                                  </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if descripcionCon %}{{descripcionCon}}{% endif %}">
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="tituloLicitacionCon" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td> <span toolTexto="planning.rationale">Nombre del Proceso</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordentituloLicitacionCon}}">
+                                                                           <div class="contenedorFlechasOrden">
+                                                                                 <i class="fas fa-sort-up flechaArriba" {% if ordentituloLicitacionCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                                 <i class="fas fa-sort-down flechaAbajo" {% if ordentituloLicitacionCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                                           </div>
+                                                                        </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if tituloLicitacionCon %}{{tituloLicitacionCon}}{% endif %}">
+                                </th>
+
+
+
+                                <!-- <th class="textoAlineadoCentrado">
+                                       <table class="alineado">
+                                             <tr><td> <span toolTexto="planning.rationale">Nombre del Proceso</span></td><td> <span class="ordenEncabezado" opcion="neutro">
+                                                   <div class="contenedorFlechasOrden">
+                                                         <i class="fas fa-sort-up flechaArriba"></i>
+                                                         <i class="fas fa-sort-down flechaAbajo"></i>
+                                                   </div>
+                                                </span></td></tr>
+                                          </table>
+                  
+                                      
+                                      
+                                       <input  class="campoBlancoTextoSeleccion" placeholder="Nombre">
+                                    </th>-->
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="categoriaCompraCon" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td> <span toolTexto="tender.additionalProcurementCategories">Categoría de Compra</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordencategoriaCompraCon}}">
+                                                      <div class="contenedorFlechasOrden">
+                                                            <i class="fas fa-sort-up flechaArriba" {% if ordencategoriaCompraCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                            <i class="fas fa-sort-down flechaAbajo" {% if ordencategoriaCompraCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                      </div>
+                                                   </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <!--<input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if categoriaCompraCon %}{{categoriaCompraCon}}{% endif %}">-->
+                                    <select class="campoBlancoTextoSeleccion" placeholder="Nombre"  type="text" >
+                                        <option value="" >Seleccionar Todos</option>
+                                        <option value="works" {% if categoriaCompraCon == 'works' %}selected{% endif %}>Obras</option>
+                                        <option value="goods" {% if categoriaCompraCon == 'goods' %}selected{% endif %}>Bienes y provisiones</option>
+                                        <option value="services" {% if categoriaCompraCon == 'services' %}selected{% endif %}>Servicios</option>
+                                     </select>
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="montoCon" tipo="numero">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].value.amount">Monto del Contrato</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenmontoCon}}">
+                                                            <div class="contenedorFlechasOrden">
+                                                                  <i class="fas fa-sort-up flechaArriba" {% if ordenmontoCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                  <i class="fas fa-sort-down flechaAbajo" {% if ordenmontoCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                            </div>
+                                                         </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion elementoNumerico" decimal="true" placeholder="Número" opcion="<" type="text" value="{% if montoCon %}{{montoCon}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadormontoCon == '<' %}&lt;{% endif %}{% if operadormontoCon == '>' %}&gt;{% endif %}{% if operadormontoCon == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMayorMontoCon" name="selectorMenorMontoCon" opcion="<" {% if operadormontoCon == '<' %}checked{% endif %}>
+                                                        <label for="filtroMenorMayorMontoCon">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMenorMontoCon" name="selectorMenorMontoCon" opcion=">" {% if operadormontoCon == '>' %}checked{% endif %}>
+                                                        <label for="filtroMenorMenorMontoCon">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorIgualMontoCon" name="selectorMenorMontoCon" opcion="==" {% if operadormontoCon == '=' %}checked{% endif %}>
+                                                        <label for="filtroMenorIgualMontoCon">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="fechaFirmaCon" tipo="fecha">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].dateSigned">Fecha de Firma del Contrato</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenfechaFirmaCon}}">
+                                                               <div class="contenedorFlechasOrden">
+                                                                     <i class="fas fa-sort-up flechaArriba" {% if ordenfechaFirmaCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                     <i class="fas fa-sort-down flechaAbajo" {% if ordenfechaFirmaCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                               </div>
+                                                            </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion fecha" placeholder="Fecha" autocomplete="off" opcion="<" type="text" value="{% if fechaFirmaCon %}{{fechaFirmaCon}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadorfechaFirmaCon == '<' %}&lt;{% endif %}{% if operadorfechaFirmaCon == '>' %}&gt;{% endif %}{% if operadorfechaFirmaCon == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMayorFechaFirmaCon" name="selectorFechaFechaFirmaCon" opcion="<" {% if operadorfechaFirmaCon == '<' %}checked{% endif %}>
+                                                        <label for="filtroFechaMayorFechaFirmaCon">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMenorFechaFirmaCon" name="selectorFechaFechaFirmaCon" opcion=">" {% if operadorfechaFirmaCon == '>' %}checked{% endif %}>
+                                                        <label for="filtroFechaMenorFechaFirmaCon">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaIgualFechaFirmaCon" name="selectorFechaFechaFirmaCon" opcion="==" {% if operadorfechaFirmaCon == '=' %}checked{% endif %}>
+                                                        <label for="filtroFechaIgualFechaFirmaCon">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th class="textoAlineadoCentrado  campoFiltrado" filtro="estadoCon" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td> <span toolTexto="contracts[n].status">Estado</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenestadoCon}}">
+                                                                  <div class="contenedorFlechasOrden">
+                                                                        <i class="fas fa-sort-up flechaArriba" {% if ordenestadoCon == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                        <i class="fas fa-sort-down flechaAbajo" {% if ordenestadoCon == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                                  </div>
+                                                               </span></td>
+                                        </tr>
+                                    </table>
+
+
+                                    <!--<input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if estadoCon %}{{estadoCon}}{% endif %}">-->
+                                    <select class="campoBlancoTextoSeleccion" placeholder="Nombre"  type="text" >
+                                        <option value="" >Seleccionar Todos</option>
+                                        <option value="pending" {% if estadoCon == 'pending' %}selected{% endif %}>Pendiente</option>
+                                        <option value="active" {% if estadoCon == 'active' %}selected{% endif %}>Activo</option>
+                                        <option value="cancelled" {% if estadoCon == 'cancelled' %}selected{% endif %}>Cancelado</option>
+                                        <option value="unsuccessful" {% if estadoCon == 'unsuccessful' %}selected{% endif %}>Sin Éxito</option>
+                                        <option value="terminated" {% if estadoCon == 'terminated' %}selected{% endif %}>Terminado</option>
+                                        
+                                     </select>
+
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="resultadosContratosComprador">
+                            <!--<tr>
+                           <td data-label="Dependencia"><a href="/comprador/" class="enlaceTablaGeneral">Departamento Central</a> </td>
+                           <td data-label="Proveedor"><a href="/proveedor" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                           <td data-label="Título del Contrato"><a href="/proceso/ocdi-1949-466226-1212/?contrato=C-2018-963-6" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                           <td data-label="Descripción">Lorem ipsum dolor sit amet consect</td>
+                           <td data-label="Nombre del Proceso">Lorem ipsum dolor sit amet consect</td>
+                           <td data-label="Categoría de Compra">Lorem ipsum dolor sit amet consect</td>
+                           <td data-label="Monto del Contrato">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                           <td data-label="Fecha de Firma del Contrato">2018-02-19 10:02:54</td>
+                           <td data-label="Estado">Firmado</td>
+                        </tr>-->
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0">Mostrando <span class="inicioResultado ContratosComprador">0</span> a <span class="finResultado ContratosComprador">0</span> de <span class="totalResultado ContratosComprador">0</span> Contratos</h5>
+                        </div>
+
+                        <div class="col-md-6 textoAlineadoCentrado">
+                            <nav class="navegacionTablaGeneral ContratosComprador">
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 textoAlineadoDerecha">
+                <h4 class="textoAlineadoDerecha mb-0 descargaIconos enLinea alineadoArriba" style="margin-top:18px">
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaJSONContratos"><i class="fas fa-file-download"></i>&nbsp;.JSON</span>
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaCSVContratos"><i class="fas fa-file-download"></i>&nbsp;.CSV</span>
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaXLSXContratos"><i class="fas fa-file-download"></i>&nbsp;.XLSX</span>
+                </h4>
+                <h4 class="enLinea mb-0 mt-3 enLinea alineadoArriba" onclick="location.href='/preguntas'">
+                    <div class="textoAlineadoCentrado cursorMano botonAyuda transicion" id="informacionTipoDatos">
+                        <i class="fas fa-question"></i>
+                    </div>
+
+                </h4>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" cajonSombreado " id="cajonPagos" data-step="5" data-intro="Puedes ver todos los pagos que ha efectuado este comprador.">
+                    <div class="row">
+                        <div class="col-md-12 mt-2">
+                            <!--<h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Procesos de Contratación</h1>-->
+                            <h4 class="text-primary-edcax titularCajonSombreado">Procesos de Pago del Comprador</h4>
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-3 ">
+                        <div class="col-lg-6">
+                            <div class="campoAzulBusquedaPadre normal" style="margin-left:0">
+                                <input class="form-control form-control-lg campoAzulBusqueda" type="text" placeholder="Busca un proceso de pago...">
+                                <i class="fas fa-search cursorMano" id="buscarInformacion"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 textoAlineadoDerecha">
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">Mostrar&nbsp;</h5>
+                            <select name="" id="paginacionBusquedaPago" class="campoSeleccion ancho70 mt-3 enLinea">
+                                       <option value="5" {% if paginarPorPag == 5 %}selected{% endif %}>5</option>
+                                       <option value="10" {% if paginarPorPag == 10 %}selected{% endif %}>10</option>
+                                       <option value="20" {% if paginarPorPag == 20 %}selected{% endif %}>20</option>
+                                       <option value="50" {% if paginarPorPag == 50 %}selected{% endif %}>50</option>
+                                       <option value="100" {% if paginarPorPag == 100 %}selected{% endif %}>100</option>
+                                    </select>
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0 enLinea">&nbsp;Resultados</h5>
+                        </div>
+                    </div>
+                    <table class="tablaGeneral mostrarEncabezados">
+                        <thead>
+                            <tr>
+                                <!--
+                              <th class="textoAlineadoCentrado">
+                                    <table class="alineado">
+                                          <tr><td><span toolTexto="buyer.name">Dependencia</span></td><td><span class="ordenEncabezado" opcion="neutro">
+                                                <div class="contenedorFlechasOrden">
+                                                      <i class="fas fa-sort-up flechaArriba"></i>
+                                                      <i class="fas fa-sort-down flechaAbajo"></i>
+                                                </div>
+                                             </span></td></tr>
+                                       </table>
+               
+                                    
+                                    
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre">
+                                    </th>-->
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="compradorPag" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].suppliers[n].name">Comprador</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordencompradorPag}}">
+                                                      <div class="contenedorFlechasOrden">
+                                                            <i class="fas fa-sort-up flechaArriba" {% if ordencompradorPag == 'descendente' %}style="display:none"{% endif %}></i>
+                                                            <i class="fas fa-sort-down flechaAbajo" {% if ordencompradorPag == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                      </div>
+                                                   </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if compradorPag %}{{compradorPag}}{% endif %}">
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="proveedorPag" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].suppliers[n].name">Proveedor</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenproveedorPag}}">
+                                                            <div class="contenedorFlechasOrden">
+                                                                  <i class="fas fa-sort-up flechaArriba" {% if ordenproveedorPag == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                  <i class="fas fa-sort-down flechaAbajo" {% if ordenproveedorPag == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                            </div>
+                                                         </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Nombre" type="text" value="{% if proveedorPag %}{{proveedorPag}}{% endif %}">
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="tituloPag" tipo="texto">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].title">Título del contrato</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordentituloPag}}">
+                                                            <div class="contenedorFlechasOrden">
+                                                                  <i class="fas fa-sort-up flechaArriba" {% if ordentituloPag == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                  <i class="fas fa-sort-down flechaAbajo" {% if ordentituloPag == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                            </div>
+                                                         </span></td>
+                                        </tr>
+                                    </table>
+                                    <input class="campoBlancoTextoSeleccion" placeholder="Buscar" type="text" value="{% if tituloPag %}{{tituloPag}}{% endif %}">
+                                </th>
+
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="montoPag" tipo="numero">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="contracts[n].value.amount">Monto del Contrato</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenmontoPag}}">
+                                                            <div class="contenedorFlechasOrden">
+                                                                  <i class="fas fa-sort-up flechaArriba" {% if ordenmontoPag == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                  <i class="fas fa-sort-down flechaAbajo" {% if ordenmontoPag == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                            </div>
+                                                         </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion elementoNumerico" decimal="true" placeholder="Número" opcion="<" type="text" value="{% if montoPag %}{{montoPag}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadormontoPag == '<' %}&lt;{% endif %}{% if operadormontoPag == '>' %}&gt;{% endif %}{% if operadormontoPag == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMayorMontoPag" name="selectorMenorMontoPag" opcion="<" {% if operadormontoPag == '<' %}checked{% endif %}>
+                                                        <label for="filtroMenorMayorMontoPag">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMenorMontoPag" name="selectorMenorMontoPag" opcion=">" {% if operadormontoPag == '>' %}checked{% endif %}>
+                                                        <label for="filtroMenorMenorMontoPag">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorIgualMontoPag" name="selectorMenorMontoPag" opcion="==" {% if operadormontoPag == '=' %}checked{% endif %}>
+                                                        <label for="filtroMenorIgualMontoPag">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="pagosPag" tipo="numero">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="Suma de contracts[n].implementation.transactions[n].value.amount">Suma de todos <br> los pagos</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenpagosPag}}">
+                                                               <div class="contenedorFlechasOrden">
+                                                                     <i class="fas fa-sort-up flechaArriba" {% if ordenpagosPag == 'descendente' %}style="display:none"{% endif %}></i>
+                                                                     <i class="fas fa-sort-down flechaAbajo" {% if ordenpagosPag == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                               </div>
+                                                            </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion elementoNumerico" decimal="true" placeholder="Número" opcion="<" type="text" value="{% if pagosPag %}{{pagosPag}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadorpagosPag == '<' %}&lt;{% endif %}{% if operadorpagosPag == '>' %}&gt;{% endif %}{% if operadorpagosPag == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMayorPagosPag" name="selectorMenorPagosPag" opcion="<" {% if operadorpagosPag == '<' %}checked{% endif %}>
+                                                        <label for="filtroMenorMayorPagosPag">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorMenorPagosPag" name="selectorMenorPagosPag" opcion=">" {% if operadorpagosPag == '>' %}checked{% endif %}>
+                                                        <label for="filtroMenorMenorPagosPag">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroMenorIgualPagosPag" name="selectorMenorPagosPag" opcion="==" {% if operadorpagosPag == '=' %}checked{% endif %}>
+                                                        <label for="filtroMenorIgualPagosPag">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <!--
+                                    <th class="textoAlineadoCentrado">
+                                          <table class="alineado">
+                                                <tr><td><span toolTexto="contracts[n].status">Estado</span></td><td>
+                                                      <span class="ordenEncabezado" opcion="neutro">
+                                                            <div class="contenedorFlechasOrden">
+                                                                  <i class="fas fa-sort-up flechaArriba"></i>
+                                                                  <i class="fas fa-sort-down flechaAbajo"></i>
+                                                            </div>
+                                                         </span>
+                                                </td></tr>
+                                             </table>
+                     
+                                          
+                                          
+                                          <input  class="campoBlancoTextoSeleccion" placeholder="Nombre">
+                                       </th>-->
+                                <th class="textoAlineadoCentrado campoFiltrado" filtro="fechaPag" tipo="fecha">
+                                    <table class="alineado">
+                                        <tr>
+                                            <td><span toolTexto="Mayor de contracts[n].implementation.transactions[n].date">Fecha del Último pago</span></td>
+                                            <td><span class="ordenEncabezado" opcion="{{ordenfechaPag}}">
+                                                         <div class="contenedorFlechasOrden">
+                                                               <i class="fas fa-sort-up flechaArriba" {% if ordenfechaPag == 'descendente' %}style="display:none"{% endif %}></i>
+                                                               <i class="fas fa-sort-down flechaAbajo" {% if ordenfechaPag == 'ascendente' %}style="display:none"{% endif %}></i>
+                                                         </div>
+                                                      </span></td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="contenedorFiltroNumerico">
+                                        <input class="campoBlancoTextoSeleccion fecha" placeholder="YYYY-MM-DD" autocomplete="off" opcion="<" type="text" value="{% if fechaPag %}{{fechaPag}}{% endif %}">
+                                        <button class="btnFiltroNumerico">{% if operadorfechaPag == '<' %}&lt;{% endif %}{% if operadorfechaPag == '>' %}&gt;{% endif %}{% if operadorfechaPag == '=' %}={% endif %}</button>
+                                        <div class="preContenedorFiltroBusqueda animated fadeIn">
+                                            <div class=" contenedorFiltroBusqueda">
+                                                <div class="flechaArribaBlanca"></div>
+                                                <div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMayorFechaPag" name="selectorFechaFechaPag" opcion="<" {% if operadorfechaPag == '<' %}checked{% endif %}>
+                                                        <label for="filtroFechaMayorFechaPag">Menor a &nbsp;<span>&lt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaMenorFechaPag" name="selectorFechaFechaPag" opcion=">" {% if operadorfechaPag == '>' %}checked{% endif %}>
+                                                        <label for="filtroFechaMenorFechaPag">Mayor a &nbsp;<span>&gt;</span></label>
+                                                    </div>
+                                                    <div class="OpcionFiltroBusquedaNumerico">
+                                                        <input type="radio" id="filtroFechaIgualFechaPag" name="selectorFechaFechaPag" opcion="==" {% if operadorfechaPag == '=' %}checked{% endif %}>
+                                                        <label for="filtroFechaIgualFechaPag">Igual a &nbsp;<span>=</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="resultadosPagosComprador">
+                            <!--<tr class="filaSubTabla transicion pagos" toolTexto="Puedes ver una subtabla de pagos haciendo CLICK">
+                                 <td data-label="Dependencia"><a href="/comprador" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                              <td data-label="Proveedor"><a href="/proveedor" class="enlaceTablaGeneral">Larach</a> </td>
+                              <td data-label="Título del Contrato"><a href="/proceso/ocdi-1949-466226-1212/?contrato=C-2018-963-6" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a></td>
+                              <td data-label="Monto del Contrato">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Suma de todos los pagos">1,900,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Estado">Compromiso</td>
+                              <td data-label="Fecha del último pago">2018-02-19 10:02:54</td>
+                     
+                           </tr>
+                           <tr class="filaSubTabla transicion pagos" toolTexto="Puedes ver una subtabla de pagos haciendo CLICK">
+                                 <td data-label="Dependencia"><a href="/comprador" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                              <td data-label="Proveedor"><a href="/proveedor" class="enlaceTablaGeneral">Larach</a> </td>
+                              <td data-label="Título del Contrato"><a href="/proceso/ocdi-1949-466226-1212/?contrato=C-2018-963-6" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a></td>
+                              <td data-label="Monto del Contrato">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Suma de todos los pagos">1,900,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Estado">Compromiso</td>
+                              <td data-label="Fecha del último pago">2018-02-19 10:02:54</td>
+                     
+                           </tr>
+                           <tr class="filaSubTabla transicion pagos" toolTexto="Puedes ver una subtabla de pagos haciendo CLICK">
+                                 <td data-label="Dependencia"><a href="/comprador" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a> </td>
+                              <td data-label="Proveedor"><a href="/proveedor" class="enlaceTablaGeneral">Larach</a> </td>
+                              <td data-label="Título del Contrato"><a href="/proceso/ocdi-1949-466226-1212/?contrato=C-2018-963-6" class="enlaceTablaGeneral">Lorem ipsum dolor sit amet consect</a></td>
+                              <td data-label="Monto del Contrato">2,466,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Suma de todos los pagos">1,900,855,052 <span class="textoColorPrimario">PYG</span></td>
+                              <td data-label="Estado">Compromiso</td>
+                              <td data-label="Fecha del último pago">2018-02-19 10:02:54</td>
+                     
+                           </tr>-->
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="tituloTablaGeneral textoColorTitulo mt-3 mb-0">Mostrando <span class="inicioResultado PagosComprador">0</span> a <span class="finResultado PagosComprador">0</span> de <span class="totalResultado PagosComprador">0</span> Pagos</h5>
+                        </div>
+                        <div class="col-md-6 textoAlineadoCentrado">
+                            <nav class="navegacionTablaGeneral PagosComprador">
+                            </nav>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12 textoAlineadoDerecha mb-5">
+                <h4 class="textoAlineadoDerecha mb-0 descargaIconos enLinea alineadoArriba" style="margin-top:18px">
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaJSONPagos"><i class="fas fa-file-download"></i>&nbsp;.JSON</span>
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaCSVPagos"><i class="fas fa-file-download"></i>&nbsp;.CSV</span>
+                    <span class="textoColorGris textoAlineadoDerecha p-1 cursorMano transicion" id="descargaXLSXPagos"><i class="fas fa-file-download"></i>&nbsp;.XLSX</span>
+                </h4>
+                <h4 class="enLinea mb-0 mt-3 enLinea alineadoArriba" onclick="location.href='/preguntas'">
+                    <div class="textoAlineadoCentrado cursorMano botonAyuda transicion" id="informacionTipoDatos">
+                        <i class="fas fa-question"></i>
+                    </div>
+
+                </h4>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %} {% block script_content %}
+<script src="{% static 'plugins/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'plugins/jquery-mask-1.14.15/jquery.mask.min.js' %}"></script>
+<script src="{% static 'plugins/autoNumeric-4.1.0/autoNumeric.min.js' %}"></script>
+<script src="{% static 'js/comprador.js' %}"></script>
+{% endblock %}

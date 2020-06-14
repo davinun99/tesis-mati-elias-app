@@ -331,7 +331,7 @@ function ObternerElementosSuma(datos,reversion){
                 $('<td>',{class:'contenidoTablaCaracteristicas textoAlineadoCentrado textoColorGrisNormal ',text:ObtenerFecha(datos[i].releaseDate)}),
                 $('<td>',{class:'textoAlineadoDerecha titularColor textoColorGrisNormal fuente18'}).append(
                     ValorMoneda(datos[i].value),
-                    $('<span>',{class:'textoColorPrimario',text:' HNL'})
+                    $('<span>',{class:'textoColorPrimario',text:' PYG'})
                 )
               ) 
             )
@@ -341,7 +341,7 @@ function ObternerElementosSuma(datos,reversion){
                 $('<td>',{class:'contenidoTablaCaracteristicas textoAlineadoCentrado titularColor fuente18 '+'textoColorPrimario',text:'Total'}),
                 $('<td>',{class:'textoAlineadoDerecha titularColor textoColorGrisNormal fuente18'}).append(
                     ValorMoneda(suma),
-                    $('<span>',{class:'textoColorPrimario',text:' HNL'})
+                    $('<span>',{class:'textoColorPrimario',text:' PYG'})
                 )
               ) 
     )

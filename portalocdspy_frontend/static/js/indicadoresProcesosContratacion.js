@@ -117,7 +117,7 @@ function ModalidadMontoCantidad(){
                     var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
     
                     e.forEach(function(valor,indice){
-                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorNumerico(valor.value) :ValorMoneda(valor.value)) +' '+(valor.seriesIndex==0?'Contratos':'HNL')+'<br>'
+                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorNumerico(valor.value) :ValorMoneda(valor.value)) +' '+(valor.seriesIndex==0?'Contratos':'PYG')+'<br>'
                     });
                     return cadena;
                 }
@@ -193,12 +193,12 @@ function ModalidadMontoCantidad(){
                     max: 25,
                     interval: 5,*/
                     axisLabel: {
-                        formatter: '{value} HNL',
+                        formatter: '{value} PYG',
                         rotate:315
                     },
                     axisPointer: {
                         label: {
-                            formatter: '{value} HNL'
+                            formatter: '{value} PYG'
                         }
                     }
                 }
@@ -264,7 +264,7 @@ function ModalidadMontoCantidad(){
                             fontSize:15,
                             position: 'right',
                             formatter: function (e){
-                                return ValorMoneda(e.value)+' HNL';
+                                return ValorMoneda(e.value)+' PYG';
                             }
                         }
                     }*/
@@ -338,12 +338,12 @@ function ModalidadMontoCantidad(){
                             max: 25,
                             interval: 5,*/
                             axisLabel: {
-                                formatter: '{value} HNL',
+                                formatter: '{value} PYG',
                                 rotate:295
                             },
                             axisPointer: {
                                 label: {
-                                    formatter: '{value} HNL'
+                                    formatter: '{value} PYG'
                                 }
                             }
                         }
@@ -607,7 +607,7 @@ var datosPastel=[];
     
                     var cadena=valor.name+'<br>';
                    
-                    cadena=cadena+' '+valor.marker/*+' '+valor.seriesName+*/+' '+ValorMoneda(valor.value)+' '+'HNL'+' ('+valor.percent+'%)'+'<br>';
+                    cadena=cadena+' '+valor.marker/*+' '+valor.seriesName+*/+' '+ValorMoneda(valor.value)+' '+'PYG'+' ('+valor.percent+'%)'+'<br>';
                     return cadena;
                 }
             },
@@ -645,7 +645,7 @@ var datosPastel=[];
                         show:true,
                         color:'gray',
                         formatter:function (e){
-                            return ''+e.name+' \n'+ValorMoneda(e.value) +' HNL ('+ ValorMoneda(e.percent) +'%)'
+                            return ''+e.name+' \n'+ValorMoneda(e.value) +' PYG ('+ ValorMoneda(e.percent) +'%)'
                         }
                     }
                 }
@@ -693,7 +693,7 @@ var datosPastel=[];
                                 show:true,
                                 color:'gray',
                                 formatter:function (e){
-                                    return ''+e.name+' \n'+ValorMoneda(e.value) +' HNL ('+ ValorMoneda(e.percent) +'%)'
+                                    return ''+e.name+' \n'+ValorMoneda(e.value) +' PYG ('+ ValorMoneda(e.percent) +'%)'
                                 }
                             },
                             labelLine:{
@@ -707,7 +707,7 @@ var datosPastel=[];
                     bottom:0,
                     right:'center',
                     formatter: function (e){
-                        return e +'. '+ ValorMoneda(datosPastel.filter(function(data){ if(data.name===e){return true;}})[0].value)+' HNL';
+                        return e +'. '+ ValorMoneda(datosPastel.filter(function(data){ if(data.name===e){return true;}})[0].value)+' PYG';
                     }
                 },
                 tooltip: {
@@ -766,7 +766,7 @@ var grafico=echarts.init(document.getElementById('top10InstitucionesMontos'));
                     var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
     
                     e.forEach(function(valor,indice){
-                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :ValorNumerico(valor.value) ) +' '+(valor.seriesIndex==0?'HNL':'Procesos')+'<br>'
+                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :ValorNumerico(valor.value) ) +' '+(valor.seriesIndex==0?'PYG':'Procesos')+'<br>'
                     });
                     return cadena;
                 }
@@ -799,13 +799,13 @@ var grafico=echarts.init(document.getElementById('top10InstitucionesMontos'));
                                 max: 810,*/
                                 //interval: 100000,
                                 axisLabel: {
-                                    formatter: '{value} HNL',
+                                    formatter: '{value} PYG',
                                     rotate:45,
                             showMinLabel:false
                                 },
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 },
                     position:'bottom',
@@ -861,7 +861,7 @@ var grafico=echarts.init(document.getElementById('top10InstitucionesMontos'));
                             fontSize:15,
                             position: 'right',
                             formatter: function (e){
-                                return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                             },
                             color:'gray'
                         }
@@ -930,13 +930,13 @@ var grafico=echarts.init(document.getElementById('top10InstitucionesMontos'));
                         {   name:'Monto\nContratado',
                             type: 'value',
                                         axisLabel: {
-                                            formatter: '{value} HNL',
+                                            formatter: '{value} PYG',
                                             rotate:65,
                                     showMinLabel:false
                                         },
                                         axisPointer: {
                                             label: {
-                                                formatter: '{value} HNL'
+                                                formatter: '{value} PYG'
                                             }
                                         },
                             position:'bottom'
@@ -968,7 +968,7 @@ var grafico=echarts.init(document.getElementById('top10InstitucionesMontos'));
                                     fontSize:15,
                                     position: 'right',
                                     formatter: function (e){
-                                        return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                        return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                     }
                                 }
                             },
@@ -1055,7 +1055,7 @@ var grafico=echarts.init(document.getElementById('montoCatalogoElectronico'));
                     var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
     
                     e.forEach(function(valor,indice){
-                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :ValorNumerico(valor.value) ) +' '+(valor.seriesIndex==0?'HNL':'Contratos')+'<br>'
+                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :ValorNumerico(valor.value) ) +' '+(valor.seriesIndex==0?'PYG':'Contratos')+'<br>'
                     });
                     return cadena;
                 }
@@ -1085,13 +1085,13 @@ var grafico=echarts.init(document.getElementById('montoCatalogoElectronico'));
                                 max: 810,*/
                                 //interval: 100000,
                                 axisLabel: {
-                                    formatter: '{value} HNL',
+                                    formatter: '{value} PYG',
                                     rotate:45,
                             showMinLabel:false
                                 },
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 },
                     position:'bottom',
@@ -1144,7 +1144,7 @@ var grafico=echarts.init(document.getElementById('montoCatalogoElectronico'));
                             fontSize:15,
                             position: 'right',
                             formatter: function (e){
-                                return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                             },
                             color:'gray'
                         }
@@ -1223,13 +1223,13 @@ var grafico=echarts.init(document.getElementById('montoCatalogoElectronico'));
                             name:'Monto de\nContrato',
                             type: 'value',
                             axisLabel: {
-                                formatter: '{value} HNL',
+                                formatter: '{value} PYG',
                                 rotate:65,
                             showMinLabel:false
                             },
                             axisPointer: {
                                 label: {
-                                    formatter: '{value} HNL'
+                                    formatter: '{value} PYG'
                                 }
                             },
                             position:'bottom'
@@ -1261,7 +1261,7 @@ var grafico=echarts.init(document.getElementById('montoCatalogoElectronico'));
                                     fontSize:15,
                                     position: 'right',
                                     formatter: function (e){
-                                        return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                        return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                     }
                                 }
                             },
@@ -1747,7 +1747,7 @@ var grafico=echarts.init(document.getElementById('montoCompraConjunta'));
                     var cadena=ObtenerParrafo(e[0].name,40).replace(/\n/g,'<br>')+'<br>';
     
                     e.forEach(function(valor,indice){
-                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :ValorNumerico(valor.value) ) +' '+(valor.seriesIndex==0?'HNL':'Contratos')+'<br>'
+                        cadena=cadena+' '+valor.marker+' '+valor.seriesName+' '+(valor.seriesIndex==0?ValorMoneda(valor.value) :ValorNumerico(valor.value) ) +' '+(valor.seriesIndex==0?'PYG':'Contratos')+'<br>'
                     });
                     return cadena;
                 }
@@ -1777,13 +1777,13 @@ var grafico=echarts.init(document.getElementById('montoCompraConjunta'));
                                 max: 810,*/
                                 //interval: 100000,
                                 axisLabel: {
-                                    formatter: '{value} HNL',
+                                    formatter: '{value} PYG',
                                     rotate:45,
                             showMinLabel:false
                                 },
                                 axisPointer: {
                                     label: {
-                                        formatter: '{value} HNL'
+                                        formatter: '{value} PYG'
                                     }
                                 },
                     position:'bottom',
@@ -1836,7 +1836,7 @@ var grafico=echarts.init(document.getElementById('montoCompraConjunta'));
                             fontSize:15,
                             position: 'right',
                             formatter: function (e){
-                                return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                             },
                             color:'gray'
                         }
@@ -1911,13 +1911,13 @@ var grafico=echarts.init(document.getElementById('montoCompraConjunta'));
                             name:'Monto de\nContrato',
                             type: 'value',
                             axisLabel: {
-                                formatter: '{value} HNL',
+                                formatter: '{value} PYG',
                                 rotate:65,
                             showMinLabel:false
                             },
                             axisPointer: {
                                 label: {
-                                    formatter: '{value} HNL'
+                                    formatter: '{value} PYG'
                                 }
                             },
                             position:'bottom'
@@ -1949,7 +1949,7 @@ var grafico=echarts.init(document.getElementById('montoCompraConjunta'));
                                     fontSize:15,
                                     position: 'right',
                                     formatter: function (e){
-                                        return "{c} HNL".replace('{c}',ValorMoneda(e.value));
+                                        return "{c} PYG".replace('{c}',ValorMoneda(e.value));
                                     }
                                 }
                             },

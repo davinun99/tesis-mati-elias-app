@@ -279,10 +279,10 @@
               $('<a>',{class:'enlaceTablaGeneral',href:'/comprador/'+encodeURIComponent(resultados[i].id/*uri*/)}).text(resultados[i].name)
             ),
             $('<td>',{'data-label':'Procesos' ,class:'textoAlineadoCentrado'}).text(ValorNumerico(resultados[i].procesos)),
-            $('<td>',{'data-label':'Total de Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].total_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
-            $('<td>',{'data-label':'Promedio de Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].promedio_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
-            $('<td>',{'data-label':'Mayor Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].mayor_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
-            $('<td>',{'data-label':'Menor Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].menor_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' HNL'})),
+            $('<td>',{'data-label':'Total de Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].total_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
+            $('<td>',{'data-label':'Promedio de Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].promedio_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
+            $('<td>',{'data-label':'Mayor Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].mayor_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
+            $('<td>',{'data-label':'Menor Monto Contratado' ,class:'textoAlineadoDerecha'}).append(ValorMoneda(resultados[i].menor_monto_contratado),$('<span>',{class:'textoColorPrimario',text:' PYG'})),
             $('<td>',{'data-label':'Fecha de Último Proceso' ,class:'textoAlineadoCentrado'}).append(
               $('<span>',{class:resultados[i].fecha_ultimo_proceso&&resultados[i].fecha_ultimo_proceso!='NaT'?'':'textoColorGris' }).text(
                 resultados[i].fecha_ultimo_proceso&&resultados[i].fecha_ultimo_proceso!='NaT'?ObtenerFecha(resultados[i].fecha_ultimo_proceso,'fecha'):'No Disponible'

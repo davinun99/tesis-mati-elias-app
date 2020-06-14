@@ -210,7 +210,7 @@ function DefinirElementosConvocatoria(){
                             ValorMoneda(procesoRecord.compiledRelease.tender.minValue.amount)
                           )
                           ,
-                          $('<span>',{class:'textoColorPrimario',text:procesoRecord.compiledRelease.tender.minValue.currency?procesoRecord.compiledRelease.tender.minValue.currency:'HNL',toolTexto:"tender.minValue.currency"})
+                          $('<span>',{class:'textoColorPrimario',text:procesoRecord.compiledRelease.tender.minValue.currency?procesoRecord.compiledRelease.tender.minValue.currency:'PYG',toolTexto:"tender.minValue.currency"})
                         )
                       ) : null
                       )
