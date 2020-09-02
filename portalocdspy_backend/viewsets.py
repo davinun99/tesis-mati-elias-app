@@ -309,7 +309,8 @@ class Buscador(APIView):
 
 		page = int(request.GET.get('pagina', '1'))
 		metodo = request.GET.get('metodo', 'proceso')
-		moneda = request.GET.get('moneda', '')
+		moneda = request.GET.get(' ', '')
+		redFlag = request.GET.get(' ', '')
 		metodo_seleccion = request.GET.get('metodo_seleccion', '')
 		institucion = request.GET.get('institucion', '')
 		categoria = request.GET.get('categoria', '')
@@ -330,14 +331,14 @@ class Buscador(APIView):
 		s = Search(using=cliente, index=OCDS_INDEX)
 
 		#Source
-		campos = ['doc.compiledRelease', 'extra']
+		campos = ['doc.compiledRelease', 'extra', 'redFlags']
 		s = s.source(campos)
 		#Filtros
 
+		s.aggs.metric('redFlags', 'terms', field='redFlags.keyword')
 		s.aggs.metric('contratos', 'nested', path='doc.compiledRelease.contracts')
 
 		s.aggs["contratos"].metric('monedas', 'terms', field='doc.compiledRelease.contracts.value.currency.keyword')
-
 		s.aggs["contratos"]["monedas"].metric("nProcesos", "reverse_nested")
 
 		
@@ -487,6 +488,8 @@ class Buscador(APIView):
 
 		results = s[start:end].execute()
 
+		redFlags = results.aggregations.redFlags.buckets
+
 		monedas = results.aggregations.contratos.monedas.buckets
 
 		if results.hits.total > 0:
@@ -527,6 +530,7 @@ class Buscador(APIView):
 		}
 
 		filtros = {}
+		filtros["redFlags"] = results.aggregations.redFlags.to_dict()
 		filtros["monedas"] = results.aggregations.contratos.monedas.to_dict()
 		filtros["años"] = results.aggregations.años.to_dict()
 		filtros["categorias"] = results.aggregations.categorias.to_dict()
@@ -560,6 +564,7 @@ class Buscador(APIView):
 		parametros["metodo"] = metodo
 		parametros["pagina"] = page
 		parametros["moneda"] = moneda
+		parametros["redFlag"] = redFlag
 		parametros["metodo_seleccion"] = metodo_seleccion
 		parametros["institucion"] = institucion
 		parametros["categoria"] = categoria

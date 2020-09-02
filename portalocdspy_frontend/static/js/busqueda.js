@@ -5,6 +5,7 @@
  */
 
 var filtrosAplicables={
+  redFlags:{titulo:'Red Flags',parametro:'redFlag',parametroOrden:'redFlag'},
   categorias:{titulo:'Categoría',parametro:'categoria',parametroOrden:'categoria'},
   monedas: {titulo:'Moneda',parametro:'moneda',parametroOrden:'moneda'},
   instituciones: {titulo:'Institución Compradora',parametro:'institucion',parametroOrden:'institucion'},
@@ -200,6 +201,9 @@ function CargarElementosBusqueda(cargaFiltro){
     term : decodeURIComponent(ObtenerTexto(ObtenerValor('term'))),
     metodo : ['proceso','contrato','pago'].includes(ObtenerValor('metodo'))?ObtenerValor('metodo'):'proceso'
   }
+  if(Validar(ObtenerValor('redFlag'))){
+    parametros['redFlag']=ObtenerValor('redFlag');
+  }
   if(Validar(ObtenerValor('moneda'))){
     parametros['moneda']=ObtenerValor('moneda');
   }
@@ -338,6 +342,8 @@ function AccederBusqueda(opciones,desUrl){
 
   '&pagina='+(opciones.pagina?opciones.pagina:(ObtenerNumero(ObtenerValor('pagina')) ? ObtenerNumero(ObtenerValor('pagina')) : 1))+
 
+  (Validar(opciones.redFlag)? '&redFlag='+opciones.redFlag: (Validar(ObtenerValor('redFlag'))&&!desUrl?'&redFlag='+ObtenerValor('redFlag'):''))+
+
   (Validar(opciones.moneda)? '&moneda='+opciones.moneda: (Validar(ObtenerValor('moneda'))&&!desUrl?'&moneda='+ObtenerValor('moneda'):''))+
 
   (Validar(opciones.metodo_seleccion)? '&metodo_seleccion='+opciones.metodo_seleccion: (Validar(ObtenerValor('metodo_seleccion'))&&!desUrl?'&metodo_seleccion='+ObtenerValor('metodo_seleccion'):''))+
@@ -454,6 +460,9 @@ function ObtenerJsonFiltrosAplicados(parametros,url){
   }
   if(Validar(ObtenerValor('moneda'))){
     parametros[url?'moneda':'monedas']=decodeURIComponent(ObtenerValor('moneda'));
+  }
+  if(Validar(ObtenerValor('redFlag'))){
+    parametros[url?'redFlag':'redFlags']=decodeURIComponent(ObtenerValor('redFlag'));
   }
   if(Validar(ObtenerValor('proveedor'))){
     parametros[url?'proveedor':'proveedor']=decodeURIComponent(ObtenerValor('proveedor'));

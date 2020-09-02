@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head_content %}
-<title>Portal de Contrataciones Abiertas de Honduras - Busqueda</title>
+<title>Portal de Contrataciones Abiertas - Busqueda</title>
 {% endblock %}
 
 
@@ -141,8 +141,7 @@
                   
                      <div  class="metodoBusquedaContenedor anchoTotal mt-3 mb-3 textoAlineadoCentrado " data-step="2" data-intro="Puedes seleccionar un método de búsqueda para realizar un filtrado por procesos de contratación, contratos y procesos de pagos.">
                            <div class="btn-group sombraBasica" role="group" aria-label="Metodo de Busqueda" >
-                              <a href="javascript:void(0)" id="opcionProcesosContratacion" name="metodoBusqueda" toolTexto="Buscar en Procesos de Contratación de HonduCompras 1, ONCAE" metodo="proceso"  class="btn btn-primary fondoColorSecundario {% if 'proceso' == request.GET.metodo %}activo{% endif %}"><span>Procesos de Contratación </span></a>
-                              <a href="javascript:void(0)" id="opcionContratos" name="metodoBusqueda" toolTexto="Buscar en Contratos Provenientes de Sistemas de ONCAE" metodo="contrato"  class="btn btn-primary fondoColorSecundario {% if 'contrato' == request.GET.metodo %}activo{% endif %}"><span>Contratos</span></a>
+                              <a href="javascript:void(0)" id="opcionProcesosContratacion" name="metodoBusqueda" toolTexto="Buscar en Procesos de Contratación" metodo="proceso"  class="btn btn-primary fondoColorSecundario {% if 'proceso' == request.GET.metodo %}activo{% endif %}"><span>Procesos de Contratación </span></a>
                                </div>
                      </div>
                  
