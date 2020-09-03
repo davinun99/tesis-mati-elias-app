@@ -202,7 +202,7 @@ function CargarElementosBusqueda(cargaFiltro){
     metodo : ['proceso','contrato','pago'].includes(ObtenerValor('metodo'))?ObtenerValor('metodo'):'proceso'
   }
   if(Validar(ObtenerValor('redFlag'))){
-    parametros['redFlag']=ObtenerValor('redFlag');
+    parametros['redFlag']=decodeURIComponent(ObtenerValor('redFlag'));
   }
   if(Validar(ObtenerValor('moneda'))){
     parametros['moneda']=ObtenerValor('moneda');

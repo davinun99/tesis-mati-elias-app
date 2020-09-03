@@ -309,8 +309,8 @@ class Buscador(APIView):
 
 		page = int(request.GET.get('pagina', '1'))
 		metodo = request.GET.get('metodo', 'proceso')
-		moneda = request.GET.get(' ', '')
-		redFlag = request.GET.get(' ', '')
+		moneda = request.GET.get('moneda', '')
+		redFlag = request.GET.get('redFlag', '')
 		metodo_seleccion = request.GET.get('metodo_seleccion', '')
 		institucion = request.GET.get('institucion', '')
 		categoria = request.GET.get('categoria', '')
@@ -443,7 +443,7 @@ class Buscador(APIView):
 
 		if term:
 			if metodo == 'proceso':
-				s = s.filter('match', doc__compiledRelease__tender__description=term)
+				s = s.filter('match', doc__compiledRelease__tender__title=term)
 
 			if metodo in  ['contrato', 'pago']:
 				qDescripcion = Q("wildcard", doc__compiledRelease__contracts__description='*'+term+'*')
@@ -451,6 +451,9 @@ class Buscador(APIView):
 
 		if organismo.replace(' ', ''):
 			s = s.filter('match_phrase', doc__compiledRelease__planning__budget__budgetBreakdown__classifications__organismo=organismo)
+
+		if redFlag.replace(' ', ''):
+			s = s.query('match_phrase', **{'redFlags.keyword': redFlag})
 
 		search_results = SearchResults(s)
 
