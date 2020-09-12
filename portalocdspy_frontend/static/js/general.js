@@ -724,9 +724,17 @@ function ObtenerValor( nombre, url ) {
     nombre=encodeURIComponent(nombre);
     nombre = nombre.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
     var regexS = "[\\?&]"+nombre+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec( url );
-    return results == null ? null : results[1];
+    var regex = new RegExp( regexS, 'g' );
+
+    let matches =[]
+    for(const match of url.matchAll(regex)) {
+        matches.push(match[1]);
+    }
+
+    if(matches.length > 1) {
+        return matches.join(",");
+    }
+    return matches.length == 0 ? null : matches[0];
 }
 
 

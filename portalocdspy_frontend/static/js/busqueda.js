@@ -476,6 +476,38 @@ function ObtenerJsonFiltrosAplicados(parametros,url){
   return parametros;
 }
 
+function generarEtiquetaChip(llave, filtro) {
+  result = [];
+  for (let item of filtro.split(',')) {
+    result.push($('<div>', {class: 'etiquetaFiltro', 'llave': llave, 'valor': item}).append(
+        (traducciones[item] ? traducciones[item].titulo : item),
+        '&nbsp;',
+        $('<i>', {class: 'fas fa-times'}).on('click', function (e) {
+
+          var filtros = {};
+          filtros = ObtenerJsonFiltrosAplicados(filtros, true);
+          filtros['pagina'] = 1;/*
+              $('li.list-group-item.active').each(function(cla,val){
+                filtros[filtrosAplicables[$(val).attr('llave')]?filtrosAplicables[$(val).attr('llave')].parametro:'' ]=$(val).attr('valor');
+              });*/
+
+          const filtroSeleccionado = filtrosAplicables[$(e.currentTarget).parent().attr('llave')] ? filtrosAplicables[$(e.currentTarget).parent().attr('llave')].parametro : '';
+
+          let filtrosActivos = filtros[filtroSeleccionado].split(',');
+          if(filtrosActivos.length == 1) {
+            delete filtros[filtroSeleccionado];
+          } else {
+            filtros[filtroSeleccionado] = filtrosActivos.filter((item) => item != $(e.currentTarget).parent().attr('valor')).join(',');
+          }
+          //delete filtros[$(e.currentTarget).parent().attr('llave')];
+          window.history.pushState({}, document.title, AccederBusqueda(filtros, true));
+          CargarElementosBusqueda(true);
+        })
+    ))
+  }
+  return result;
+}
+
 function MostrarEtiquetasFiltrosAplicados(parametros){
   delete parametros.ordenarPor;
   if(!$.isEmptyObject(parametros)){
@@ -491,24 +523,7 @@ function MostrarEtiquetasFiltrosAplicados(parametros){
       $('<div>',{class:'grupoEtiquetaFiltro col-md-12 mb-1'}).append(
         $('<div>',{class:'grupoEtiquetaTitulo mr-1',text:filtrosAplicables[llave].titulo +':'}),
         $('<div>',{class:'filtrosAplicados'}).append(
-          $('<div>',{class:'etiquetaFiltro','llave':llave,'valor':filtro}).append(
-              (traducciones[filtro]?traducciones[filtro].titulo:filtro),
-            '&nbsp;',
-            $('<i>',{class:'fas fa-times'}).on('click',function(e){
-              
-              var filtros={
-              };
-              filtros=ObtenerJsonFiltrosAplicados(filtros,true);
-              filtros['pagina']=1;/*
-              $('li.list-group-item.active').each(function(cla,val){
-                filtros[filtrosAplicables[$(val).attr('llave')]?filtrosAplicables[$(val).attr('llave')].parametro:'' ]=$(val).attr('valor');
-              });*/
-              delete filtros[filtrosAplicables[$(e.currentTarget).parent().attr('llave')]?filtrosAplicables[$(e.currentTarget).parent().attr('llave')].parametro:''];
-              //delete filtros[$(e.currentTarget).parent().attr('llave')];
-              window.history.pushState({}, document.title,AccederBusqueda(filtros,true) );
-              CargarElementosBusqueda(true);
-            })
-          )
+          generarEtiquetaChip(llave, filtro)
         )
       )
     )
@@ -528,9 +543,11 @@ function MostrarListaElasticaAplicados(){
   };
   filtros=ObtenerJsonFiltrosAplicados(filtros);
   $.each(filtros,function(llave,valor){
-    $('ul#ul'+llave).find(
-      'li[formato="'+((traducciones[valor]?traducciones[valor].titulo:valor)).toString().toLowerCase()+'"]'
-    ).addClass('active');
+    for (let item of valor.split(',')) {
+      $('ul#ul'+llave).find(
+        'li[formato="'+((traducciones[item]?traducciones[item].titulo:item)).toString().toLowerCase()+'"]'
+      ).addClass('active');
+    }
   });
 }
 
@@ -1085,7 +1102,7 @@ function AgregarPropiedadesListaElastica(valor,llave){
           if(filtro.hasClass('active')){
             filtro.removeClass('active')
           }else{
-            filtro.parent().find('.list-group-item.active').removeClass('active');
+            // filtro.parent().find('.list-group-item.active').removeClass('active');
             filtro.addClass('active');
           }
 
@@ -1093,11 +1110,22 @@ function AgregarPropiedadesListaElastica(valor,llave){
           };
           filtros=ObtenerJsonFiltrosAplicados(filtros,true);
           filtros['pagina']=1;
+
+          const filtroSeleccionado = filtrosAplicables[filtro.attr('llave')]?filtrosAplicables[filtro.attr('llave')].parametro:'';
           if(filtro.hasClass('active')){
-            filtros[filtrosAplicables[$(e.currentTarget).attr('llave')]?filtrosAplicables[$(e.currentTarget).attr('llave')].parametro:'']=$(e.currentTarget).attr('valor');
+            if(filtros[filtroSeleccionado]) {
+              filtros[filtroSeleccionado]+= ','+filtro.attr('valor');
+            } else {
+              filtros[filtroSeleccionado] = filtro.attr('valor');
+            }
           }
           else {
-            delete filtros[filtrosAplicables[$(e.currentTarget).attr('llave')]?filtrosAplicables[$(e.currentTarget).attr('llave')].parametro:''];
+            let filtrosActivos = filtros[filtroSeleccionado].split(',');
+            if (filtrosActivos.length == 1) {
+              delete filtros[filtroSeleccionado];
+            } else {
+              filtros[filtroSeleccionado] = filtrosActivos.filter((item) => item != filtro.attr('valor')).join(',');
+            }
           }
         
 
