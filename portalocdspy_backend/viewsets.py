@@ -453,7 +453,11 @@ class Buscador(APIView):
 			s = s.filter('match_phrase', doc__compiledRelease__planning__budget__budgetBreakdown__classifications__organismo=organismo)
 
 		if redFlag.replace(' ', ''):
-			s = s.query('match_phrase', **{'redFlags.keyword': redFlag})
+			if(len(redFlag.split(',')) == 1):
+				s = s.query('match_phrase', **{'redFlags.keyword': redFlag})
+			else:
+				for value in redFlag.split(','):
+					s = s.query("match_phrase", **{'redFlags.keyword':value})
 
 		search_results = SearchResults(s)
 
