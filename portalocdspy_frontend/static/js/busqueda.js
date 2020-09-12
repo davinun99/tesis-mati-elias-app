@@ -297,7 +297,7 @@ function MostrarResultados(datos){
       AgregarResultadoPago(datos.resultados[i]._source.doc.compiledRelease);
       break;
       case 'proceso':
-      AgregarResultadoProceso(datos.resultados[i]._source.doc.compiledRelease);
+      AgregarResultadoProceso(datos.resultados[i]._source.doc.compiledRelease, datos.resultados[i]._source.redFlags);
       break;
     }
   }
@@ -537,8 +537,13 @@ function MostrarListaElasticaAplicados(){
 
 
 
-
-function AgregarResultadoProceso(datos){
+function AgregarResultadoProceso(datos, redFlags){
+  var dynamic = "";
+  if (redFlags) {
+    for (var x = 0; x < redFlags.length; x++) { //Move the for loop from here
+      dynamic += '<td class="etiquetaFiltro contenidoTablaCaracteristicas">' + redFlags[x] + '</td>';
+    }
+  }
   $('#listaResultadosBusqueda').append(
     $('<div>',{class:'resultadoBusquedaProceso  transicion cajonSombreado anchoTotal animated fadeIn'}).append(
       $('<div>',{class:'p-1'}).append(
@@ -579,8 +584,12 @@ function AgregarResultadoProceso(datos){
               $('<tr>',{class:''}).append(
                 $('<td>',{class:'tituloTablaCaracteristicas',text:'Estado:'}),
                 $('<td>',{class:'contenidoTablaCaracteristicas',text:ObtenerEstadoProceso(datos)})
+              ),
+              $('<tr>',{class:''}).append(
+                $('<td>',{class:'tituloTablaCaracteristicas',text:'Red Flags:'}),
+                  dynamic
+                  //$('<td>', {class: 'botonGeneral fondoColorPrimario contenidoTablaCaracteristicas',text: redFlags[i]})
               )
-              
             )
           )
         ),

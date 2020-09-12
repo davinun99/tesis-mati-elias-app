@@ -374,8 +374,8 @@ function ObtenerExtension(direccion){
  */
 function ValorMoneda(texto){
     var numero=ObtenerNumero(texto);
-    numero=numero.toFixed(2);
-    numero=numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    numero=numero.toFixed(0);
+    numero=numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return numero;
 }
 
@@ -386,7 +386,7 @@ function ValorMoneda(texto){
  */
 function ValorNumerico(texto){
     var numero=ObtenerNumero(texto);
-    numero=numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    numero=numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return numero;
 }
 
@@ -781,6 +781,7 @@ function ObtenerEnlaceParte(id,arreglo,fuente){
     }
     return elementos;
   }
+
 
 /**
  * Obtiene los elementos html de los proveedores enviados
