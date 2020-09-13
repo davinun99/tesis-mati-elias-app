@@ -15,6 +15,9 @@
          <li class="nav-item {% if '/busqueda' in request.path %}active{% endif %}">
             <a class="nav-link transicion"  href="/busqueda?term=&metodo=proceso&pagina=1">Contrataciones</a>
          </li>
+         <li class="nav-item {% if '/acerca' in request.path %}active{% endif %}">
+               <a class="nav-link transicion"  href="/acerca">Acerca</a>
+         </li>
       </ul>
       <form class="form-inline  busquedaMenuPortal" action="/busqueda">
             <input class="form-controlx mr-sm-2" type="search" placeholder="Búsqueda" aria-label="Search" name="term" value="{% if request.GET.term %}{{request.GET.term}}{% endif %}">
