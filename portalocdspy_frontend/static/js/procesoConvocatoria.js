@@ -1,8 +1,4 @@
-/**
- * @file procesoConvocatoria.js Este archivo se incluye en la sección de Visualización de un Proceso de Contratación del Portal de Contrataciones Abiertas de Honduras
- * @author Bryant Marcelo Pérez
- * @see <a href="https://github.com/portaledcahn/edcahn_backend/tree/frontend">GitHub</a>
- */
+
 var estadosConvocatoria={
   'planning':{titulo:'Planeación',descripcion:'Un proceso de contrataciones futuro que se está considerando. Información temprana sobre el proceso se puede dar en la sección de licitación. Un proceso con este estado puede dar información sobre un compromiso temprano u oportunidades de consulta, durante los cuales los detalles de la próxima licitación pueden formarse.'},
   'planned':{titulo:'Planeado',descripcion:'Un proceso de contratación está programado, pero aún no se ha llevado a cabo. Los detalles de las fechas anticipadas pueden proveerse en el bloque de licitación.'},
@@ -494,9 +490,7 @@ function DefinirElementosConvocatoria(){
       elementos.push(
         $('<tr>').append(
           $('<td>',{class:'',text:ofertadores[i].id,'data-label':'Identificador'}),
-          $('<td>',{class:'','data-label':'Ofertador'}).append(
-            $('<a>',{text:ObtenerTexto(ofertadores[i].name) ,class:'enlaceTablaGeneral',href:url+'/proveedor/'+ofertadores[i].id})
-          )
+          $('<td>',{class:'',text:ofertadores[i].name,'data-label':'Ofertador'})
         )
       );
     }

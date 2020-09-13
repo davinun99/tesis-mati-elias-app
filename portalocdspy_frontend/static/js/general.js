@@ -1,8 +1,4 @@
-/**
- * @file general.js Este archivo de incluye en todas la páginas del sitio y contiene funciones que pueden ser utilizadas en todas las secciones
- * @author Bryant Marcelo Pérez
- * @see <a href="https://github.com/portaledcahn/edcahn_backend/tree/frontend">GitHub</a>
- */
+
 /**
  * variable url global
  * @type {string} url

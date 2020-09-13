@@ -1,8 +1,4 @@
-/**
- * @file busqueda.js Este archivo se incluye en la sección de contrataciones del Portal de Contrataciones Abiertas de Honduras
- * @author Bryant Marcelo Pérez
- * @see <a href="https://github.com/portaledcahn/edcahn_backend/tree/frontend">GitHub</a>
- */
+
 
 var filtrosAplicables={
   redFlags:{titulo:'Red Flags',parametro:'redFlag',parametroOrden:'redFlag'},

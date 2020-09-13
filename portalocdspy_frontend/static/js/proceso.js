@@ -1,8 +1,4 @@
-/**
- * @file proceso.js Este archivo se incluye en la sección de Visualización de un Proceso de Contratación del Portal de Contrataciones Abiertas de Honduras
- * @author Bryant Marcelo Pérez
- * @see <a href="https://github.com/portaledcahn/edcahn_backend/tree/frontend">GitHub</a>
- */
+
 /*OCID del proceso de contratacion*/
 var procesoOcid='';
 var procesoRecord={};

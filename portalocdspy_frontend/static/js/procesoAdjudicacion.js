@@ -1,8 +1,4 @@
-/**
- * @file procesoAdjudicacion.js Este archivo se incluye en la sección de Visualización de un Proceso de Contratación del Portal de Contrataciones Abiertas de Honduras
- * @author Bryant Marcelo Pérez
- * @see <a href="https://github.com/portaledcahn/edcahn_backend/tree/frontend">GitHub</a>
- */
+
 var estadosAdjudicacion={
   'pending':{titulo:'Pendiente',descripcion:'Esta adjudicación se ha propuesto pero no ha entrado en vigor. Esto puede ser por un período de reflexión o algún otro proceso.'},
   'active':{titulo:'Activo',descripcion:'Se ha adjudicado y está en proceso.'},
