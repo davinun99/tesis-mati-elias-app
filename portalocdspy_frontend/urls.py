@@ -14,7 +14,4 @@ urlpatterns = [
     path('busqueda/', frontend_views.Busqueda),
     path('descargas/', frontend_views.Descargas),
     path('preguntas/', frontend_views.Preguntas),
-    path('visualizaciones/', frontend_views.Visualizaciones),
-    path('tableroProcesosContratacion/', frontend_views.TableroProcesosContratacion),
-    path('indicadoresProcesosContratacion/', frontend_views.IndicadoresProcesosContratacion),
 ]
