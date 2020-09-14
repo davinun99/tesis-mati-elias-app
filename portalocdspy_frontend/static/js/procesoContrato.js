@@ -10,25 +10,19 @@ function DefinirElementosContrato(){
                 $('<span>',{class:'textoColorGris textoAlineadoDerecha p-1 cursorMano transicion',id:'descargaJSONContrato'}).append(
                   $('<i>',{class:'fas fa-file-download'}),
                   '&nbsp;.JSON'
-                ),
-                $('<span>',{class:'textoColorGris textoAlineadoDerecha p-1 cursorMano transicion',id:'descargaCSVContrato'}).append(
-                  $('<i>',{class:'fas fa-file-download'}),
-                  '&nbsp;.CSV'
-                ),
-                $('<span>',{class:'textoColorGris textoAlineadoDerecha p-1 cursorMano transicion',id:'descargaXLSXContrato'}).append(
-                  $('<i>',{class:'fas fa-file-download'}),
-                  '&nbsp;.XLSX'
                 )
               ),
               $('<h4>',{class:'enLinea mb-0 enLinea alineadoArriba'}).append(
                 $('<a>',{href:'/preguntas'}).append(
-                  $('<div>',{class:'textoAlineadoCentrado cursorMano botonAyuda transicion', id:'informacionTipoDatos'}).append(
-                  
-                    $('<i>',{class:'fas fa-question'})
-                  
-                  )
+                    $('<div>', {
+                        class: 'textoAlineadoCentrado cursorMano botonAyuda transicion',
+                        id: 'informacionTipoDatos',
+                        toolTexto: "¿Que son estos tipos de datos?"
+                    }).append(
+                        $('<i>', {class: 'fas fa-question'})
+                    )
                 )
-                
+
               )
             )
           ),

@@ -902,7 +902,7 @@ if(arreglo.length>1){
     });
 
     var blob = new Blob(["\uFEFF"+cadenaCSV], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, nombre?('Portal de Contrataciones Abiertas de Honduras - '+nombre+'.csv'):'Portal de Contrataciones Abiertas de Honduras.csv');
+    saveAs(blob, nombre?('Banderas Rojas en Contrataciones - '+nombre+'.csv'):'Banderas Rojas en Contrataciones.csv');
 
 }
 }
@@ -913,7 +913,7 @@ if(arreglo.length>1){
 function DescargarJSON(objeto,nombre){
     if(objeto){
         var blob = new Blob([JSON.stringify(objeto)], { type: "application/json" });
-        saveAs(blob, nombre?('Portal de Contrataciones Abiertas de Honduras - '+nombre+'.json'):'Portal de Contrataciones Abiertas de Honduras.json');
+        saveAs(blob, nombre?('Banderas Rojas en Contrataciones - '+nombre+'.json'):'Banderas Rojas en Contrataciones.json');
     }
 }
 
@@ -927,8 +927,8 @@ function DescargarXLSX(arreglo,nombre){
         var wb = XLSX.utils.book_new();
     wb.Props = {
         Title: nombre?nombre:'',
-        Subject: "Portal de Contrataciones Abiertas de Honduras",
-        Author: "Portal de Contrataciones Abiertas de Honduras",
+        Subject: "Banderas Rojas en Contrataciones",
+        Author: "Banderas Rojas en Contrataciones",
         CreatedDate: new Date()
     };
     wb.SheetNames.push(nombre?nombre:'');
@@ -941,7 +941,7 @@ function DescargarXLSX(arreglo,nombre){
     });
     saveAs(new Blob([s2ab(wbout)], {
         type: "application/octet-stream"
-    }),nombre?('Portal de Contrataciones Abiertas de Honduras - '+nombre+'.xlsx'):'Portal de Contrataciones Abiertas de Honduras.xlsx');
+    }),nombre?('Banderas Rojas en Contrataciones - '+nombre+'.xlsx'):'Banderas Rojas en Contrataciones.xlsx');
     }
 }
 
