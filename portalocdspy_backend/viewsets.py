@@ -230,55 +230,65 @@ class Index(APIView):
 
 		cliente = ElasticSearchDefaultConnection()
 
-		oncae = Search(using=cliente, index=OCDS_INDEX)
+		dncp = Search(using=cliente, index=OCDS_INDEX)
 
-		oncae = oncae.filter('match_phrase', doc__compiledRelease__sources__id=sourceDNCP)
+		redFlagsQuery = Search(using=cliente, index=OCDS_INDEX)
 
-		oncae.aggs.metric(
+		dncp = dncp.filter('match_phrase', doc__compiledRelease__sources__id=sourceDNCP)
+
+		redFlagsQuery = redFlagsQuery.filter('exists', field='redFlags')
+
+		dncp.aggs.metric(
 			'contratos',
 			'nested',
 			path='doc.compiledRelease.contracts'
 		)
 		
-		oncae.aggs["contratos"].metric(
+		dncp.aggs["contratos"].metric(
 			'distinct_contracts', 
 			'cardinality',
 			precision_threshold=precision, 
 			field='doc.compiledRelease.contracts.id.keyword'
 		)
 
-		oncae.aggs.metric(
+		dncp.aggs.metric(
 			'distinct_buyers',
 			'cardinality',
 			precision_threshold=precision,
 			field='doc.compiledRelease.buyer.id.keyword'
 		)
 		
-		oncae.aggs.metric(
+		dncp.aggs.metric(
 			'procesos_contratacion', 
 			'value_count',
 			field='doc.compiledRelease.ocid.keyword'
 		)
 
-		oncae.aggs.metric(
+		dncp.aggs.metric(
+			'red_flags',
+			'value_count',
+			field='redFlags'
+		)
+
+		dncp.aggs.metric(
 			'proveedores_dncp',
 			'terms',
 			field='doc.compiledRelease.awards.suppliers.name.keyword',
 			size=100000
 		)
-		'''
-		#Proveedores terms
-		oncae.aggs["awards"].metric(
-			'proveedores_dncp',
-			'terms',
-			field='doc.compiledRelease.awards.suppliers.name.keyword',
-			size=100000
+
+		redFlagsQuery.aggs.metric(
+			'red_flags',
+			'value_count',
+			field='redFlags'
 		)
-		'''
-		resultsONCAE = oncae.execute()
+
+		resultsDNCP = dncp.execute()
+
+		resultsRedFlags = redFlagsQuery.execute()
 
 		diccionario_proveedores = []
-		dfProveedores = pd.DataFrame(resultsONCAE.aggregations.proveedores_dncp.to_dict()["buckets"])
+		dfProveedores = pd.DataFrame(resultsDNCP.aggregations.proveedores_dncp.to_dict()["buckets"])
 
 		if not dfProveedores.empty:
 			cantidad_proveedores = dfProveedores['key'].nunique()
@@ -290,11 +300,11 @@ class Index(APIView):
 		# dfProveedores.to_csv(r'proveedores.csv', sep='\t', encoding='utf-8')
 
 		context = {
-			"elasticsearch": cantidad_proveedores,
-			"contratos": resultsONCAE.aggregations.contratos.distinct_contracts.value,
-			"procesos": resultsONCAE.aggregations.procesos_contratacion.value,
-			#"pagos": resultsSEFIN.aggregations.procesos_pagos.value,
-			"compradores": resultsONCAE.aggregations.distinct_buyers.value,
+			"contratos": resultsDNCP.aggregations.contratos.distinct_contracts.value,
+			"procesos": resultsDNCP.aggregations.procesos_contratacion.value,
+			"redFlags": resultsDNCP.aggregations.red_flags.value,
+			"uniqueRedFlags": resultsRedFlags.hits.total,
+			"compradores": resultsDNCP.aggregations.distinct_buyers.value,
 			"proveedores": cantidad_proveedores
 		}
 
