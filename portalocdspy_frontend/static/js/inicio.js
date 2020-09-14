@@ -27,8 +27,8 @@ function CargarEstadisticas(){
         DebugFecha();
         if(datos){
             $('#compradores').attr('data-to', ObtenerNumero(datos.compradores));
-            $('#contratos').attr('data-to', ObtenerNumero(datos.contratos));
-            $('#pagos').attr('data-to', ObtenerNumero(datos.pagos));
+            $('#uniqueRedFlags').attr('data-to', ObtenerNumero(datos.uniqueRedFlags));
+            $('#redFlags').attr('data-to', ObtenerNumero(datos.redFlags));
             $('#procesos').attr('data-to', ObtenerNumero(datos.procesos));
             $('#proveedores').attr('data-to', ObtenerNumero(datos.proveedores));
         }
