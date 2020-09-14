@@ -613,7 +613,7 @@ class RecordDetail(APIView):
 		context = results.hits.hits
 
 		if context:
-			response = context[0]["_source"]["doc"]
+			response = context[0]["_source"]
 			return Response(response)
 		else:
 			raise Http404

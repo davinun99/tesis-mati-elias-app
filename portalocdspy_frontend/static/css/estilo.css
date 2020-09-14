@@ -1257,7 +1257,12 @@ ul.navbar-nav .nav-item .nav-link{
 			font-size: 12px;
  }
 	.contenedorPasosProceso{
+			display: flex;
 			text-align: center;
+ }
+
+	.espaciadorFlex{
+			flex-grow: 1;
  }
 	.tituloDetalleProceso{
 			font-size: 20px;

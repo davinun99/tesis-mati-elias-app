@@ -1,161 +1,218 @@
 {% extends "base.html" %}
 
 {% block head_content %}
-<title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Proceso</title>
+    <title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Proceso</title>
 {% endblock %}
 
 {% block container %}
-{% load static %}
-<div class="container mb-5 tamanoMinimo" style="position:relative">
-      <div id="procesoCargaContedor" style="">
-            <input type="hidden" value="{{ocid}}" id="procesoOcid">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion titulo tituloOcultar" style="">
-                  </div>
-               <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria titulo tituloOcultar" style="display: none">
-                  </div>
-               <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion titulo tituloOcultar" style="display: none">
-                  </div>
-               <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato titulo tituloOcultar" style="display: none">
-                  </div>
-               <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion titulo tituloOcultar" style="display: none">
-                  </div>
+    {% load static %}
+    <div class="container mb-5 tamanoMinimo" style="position:relative">
+        <div id="procesoCargaContedor" style="">
+            <input type="hidden" value="{{ ocid }}" id="procesoOcid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion titulo tituloOcultar"
+                         style="">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria titulo tituloOcultar"
+                         style="display: none">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion titulo tituloOcultar"
+                         style="display: none">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato titulo tituloOcultar"
+                         style="display: none">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion titulo tituloOcultar"
+                         style="display: none">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 redFlags titulo tituloOcultar"
+                         style="display: none">
+                    </div>
+                </div>
             </div>
-         </div>
-         <div class="row" style="display:none" id="noEncontrado">
-            <div class="col-md-12 cajonSombreado fondoColorPrimario mt-5 fondoContrataciones" style="background-color: #3B53A4">
-            
-               <h1 class="titularColor textoColorBlanco p-5 m-5" style="font-size: 2rem">No se Encontró el Proceso de Contratación.</h1>
-              
-            </div>
-         </div>
-         <div class="row mt-3 mb-3 contenedorElementosProceso">
-            <div class=" col-12 col-sm-12 col-md-12 contenedorProceso1" id="etapasProceso" style="display: none" data-step="1" data-intro="Puedes seleccionar una etapa del proceso de contratación para visualizar la información de esta.">
-               <div class=" contenedorPasosProceso mb-3">
-                  <div class="botonPasoProceso fondoColorPrimario activo" id="planificacionProceso" estado="planificacion" title="Planificación">
-                     <div class="circuloNumeroPasoProceso ">
-                        <span>1</span>
-                     </div>
-                     <div class="textoBotonPasoProceso"> <span>Planificación </span></div>
-                  </div>
-                  <div class="botonPasoProceso fondoColorPrimario" id="convocatoriaProceso" estado="convocatoria" title="Convocatoria">
-                     <div class="circuloNumeroPasoProceso ">
-                        <span>2</span>
-                     </div>
-                     <div class="textoBotonPasoProceso"> <span>Convocatoria </span></div>
-                  </div>
-                  <div class="botonPasoProceso fondoColorPrimario" id="adjudicacionProceso" estado="adjudicacion" title="Adjudicación">
-                     <div class="circuloNumeroPasoProceso ">
-                        <span>3</span>
-                     </div>
-                     <div class="textoBotonPasoProceso"> <span>Adjudicación</span></div>
-                  </div>
-                  <div class="botonPasoProceso fondoColorPrimario" id="contratoProceso" estado="contrato" title="Contrato">
-                     <div class="circuloNumeroPasoProceso ">
-                        <span>4</span>
-                     </div>
-                     <div class="textoBotonPasoProceso"> <span>Contratos </span></div>
-                  </div>
-                  <!--
-                  <div class="botonPasoProceso fondoColorPrimario deshabilitado" id="implementacionProceso" estado="implementacion" title="Implementación">
-                     <div class="circuloNumeroPasoProceso ">
-                        <span>5</span>
-                     </div>
-                     <div class="textoBotonPasoProceso"> <span>Implementación</span></div>
-                  </div>-->
-               </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-2 col-lg-2 contenedorProceso2 mb-3" style="display: none">
-               <div class="botonPropiedadProceso activo" propiedad="informacion" title="Información" style="" tabindex="0">
-                  <img src="/static/img/proceso/data.png" alt="Información">
-                  <div class="textoBotonPropiedadProceso">Información</div>
-               </div>
-               <div class="botonPropiedadProceso" propiedad="documentos" title="Documentos" style="display:none" tabindex="0">
-                  <img src="/static/img/proceso/documentos.png" alt="Documentos">
-                  <div class="textoBotonPropiedadProceso">Documentos</div>
-               </div>
-               <div class="botonPropiedadProceso" propiedad="historial" title="Historial de Publicaciones" style="display:none" tabindex="0">
-                  <img src="/static/img/proceso/historial.png" alt="Historial de Publicaciones">
-                  <div class="textoBotonPropiedadProceso">Historial de Publicaciones</div>
-               </div>
-               <div class="botonPropiedadProceso" propiedad="invitados" title="Invitados" style="display:none" tabindex="0">
-                  <img src="/static/img/proceso/invitados.png" alt="Invitados">
-                  <div class="textoBotonPropiedadProceso"> Proveedores Invitados</div>
-               </div>
-               <div class="botonPropiedadProceso" propiedad="solicitados" title="Items Solicitados" style="" tabindex="0">
-                  <img src="/static/img/proceso/items.png" alt="Items Solicitados">
-                  <div class="textoBotonPropiedadProceso">Productos Solicitados</div>
-               </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion informacion pasoOcultar" id="planificacionInformacion" style="" data-step="2" data-intro="En esta sección puedes visualizar, documentos, archivos, e información de la etapa que este seleccionada en la parte superior.">
+            <div class="row" style="display:none" id="noEncontrado">
+                <div class="col-md-12 cajonSombreado fondoColorPrimario mt-5 fondoContrataciones"
+                     style="background-color: #3B53A4">
 
+                    <h1 class="titularColor textoColorBlanco p-5 m-5" style="font-size: 2rem">No se Encontró el Proceso
+                        de Contratación.</h1>
 
-               
-               
-               
-               </div>
+                </div>
+            </div>
+            <div class="row mt-3 mb-3 contenedorElementosProceso">
+                <div class=" col-12 col-sm-12 col-md-12 contenedorProceso1" id="etapasProceso" style="display: none"
+                     data-step="1"
+                     data-intro="Puedes seleccionar una etapa del proceso de contratación para visualizar la información de esta.">
+                    <div class=" contenedorPasosProceso mb-3" style="display: flex;">
+                        <div class="botonPasoProceso fondoColorPrimario activo" id="planificacionProceso"
+                             estado="planificacion" title="Planificación">
+                            <div class="circuloNumeroPasoProceso ">
+                                <span>1</span>
+                            </div>
+                            <div class="textoBotonPasoProceso"><span>Planificación </span></div>
+                        </div>
+                        <div class="botonPasoProceso fondoColorPrimario" id="convocatoriaProceso" estado="convocatoria"
+                             title="Convocatoria">
+                            <div class="circuloNumeroPasoProceso ">
+                                <span>2</span>
+                            </div>
+                            <div class="textoBotonPasoProceso"><span>Convocatoria </span></div>
+                        </div>
+                        <div class="botonPasoProceso fondoColorPrimario" id="adjudicacionProceso" estado="adjudicacion"
+                             title="Adjudicación">
+                            <div class="circuloNumeroPasoProceso ">
+                                <span>3</span>
+                            </div>
+                            <div class="textoBotonPasoProceso"><span>Adjudicación</span></div>
+                        </div>
+                        <div class="botonPasoProceso fondoColorPrimario" id="contratoProceso" estado="contrato"
+                             title="Contrato">
+                            <div class="circuloNumeroPasoProceso ">
+                                <span>4</span>
+                            </div>
+                            <div class="textoBotonPasoProceso"><span>Contrato </span></div>
+                        </div>
+                        <div class="espaciadorFlex" style="flex-grow: 1;"></div>
+                        <div class="botonPasoProceso fondoColorPrimario" id="redFlagsProceso" estado="redFlags"
+                             title="Banderas Rojas">
+                            <div class="circuloNumeroPasoProceso ">
+                                <span>!</span>
+                            </div>
+                            <div class="textoBotonPasoProceso"><span>Banderas Rojas</span></div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2 contenedorProceso2 mb-3" style="display: none">
+                    <div class="botonPropiedadProceso activo" propiedad="informacion" title="Información" style=""
+                         tabindex="0">
+                        <img src="/static/img/proceso/data.png" alt="Información">
+                        <div class="textoBotonPropiedadProceso">Información</div>
+                    </div>
+                    <div class="botonPropiedadProceso" propiedad="documentos" title="Documentos" style="display:none"
+                         tabindex="0">
+                        <img src="/static/img/proceso/documentos.png" alt="Documentos">
+                        <div class="textoBotonPropiedadProceso">Documentos</div>
+                    </div>
+                    <div class="botonPropiedadProceso" propiedad="historial" title="Historial de Publicaciones"
+                         style="display:none" tabindex="0">
+                        <img src="/static/img/proceso/historial.png" alt="Historial de Publicaciones">
+                        <div class="textoBotonPropiedadProceso">Historial de Publicaciones</div>
+                    </div>
+                    <div class="botonPropiedadProceso" propiedad="invitados" title="Invitados" style="display:none"
+                         tabindex="0">
+                        <img src="/static/img/proceso/invitados.png" alt="Invitados">
+                        <div class="textoBotonPropiedadProceso"> Proveedores Invitados</div>
+                    </div>
+                    <div class="botonPropiedadProceso" propiedad="solicitados" title="Items Solicitados" style=""
+                         tabindex="0">
+                        <img src="/static/img/proceso/items.png" alt="Items Solicitados">
+                        <div class="textoBotonPropiedadProceso">Productos Solicitados</div>
+                    </div>
+                </div>
 
-
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria informacion pasoOcultar" id="convocatoriaInformacion" style="display: none;">
-
-         </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria documentos pasoOcultar" id="convocatoriaDocumentos" style="display:none">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion informacion pasoOcultar"
+                     id="planificacionInformacion" style="" data-step="2"
+                     data-intro="En esta sección puedes visualizar, documentos, archivos, e información de la etapa que este seleccionada en la parte superior.">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria informacion pasoOcultar"
+                     id="convocatoriaInformacion" style="display: none;">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria documentos pasoOcultar"
+                     id="convocatoriaDocumentos" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria historial pasoOcultar"
+                     id="convocatoriaHistorial" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria invitados pasoOcultar"
+                     id="convocatoriaInvitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria solicitados pasoOcultar"
+                     id="convocatoriaSolicitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion documentos pasoOcultar"
+                     id="planificacionDocumentos" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion historial pasoOcultar"
+                     id="planificacionHistorial" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion invitados pasoOcultar"
+                     id="planificacionInvitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion solicitados pasoOcultar"
+                     id="planificacionSolicitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion informacion pasoOcultar"
+                     id="adjudicacionInformacion" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion documentos pasoOcultar"
+                     id="adjudicacionDocumentos" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion historial pasoOcultar"
+                     id="adjudicacionHistorial" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion invitados pasoOcultar"
+                     id="adjudicacionInvitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion solicitados pasoOcultar"
+                     id="adjudicacionSolicitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato informacion pasoOcultar"
+                     id="contratoInformacion" style="display:none"></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato documentos pasoOcultar"
+                     id="contratoDocumentos" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato historial pasoOcultar"
+                     id="contratoHistorial" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato invitados pasoOcultar"
+                     id="contratoInvitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato solicitados pasoOcultar"
+                     id="contratoSolicitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion informacion pasoOcultar"
+                     id="implementacionInformacion" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion documentos pasoOcultar"
+                     id="implementacionDocumentos" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion historial pasoOcultar"
+                     id="implementacionHistorial" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion invitados pasoOcultar"
+                     id="implementacionInvitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion solicitados pasoOcultar"
+                     id="implementacionSolicitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 redFlags informacion pasoOcultar"
+                     id="redFlagsInformacion" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 redFlags documentos pasoOcultar"
+                     id="redFlagsDocumentos" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 redFlags historial pasoOcultar"
+                     id="redFlagsHistorial" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 redFlags invitados pasoOcultar"
+                     id="redFlagsInvitados" style="display:none">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 redFlags solicitados pasoOcultar"
+                     id="redFlagsSolicitados" style="display:none">
+                </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria historial pasoOcultar" id="convocatoriaHistorial" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria invitados pasoOcultar" id="convocatoriaInvitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 convocatoria solicitados pasoOcultar" id="convocatoriaSolicitados" style="display:none">
-            </div>
-           
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion documentos pasoOcultar" id="planificacionDocumentos" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion historial pasoOcultar" id="planificacionHistorial" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion invitados pasoOcultar" id="planificacionInvitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 planificacion solicitados pasoOcultar" id="planificacionSolicitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion informacion pasoOcultar" id="adjudicacionInformacion" style="display:none">
-
-
-         </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion documentos pasoOcultar" id="adjudicacionDocumentos" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion historial pasoOcultar" id="adjudicacionHistorial" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion invitados pasoOcultar" id="adjudicacionInvitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 adjudicacion solicitados pasoOcultar" id="adjudicacionSolicitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato informacion pasoOcultar" id="contratoInformacion" style="display:none"></div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato documentos pasoOcultar" id="contratoDocumentos" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato historial pasoOcultar" id="contratoHistorial" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato invitados pasoOcultar" id="contratoInvitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 contrato solicitados pasoOcultar" id="contratoSolicitados" style="display:none">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion informacion pasoOcultar" id="implementacionInformacion" style="display:none"></div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion documentos pasoOcultar" id="implementacionDocumentos" style="display:none"></div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion historial pasoOcultar" id="implementacionHistorial" style="display:none"></div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion invitados pasoOcultar" id="implementacionInvitados" style="display:none"></div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 contenedorProceso3 implementacion solicitados pasoOcultar" id="implementacionSolicitados" style="display:none"></div>
-          
-         </div>
-         </div>
-   
-</div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script_content %}
-<script src="{% static 'js/proceso.js' %}"></script>
-<script src="{% static 'js/procesoPlaneacion.js' %}"></script>
-<script src="{% static 'js/procesoConvocatoria.js' %}"></script>
-<script src="{% static 'js/procesoAdjudicacion.js' %}"></script>
-<script src="{% static 'js/procesoContrato.js' %}"></script>
-<script src="{% static 'js/procesoImplementacion.js' %}"></script>
+    <script src="{% static 'js/proceso.js' %}"></script>
+    <script src="{% static 'js/procesoPlaneacion.js' %}"></script>
+    <script src="{% static 'js/procesoConvocatoria.js' %}"></script>
+    <script src="{% static 'js/procesoAdjudicacion.js' %}"></script>
+    <script src="{% static 'js/procesoContrato.js' %}"></script>
+    <script src="{% static 'js/procesoImplementacion.js' %}"></script>
+    <script src="{% static 'js/procesoRedFlags.js' %}"></script>
 {% endblock %}

@@ -91,15 +91,17 @@ function ObtenerProceso(){
     EliminarEventoModalDescarga('descargaXlsxProceso');
     $.get(api+"/record/"+procesoOcid/*url+"/static/"+procesoOcid+".json"*/,function(datos){
       console.dir(datos)
-      if(datos&&!datos.detail){
+      if(datos&&!datos.doc.detail){
        // download(JSON.stringify(datos), 'json.txt', 'text/plain');
         $('#procesoCargaContedor').show();
-        procesoRecord=datos;
+        procesoRecord=datos.doc;
+        procesoRedFlags=datos.redFlags;
         
         DefinirElementosPlaneacion();
         DefinirElementosConvocatoria();
         DefinirElementosAdjudicacion();
         DefinirElementosContrato();
+        DefinirElementosRedFlags();
         AnadirPartes();
         DeshabilitarItems();
         
