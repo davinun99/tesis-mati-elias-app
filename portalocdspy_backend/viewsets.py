@@ -267,7 +267,7 @@ class Index(APIView):
 		dncp.aggs.metric(
 			'red_flags',
 			'value_count',
-			field='banderas'
+			field='banderas.title.keyword'
 		)
 
 		dncp.aggs.metric(
