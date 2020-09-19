@@ -236,7 +236,7 @@ class Index(APIView):
 
 		dncp = dncp.filter('match_phrase', doc__compiledRelease__sources__id=sourceDNCP)
 
-		redFlagsQuery = redFlagsQuery.filter('exists', field='redFlags')
+		redFlagsQuery = redFlagsQuery.filter('exists', field='banderas')
 
 		dncp.aggs.metric(
 			'contratos',
@@ -267,7 +267,7 @@ class Index(APIView):
 		dncp.aggs.metric(
 			'red_flags',
 			'value_count',
-			field='redFlags'
+			field='banderas'
 		)
 
 		dncp.aggs.metric(
@@ -280,7 +280,7 @@ class Index(APIView):
 		redFlagsQuery.aggs.metric(
 			'red_flags',
 			'value_count',
-			field='redFlags'
+			field='banderas'
 		)
 
 		resultsDNCP = dncp.execute()
@@ -341,11 +341,11 @@ class Buscador(APIView):
 		s = Search(using=cliente, index=OCDS_INDEX)
 
 		#Source
-		campos = ['doc.compiledRelease', 'extra', 'redFlags']
+		campos = ['doc.compiledRelease', 'extra', 'banderas']
 		s = s.source(campos)
 		#Filtros
 
-		s.aggs.metric('redFlags', 'terms', field='redFlags.keyword')
+		s.aggs.metric('redFlags', 'terms', field='banderas.title.keyword')
 		s.aggs.metric('contratos', 'nested', path='doc.compiledRelease.contracts')
 
 		s.aggs["contratos"].metric('monedas', 'terms', field='doc.compiledRelease.contracts.value.currency.keyword')
@@ -464,10 +464,10 @@ class Buscador(APIView):
 
 		if redFlag.replace(' ', ''):
 			if(len(redFlag.split(',')) == 1):
-				s = s.query('match_phrase', **{'redFlags.keyword': redFlag})
+				s = s.query('match_phrase', **{'banderas.title.keyword': redFlag})
 			else:
 				for value in redFlag.split(','):
-					s = s.query("match_phrase", **{'redFlags.keyword':value})
+					s = s.query("match_phrase", **{'banderas.title.keyword':value})
 
 		search_results = SearchResults(s)
 
