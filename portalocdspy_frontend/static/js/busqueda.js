@@ -293,7 +293,7 @@ function MostrarResultados(datos){
       AgregarResultadoPago(datos.resultados[i]._source.doc.compiledRelease);
       break;
       case 'proceso':
-      AgregarResultadoProceso(datos.resultados[i]._source.doc.compiledRelease, datos.resultados[i]._source.redFlags);
+      AgregarResultadoProceso(datos.resultados[i]._source.doc.compiledRelease, datos.resultados[i]._source.banderas);
       break;
     }
   }
@@ -554,7 +554,7 @@ function AgregarResultadoProceso(datos, redFlags){
   var dynamic = "";
   if (redFlags) {
     for (var x = 0; x < redFlags.length; x++) { //Move the for loop from here
-      dynamic += '<td class="etiquetaFiltro contenidoTablaCaracteristicas">' + redFlags[x] + '</td>';
+      dynamic += '<td class="etiquetaFiltro contenidoTablaCaracteristicas">' + redFlags[x].title + '</td>';
     }
   }
   $('#listaResultadosBusqueda').append(

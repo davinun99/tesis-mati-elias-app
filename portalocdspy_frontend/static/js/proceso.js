@@ -95,7 +95,7 @@ function ObtenerProceso(){
        // download(JSON.stringify(datos), 'json.txt', 'text/plain');
         $('#procesoCargaContedor').show();
         procesoRecord=datos.doc;
-        procesoRedFlags=datos.redFlags;
+        procesoRedFlags=datos.banderas;
         
         DefinirElementosPlaneacion();
         DefinirElementosConvocatoria();

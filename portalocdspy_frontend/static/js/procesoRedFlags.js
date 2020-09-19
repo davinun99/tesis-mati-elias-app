@@ -70,7 +70,7 @@ function ObtenerRedFlags() {
       $("<tr>").append(
         $("<td>", {
           class: "contenidoTablaCaracteristicas",
-          text: procesoRedFlags[i],
+          text: procesoRedFlags[i].title,
         })
       )
     );
