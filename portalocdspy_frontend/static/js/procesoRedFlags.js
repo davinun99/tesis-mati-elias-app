@@ -69,8 +69,12 @@ function ObtenerRedFlags() {
     elementos.push(
       $("<tr>").append(
         $("<td>", {
-          class: "contenidoTablaCaracteristicas",
+          class: "tituloTablaCaracteristicas",
           text: procesoRedFlags[i].title,
+        }),
+        $("<td>", {
+          class: "contenidoTablaCaracteristicas",
+          text: procesoRedFlags[i].message,
         })
       )
     );

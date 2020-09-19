@@ -1,7 +1,7 @@
 
 
 var filtrosAplicables={
-  redFlags:{titulo:'Red Flags',parametro:'redFlag',parametroOrden:'redFlag'},
+  redFlags:{titulo:'Banderas Rojas',parametro:'redFlag',parametroOrden:'redFlag'},
   categorias:{titulo:'Categoría',parametro:'categoria',parametroOrden:'categoria'},
   monedas: {titulo:'Moneda',parametro:'moneda',parametroOrden:'moneda'},
   instituciones: {titulo:'Institución Compradora',parametro:'institucion',parametroOrden:'institucion'},
@@ -599,7 +599,7 @@ function AgregarResultadoProceso(datos, redFlags){
                 $('<td>',{class:'contenidoTablaCaracteristicas',text:ObtenerEstadoProceso(datos)})
               ),
               $('<tr>',{class:''}).append(
-                $('<td>',{class:'tituloTablaCaracteristicas',text:'Red Flags:'}),
+                $('<td>',{class:'tituloTablaCaracteristicas',text:'Banderas Rojas:'}),
                   dynamic
                   //$('<td>', {class: 'botonGeneral fondoColorPrimario contenidoTablaCaracteristicas',text: redFlags[i]})
               )
