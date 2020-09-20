@@ -17,7 +17,8 @@
          </h4>
          <form method="post" enctype="multipart/form-data">
              {% csrf_token %}
-             <input type="file" name="document">
+            <input style="color: #FFFFFF;" type="file" name="document"
+               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
              <button type="submit" class="etiquetaFiltro contenidoTablaCaracteristicas">Subir Excel</button>
          </form>
       </div>
