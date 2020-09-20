@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Admin</title>
+{% endblock %}
+
+{% load static %}
+
+{% block container %}
+<div class="container-fluid fondoColorPrimario fondoPrincipalPagina tamanoMinimo">
+<div class="container">
+   <div class="row pb-2">
+      <div class="col-md-12 mt-5 mb-5"><h1 class="textoColorBlanco textoTitular1Grueso textoAlineadoCentrado">Interfaz para administracion de las banderas rojas evaluadas en los procesos de contratacion</h1></div>
+     <div class="col-md-12">
+         <h4 class="textoColorBlanco textoTitular2Grueso">
+               Subir un nuevo conjunto de reglas
+         </h4>
+         <form method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <input type="file" name="document">
+             <button type="submit" class="etiquetaFiltro contenidoTablaCaracteristicas">Subir Excel</button>
+         </form>
+      </div>
+   </div>
+
+</div>
+</div>
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

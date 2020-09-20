@@ -1,3 +1,4 @@
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 from portalocdspy_backend import documents
 from django.core.paginator import Paginator, Page, EmptyPage, PageNotAnInteger
@@ -38,6 +39,16 @@ def ManualApi(request):
 
 def Acerca(request):
     return render(request,'acerca/acerca.html')
+
+def Admin(request):
+    if request.method =='POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        fs.save(uploaded_file.name, uploaded_file)
+        print(uploaded_file.name)
+        print(uploaded_file.size)
+    return render(request,'admin/admin.html')
+
 
 def Busqueda(request):
     parametros = {}
@@ -360,3 +371,5 @@ def verificarOrden(filtro,nombre):
         if('desc(' in filtro):
           orden='descendente'
     return orden
+
+

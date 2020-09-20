@@ -1,4 +1,7 @@
+from django.conf.urls.static import static
 from django.urls import path, include
+
+from portalocdspy import settings
 from portalocdspy_frontend import views as frontend_views
 
 urlpatterns = [
@@ -11,4 +14,9 @@ urlpatterns = [
     path('compradores/', frontend_views.Compradores),
     path('busqueda/', frontend_views.Busqueda),
     path('preguntas/', frontend_views.Preguntas),
+    path('administracion-banderas/', frontend_views.Admin),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
