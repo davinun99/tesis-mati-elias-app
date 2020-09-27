@@ -1,5 +1,9 @@
+from datetime import datetime
+
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
+
+from portalocdspy.settings import MEDIA_URL, MEDIA_ROOT
 from portalocdspy_backend import documents
 from django.core.paginator import Paginator, Page, EmptyPage, PageNotAnInteger
 import os
@@ -43,8 +47,12 @@ def Acerca(request):
 def Admin(request):
     if request.method =='POST':
         uploaded_file = request.FILES['document']
-        fs = FileSystemStorage()
+        fs = OverwriteStorage()
         fs.save(uploaded_file.name, uploaded_file)
+        names = uploaded_file.name.split(".");
+        fileName = names[0]
+        fileExtension = names[1]
+        fs.save(fileName + '_' + datetime.now().strftime("%d-%m-%y_%H-%M-%S") + '.' + fileExtension, uploaded_file)
         print(uploaded_file.name)
         print(uploaded_file.size)
     return render(request,'admin/admin.html')
@@ -371,5 +379,13 @@ def verificarOrden(filtro,nombre):
         if('desc(' in filtro):
           orden='descendente'
     return orden
+
+
+class OverwriteStorage(FileSystemStorage):
+
+    def get_available_name(self, name, max_length=None):
+        if self.exists(name):
+            os.remove(os.path.join(MEDIA_ROOT, name))
+        return name
 
 
