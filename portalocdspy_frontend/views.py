@@ -35,8 +35,6 @@ def Inicio(request):
 def Proceso(request,ocid=''):
     return render(request,'proceso/proceso.html',{'ocid':ocid.replace('"','')})
 
-def Api(request):
-    return render(request,'api/api.html')
 
 def ManualApi(request):
     return render(request,'manualApi/manualApi.html')

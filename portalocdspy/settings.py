@@ -28,10 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'https://www.contratacionesabiertas.gob.hn', 
-    'http://www.contratacionesabiertas.gob.hn',
-    'www.contratacionesabiertas.gob.hn', 
-    'contratacionesabiertas.gob.hn',
     '*'
 ]
 
@@ -61,7 +57,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',  # NEW
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',  # NEW
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
+CACHE_MIDDLEWARE_SECONDS = 600    # number of seconds to cache a page for (TTL)
+CACHE_MIDDLEWARE_KEY_PREFIX = ''    # should be used if the cache is shared across multiple sites that use the same Django instance
 
 ROOT_URLCONF = 'portalocdspy.urls'
 

@@ -20,6 +20,5 @@ from portalocdspy_frontend import urls as frontend_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(urls)),
     path('', include(frontend_urls)),
 ]

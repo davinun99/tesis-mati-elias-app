@@ -62,17 +62,6 @@ class SearchResults(LazyObject):
 
 # API releases y records
 
-class PublicAPI(APIView, PaginationHandlerMixin):
-
-	def get(self, request, format=None, *args, **kwargs):
-		urlAPI = '/api/v1/'
-
-		endpoints = {}
-		endpoints["release"] =  request.build_absolute_uri(urlAPI + "release/")
-		endpoints["record"] =  request.build_absolute_uri(urlAPI + "record/")
-
-		return Response(endpoints)
-
 class Releases(APIView, PaginationHandlerMixin):
 	pagination_class = BasicPagination
 	serializer_class = ReleaseSerializer
