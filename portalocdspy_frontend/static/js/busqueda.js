@@ -229,7 +229,7 @@ function CargarElementosBusqueda(cargaFiltro){
   EliminarEventoModalDescarga('descargaXlsxBusqueda');
   $.get(api+"/buscador",parametros).done(function( datos ) {
   
-    console.dir(datos);
+
     AgregarEventoModalDescarga('descargaJsonBusqueda',function(){
       var descarga=datos.resultados.map(function(e){
         return e._source.doc.compiledRelease;

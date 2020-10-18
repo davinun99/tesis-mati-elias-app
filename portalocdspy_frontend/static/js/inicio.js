@@ -23,7 +23,6 @@ $(function(){
 
 function CargarEstadisticas(){
     $.get(api+"/inicio",function(datos){
-        console.dir(datos)
         DebugFecha();
         if(datos){
             $('#compradores').attr('data-to', ObtenerNumero(datos.compradores));
