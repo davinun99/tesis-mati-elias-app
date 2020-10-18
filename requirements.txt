@@ -19,4 +19,5 @@ sqlparse==0.3.0
 django-compressor==2.4.0
 urllib3==1.25.3
 whitenoise==5.2.0
+channels==2.4.0
 -e git+https://github.com/OpenDataServices/flatten-tool.git@511cc6d1ee83d77aa7a1efe965eb3dd7e4940c1b#egg=flattentool

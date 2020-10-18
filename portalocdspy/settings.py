@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl_drf',
     'django.contrib.humanize',
     'ocds_bulk_download',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'portalocdspy.wsgi.application'
+
+ASGI_APPLICATION = "portalocdspy.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -164,6 +167,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'portalocdspy_frontend/static'),
 )
+
 
 # Configuracion de parametros adicionales
 
