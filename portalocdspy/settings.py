@@ -68,6 +68,7 @@ MIDDLEWARE = [
 CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
 CACHE_MIDDLEWARE_SECONDS = 600    # number of seconds to cache a page for (TTL)
 CACHE_MIDDLEWARE_KEY_PREFIX = ''    # should be used if the cache is shared across multiple sites that use the same Django instance
+WHITENOISE_MAX_AGE = 31557600
 
 ROOT_URLCONF = 'portalocdspy.urls'
 
