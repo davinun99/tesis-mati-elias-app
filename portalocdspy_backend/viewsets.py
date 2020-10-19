@@ -1,3 +1,5 @@
+import fnmatch
+
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -1748,15 +1750,21 @@ class Descargas(APIView):
 		else:
 			return Response([])
 
+
 class Descargar(APIView):
 
 	def get(self, request, pk=None, format=None):
 		file_name = pk
-		response = HttpResponse()
-		response['Content-Type'] = ''
-		response['Content-Disposition'] = 'attachment; filename="{}"'.format(file_name)
-		response['X-Accel-Redirect'] = '/protectedMedia/' + file_name
-		return response
+		file_path = "./media/" + file_name
+		print(file_path)
+		if os.path.exists(file_path):
+			with open(file_path, 'rb') as fh:
+				response = HttpResponse(fh.read(),
+										content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+				response['Content-Disposition'] = 'attachment; filename=descarga.xlsx'
+				return response
+		else:
+			raise Http404
 
 def DescargarProcesosCSV(request, search):
 	nombreArchivo = 'portalocdspy-procesos-'
@@ -1781,3 +1789,18 @@ def DescargarProductosCSV(request, search):
 	response = StreamingHttpResponse((writer.writerow(row) for row in generador_producto_csv(search)), content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="'+ nombreArchivo +'{0}.csv"'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
 	return response
+
+
+class Explorador(APIView):
+
+	def get(self, request, format=None):
+
+		listaArchivos = os.listdir('./media')
+		listaReglas = []
+		pattern = "*.xls*"
+
+		for entry in listaArchivos:
+			if fnmatch.fnmatch(entry, pattern):
+				listaReglas.append(entry)
+
+		return Response(listaReglas)

@@ -17,6 +17,6 @@ urlpatterns = [
 	path('compradores/<path:partieId>/pagos/', viewsets.PagosDelComprador.as_view()),
 	path('compradores/<path:partieId>/', viewsets.Comprador.as_view()),
 
-
-
+	path('reglas/', viewsets.Explorador.as_view()),
+	path('reglas/<path:pk>/', viewsets.Descargar.as_view()),
 ]
