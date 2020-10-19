@@ -17,8 +17,18 @@ $(function () {
 
   $("#filesList").on("click", "a", function (e) {
     let fileName = e.target.innerText;
-    $.get(api + "/reglas/" + fileName, function (file) {
-      console.log(file);
-    });
+    fetch(api + "/reglas/" + fileName)
+      .then((resp) => resp.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(() => alert("No se pudo descargar archivo"));
   });
 });
