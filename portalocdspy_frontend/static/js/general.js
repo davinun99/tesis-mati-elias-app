@@ -70,7 +70,6 @@ function MostrarIntroduccion(){
 function DebugFecha(){
     let d =new Date();
     let fecha=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()+':'+d.getMilliseconds();
-    console.dir(fecha);
 }
 
 /**

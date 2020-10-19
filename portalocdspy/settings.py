@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'uo251c%zw60+efuwf$7yn7dl=6@0)p12%q(-87*p4r^dy-zbhp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False) == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -47,10 +47,13 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl_drf',
     'django.contrib.humanize',
     'ocds_bulk_download',
+    'channels'
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -65,6 +68,7 @@ MIDDLEWARE = [
 CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
 CACHE_MIDDLEWARE_SECONDS = 600    # number of seconds to cache a page for (TTL)
 CACHE_MIDDLEWARE_KEY_PREFIX = ''    # should be used if the cache is shared across multiple sites that use the same Django instance
+WHITENOISE_MAX_AGE = 31557600
 
 ROOT_URLCONF = 'portalocdspy.urls'
 
@@ -87,6 +91,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'portalocdspy.wsgi.application'
+
+ASGI_APPLICATION = "portalocdspy.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -157,11 +163,12 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS=(
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'portalocdspy_frontend/static'),
 )
+
 
 # Configuracion de parametros adicionales
 
