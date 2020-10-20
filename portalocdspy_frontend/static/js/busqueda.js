@@ -554,7 +554,8 @@ function AgregarResultadoProceso(datos, redFlags){
   var dynamic = "";
   if (redFlags) {
     for (var x = 0; x < redFlags.length; x++) { //Move the for loop from here
-      dynamic += '<td class="etiquetaFiltro contenidoTablaCaracteristicas">' + redFlags[x].title + '</td>';
+      dynamic += '<td class="etiquetaFiltro contenidoTablaCaracteristicas" tooltexto="' +
+        redFlags[x].message + '">' + redFlags[x].title + "</td>";
     }
   }
   $('#listaResultadosBusqueda').append(
