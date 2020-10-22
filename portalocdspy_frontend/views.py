@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, Page, EmptyPage, PageNotAnInteger
 import os
 from django.http import HttpResponse, Http404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 class DSEPaginator(Paginator):
     """
@@ -42,6 +43,7 @@ def ManualApi(request):
 def Acerca(request):
     return render(request,'acerca/acerca.html')
 
+@login_required
 def Admin(request):
     if request.method =='POST':
         uploaded_file = request.FILES['document']
