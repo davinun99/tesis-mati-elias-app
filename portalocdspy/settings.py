@@ -180,7 +180,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-ELASTICSEARCH_DSL_HOST = 'matirivas.me:9200/'
+ELASTICSEARCH_DSL_HOST = 'elastic.matirivas.me/'
 
 ELASTICSEARCH_DSL = {
     'default': {
