@@ -14,5 +14,5 @@ docker-build:
     - docker stop ocds_backend || true
     - docker rm ocds_backend || true
     - docker build -t ocds_backend .
-    - docker run --restart=unless-stopped -v "$(pwd)"/media:/code/media --name ocds_backend -d -p 8000:8000 ocds_backend
+    - docker run --restart=unless-stopped --network=t2_proxy -v "$(pwd)"/media:/code/media --name ocds_backend -d -p 8000:8000 ocds_backend
 
