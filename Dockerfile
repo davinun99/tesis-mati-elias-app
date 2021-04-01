@@ -15,9 +15,3 @@ RUN pip3 install -r requirements.txt
 
 # Copy the current directory contents into the container at /code/
 COPY . /code/
-
-#port from the container to expose to host
-EXPOSE 8000
-
-#Tell image what to do when it starts as a container
-ENTRYPOINT ["sh", "/code/start.sh"]
