@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Inicio</title>
+{% endblock %}
+
+{% block container %}
+{% load static %}
+
+<div class="container-fluid fondoColorPrimario fondoPrincipalInicio">
+      <div class="container-fluid">
+         <div class="row contenedorBusquedaInicial"  >
+            <div class="contenedorBotonBlancoFiltroBusqueda">
+               <button class="botonBlancoFiltroBusqueda toolTip" id="botonBlancoFiltroBusquedaInicio" toolTexto="Selecciona un Filtro" data-step="2" data-intro="Puedes seleccionar un filtro para realizar tu búsqueda.">
+               <i class="fas fa-filter"></i>	
+               </button>
+               <div class="preContenedorFiltroBusqueda animated fadeIn">
+                  <div class=" contenedorFiltroBusqueda ">
+                     <div class="flechaArribaBlanca"></div>
+                     <div>
+                        <div class="OpcionFiltroBusqueda">
+                           <input type="radio" id="metodoProceso" name="selector" checked>
+                           <label for="metodoProceso" class="etiquetaOpcionFiltroBusqueda textoColorPrimario" >Procesos de Contratación</label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="campoBlancoBusquedaPadre" data-step="1" data-intro="Puedes buscar un texto relacionado con el titulo o descripción de un proceso de contratación, contrato, nombres de proveedores o compradores.">
+               <input class="form-control form-control-lg campoBlancoBusqueda toolTip" toolPosicion="bottom" toolTexto="Ingresa un texto a buscar" type="text" placeholder="Busca una contratación..." id="campoBlancoBusquedaProcesos">
+               <i class="fas fa-search cursorMano toolTip" toolTexto="Haz click para buscar" id="campoBlancoBusquedaProcesosBoton" title="Buscar"></i>	
+            </div>
+         </div>
+         <div class="row">
+            <h1 class="tituloInicio">
+               Busca, explora y visualiza las contrataciones <br>de las instituciones del gobierno Paraguayo y sus banderas rojas
+            </h1>
+         </div>
+
+         <div class="row mt-5 mb-3 contenedorEstadisticaInicial animated fadeIn" style="display:none">
+            <div class="col-6 col-sm-2 col-md-2 col-lg-2 offset-lg-1 offset-md-1 offset-sm-1 p-2">
+               <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="proveedores">0</div>
+               <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+               <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Proveedores</div>
+            </div>
+             <div class="col-12 col-sm-2 col-md-2 col-lg-2 p-2">
+                  <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="compradores">0</div>
+                  <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+                  <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1"  >Compradores</div>
+            </div>
+            <div class="col-6 col-sm-2 col-md-2 col-lg-2 p-2">
+               <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="procesos">0</div>
+               <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+               <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Procesos <span> de Contratación</span></div>
+            </div>
+             <div class="col-6 col-sm-2 col-md-2 col-lg-2 p-2">
+               <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="uniqueRedFlags">0</div>
+               <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+               <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Procesos <span> de Contratación</span> con Banderas Rojas</div>
+            </div>
+             <div class="col-6 col-sm-2 col-md-2 col-lg-2 p-2">
+               <div class="numeroTitularEstadistico textoColorBlanco tiempo" data-speed="1000" data-refresh-interval="20" data-from="0" data-to="0" id="redFlags">0</div>
+               <div class="divisorNumeroTitularEstadistico fondoColorBlanco"></div>
+               <div class="descripcionNumeroTitularEstadistico textoColorBlanco" style="line-height: 1" >Banderas Rojas detectadas</div>
+            </div>
+
+         </div>
+      </div>
+      <img src="{% static 'img/landing/iconosEdca.svg' %}" class="fondoIconos" style="display:none">
+   </div>
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'js/inicio.js' %}"></script>
+
+
+{% endblock %}
+

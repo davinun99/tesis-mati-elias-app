@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Admin</title>
+{% endblock %}
+
+{% load static %}
+
+{% block container %}
+<div class="container-fluid fondoColorPrimario fondoPrincipalPagina tamanoMinimo">
+   <div class="container">
+      <div class="row pb-2 mb-5">
+         <div class="col-md-12 mt-5 mb-5">
+            <h1 class="textoColorBlanco textoTitular1Grueso textoAlineadoCentrado">Interfaz para administracion de las
+               banderas rojas evaluadas en los procesos de contratacion</h1>
+         </div>
+         <div class="col-md-12 p-5 text-center border border-white rounded">
+            <h4 class="textoColorBlanco textoTitular2Grueso">
+               Subir un nuevo conjunto de reglas
+            </h4>
+            <form method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+               <div class="pt-5 d-flex justify-content-center align-items-center">
+                  <input class="text-white" type="file" name="document"
+                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                     required>
+                  <button type="submit" class="botonBlancoFiltroBusqueda ml-3" style="font-size: 35px;">
+                     <i class="fas fa-upload" tabindex="0"></i>
+                  </button>
+               </div>
+            </form>
+         </div>
+      </div>
+      <h3 class="textoColorBlanco  textoAlineadoCentrado">VERSIONES ANTERIORES</h3>
+      <div class="row">
+         <div class="col-6 mx-auto">
+            <div class="list-group textoColorBlanco font-weight-bold mb-5" id="filesList"></div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

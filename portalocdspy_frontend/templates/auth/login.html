@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block head_content %}
+<title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Iniciar Sesión</title>
+{% endblock %}
+{% block container %}
+    <h2>Iniciar Sesión</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Acceder</button>
+    </form>
+{% endblock %}

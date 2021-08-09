@@ -1,0 +1,43 @@
+{% load static %}
+<!-- BARRA DE NAVEGACION -->
+<nav class="navbar navbar-expand-lg  navbar-dark fixed-top  fondoColorPrimario">
+    <a class="navbar-brand" href="/">
+        <img src="{% static 'img/logos/logo-portal1.png' %}" style="width: 320px; height:  50px "
+             alt="Logo Portal">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#barraNavegacionPortal"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="barraNavegacionPortal">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item {% if '/' == request.path %}active{% endif %}">
+                <a class="nav-link transicion" href="/">Inicio <span class="sr-only">(current)</span> </a>
+            </li>
+            <li class="nav-item {% if '/busqueda' in request.path %}active{% endif %}">
+                <a class="nav-link transicion" href="/busqueda?term=&metodo=proceso&pagina=1">Contrataciones</a>
+            </li>
+            <li class="nav-item {% if '/acerca' in request.path %}active{% endif %}">
+                <a class="nav-link transicion" href="/acerca">Acerca</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link transicion" href="{% url 'logout' %}">Cerrar Sesión </a>
+                </li>
+            {% else %}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link transicion" href="{% url 'login' %}">Iniciar Sesión</a>#}
+{#                </li>#}
+            {% endif %}
+        </ul>
+        <form class="form-inline  busquedaMenuPortal" action="/busqueda">
+            <input class="form-controlx mr-sm-2" type="search" placeholder="Búsqueda" aria-label="Search" name="term"
+                   value="{% if request.GET.term %}{{ request.GET.term }}{% endif %}">
+            <input type="hidden" name="metodo" value="proceso">
+            <input type="hidden" name="pagina" value="1">
+            <button class="btn   btnBusquedaMenuPortal" type="submit"><i class="fas fa-search cursorMano"
+                                                                         title="Buscar"></i></button>
+        </form>
+    </div>
+</nav>
+<!-- CIERRE DE BARRA DE NAVEGACION -->

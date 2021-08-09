@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    networks:
+      - t2_proxy
+    restart: unless-stopped
+    volumes:
+      - .:/code
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./web/static:/usr/src/app/static
+    ports:
+      - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.django-rtr.entrypoints=https"
+      - "traefik.http.routers.django-rtr.rule=Host(`redflags.matirivas.me`)"
+      - "traefik.http.routers.django-rtr.rule=Host(`redflags.controlcivico.org`)"
+      - "traefik.http.routers.django-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.django-rtr.middlewares=chain-no-auth@file" # No Authentication
+      ## HTTP Services
+      - "traefik.http.routers.django-rtr.service=django-svc"
+      - "traefik.http.services.django-svc.loadbalancer.server.port=8000"
+
+networks:
+  t2_proxy:
+    external:
+      name: t2_proxy
+  default:
+    driver: bridge

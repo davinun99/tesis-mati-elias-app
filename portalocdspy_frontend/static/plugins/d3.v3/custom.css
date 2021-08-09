@@ -1,0 +1,152 @@
+svg {
+	font: 10px sans-serif;
+}
+
+.axis path,.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+/* Estilo especifico */
+.axis path,.axis line {
+	fill: none;
+	stroke: #b6b6b6;
+	shape-rendering: crispEdges;
+}
+/*.tick line{fill:none;stroke:none;}*/
+.tick text {
+	fill: #999;
+}
+
+g.journal.active {
+	cursor: pointer;
+}
+
+text.value.active {
+	cursor: pointer;
+}
+
+text.label {
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+text.value {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.tooltipo {
+	width: 300px;
+}
+
+.tooltipo td,.tooltip th {
+	padding: 2px;
+}
+
+.tooltipo .tab_sec td {
+	font-size: 11px;
+}
+
+.popover {
+	border-color: #ddd;
+}
+
+.titleChart {
+	/*display:none;*/
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+	font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.subTitleChart {
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.entidad {
+	text-align: center;
+	font-size: 12px;
+	font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.node circle {
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 3px;
+}
+
+.node text {
+	font: 12px sans-serif;
+}
+
+.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 2px;
+}
+
+#chart2 {
+	min-height: 100px;
+}
+
+.tips {
+	/*display: table;
+	clear: both;*/
+	margin-top: 20px;
+	margin-bottom: 20px;
+	/*width: 1104px;*/
+}
+
+.fila {
+	display: table-row;
+}
+
+.celda {
+	/*display: table-cell;*/
+	padding: 20px 10px 20px 80px;
+	width: 30%;
+	min-height: 105px; */
+	font-size: 14px;
+	line-height: 120%;
+	vertical-align: middle;
+}
+
+.c1 {
+	background: #EEE url(../../images/select.png) no-repeat 14px
+		center;
+}
+
+.c2 {
+	background: #DDD url(../../images/alert.png) no-repeat 14px
+		center;
+}
+
+.c3 {
+	background: #CCC url(../../images/click.png) no-repeat 14px
+		center;
+}
+
+.modal-content{
+  border-radius: 5px;
+}
+
+#embedcode{
+  width: 100%;
+}
+
+.embed-container{
+  float: right;
+}
+
+#observacion{
+  padding-top: 15px;
+}
+
+#buttonFilters, #chart, #graficoPorEntidad{
+	text-align: center;
+}

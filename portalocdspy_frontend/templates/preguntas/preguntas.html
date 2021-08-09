@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Portal de Banderas Rojas en Contrataciones Abiertas del Paraguay - Preguntas</title>
+{% endblock %}
+
+{% load static %}
+
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'plugins/json-viewer/json-viewer.css' %}" >
+{% endblock %}
+
+{% block container %}
+<div class="container tamanoMinimo">
+   <div class="row">
+      <div class="col-md-12">
+         <h1 class="textoColorPrimario mt-3 tituloDetalleProceso">Preguntas Frecuentes</h1>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-12">
+            <p class="textoAlineadoJustificado">
+            El Portal de Banderas Rojas en Contrataciones abiertas del Paraguay, contiene un conjunto de datos publicado por la DNCP, con una licencia que permite su reutilización para cualquier propósito y se valida con el Estándar <a href="http://standard.open-contracting.org/latest/es/getting_started/">OCDS</a>.
+            </p>
+      </div>
+   </div>
+   <div class="row">
+         <div class="col-md-12">
+            <h5 class="textoColorTitulo">¿Que se incluye en los tipos de datos JSON ?</h5>
+               <p class="textoAlineadoJustificado">
+               Se incluye el conjunto de datos de los procesos de contración en el Estándar <a href="http://standard.open-contracting.org/latest/es/getting_started/">OCDS</a>.
+               para que puedan ser utilizados en el formato que más sea conveniente para los usuarios finales.
+               </p>
+         </div>
+      </div>
+      <div class="row">
+            <div class="col-md-12">
+               <h5 class="textoColorTitulo">¿Que es un tipo de dato JSON?</h5>
+                  <p class="textoAlineadoJustificado">
+                        JSON es un formato ligero de intercambio de datos. Es fácil para las personas de leer y escribir. Es fácil para las máquinas analizar y generar.
+                        <br>
+                        Ejemplo:
+                  </p>
+                     <div id="jsonEjemplo" class="cajonSombreado"></div>
+            </div>
+         </div>
+
+   
+</div>
+
+{% endblock %}
+
+{% block script_content %}
+<script src="{% static 'plugins/json-viewer/json-viewer.js' %}"></script>
+<script src="{% static 'js/preguntas.js' %}"></script>
+{% endblock %}

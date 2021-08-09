@@ -1,0 +1,23 @@
+Django==2.2.12
+psycopg2==2.8.5
+django-elasticsearch-dsl==0.5.1
+django-elasticsearch-dsl-drf==0.18
+django-filter==2.1.0
+django-nine==0.2.2
+djangorestframework==3.9.4
+elasticsearch==6.4.0
+elasticsearch-dsl==6.1.0
+gunicorn==20.0.4
+ipaddress==1.0.22
+Markdown==3.1.1
+numpy==1.17.2
+pandas==1.0.4
+python-dateutil==2.8.0
+pytz==2019.2
+six==1.12.0
+sqlparse==0.3.0
+django-compressor==2.4.0
+urllib3==1.25.3
+whitenoise==5.2.0
+channels==2.4.0
+-e git+https://github.com/OpenDataServices/flatten-tool.git@511cc6d1ee83d77aa7a1efe965eb3dd7e4940c1b#egg=flattentool
