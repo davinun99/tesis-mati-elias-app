@@ -42,8 +42,12 @@ def ElasticSearchDefaultConnection():
 	usuario = settings.ELASTICSEARCH_USER
 	contrasena = settings.ELASTICSEARCH_PASS
 	tiempo = settings.ELASTICSEARCH_TIMEOUT
-	cliente = Elasticsearch(url, timeout=tiempo, http_auth=(usuario, contrasena))
-
+	cliente = Elasticsearch(
+		url, 
+		timeout=tiempo, 
+		http_auth=(usuario, contrasena),
+		ca_certs="/Users/davidnunez/http_ca.crt",
+	)
 	return cliente
 
 class BasicPagination(pagination.PageNumberPagination):
@@ -645,8 +649,12 @@ class Compradores(APIView):
 		start = (page - 1) * settings.PAGINATE_BY
 		end = start + settings.PAGINATE_BY
 
-		cliente = Elasticsearch(settings.ELASTICSEARCH_DSL_HOST, timeout=settings.TIMEOUT_ES)
-
+		cliente = Elasticsearch(
+				settings.ELASTICSEARCH_DSL_HOST, 
+				timeout=settings.TIMEOUT_ES, 
+				http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASS),
+				ca_certs="/Users/davidnunez/http_ca.crt",
+			)
 		s = Search(using=cliente, index=OCDS_INDEX)
 
 		filtros = []
