@@ -104,18 +104,18 @@ DATABASES = {
     },
     'bdkingfisher': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ocdskingfisher',
-        'USER': 'ocdskingfisher',
-        'PASSWORD': 'admin',
-        'HOST': 'matirivas.me',
+        'NAME': 'pezeypvv',
+        'USER': 'pezeypvv',
+        'PASSWORD': 'V_2fdl4tJJblu8DxBj5VtZ8q5WRL4MhP',
+        'HOST': 'suleiman.db.elephantsql.com',
         'PORT': '5432',
     },
     'portaledcahn_admin': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'portaledcahn_admin',
-        'USER': 'edcahn_admin',
-        'PASSWORD': 'admin',
-        'HOST': 'matirivas.me',
+        'NAME': 'sjbwpcih',
+        'USER': 'sjbwpcih',
+        'PASSWORD': 'I5yY3PzBy_sfzAIwpMI_GU0qTOxPriHc',
+        'HOST': 'jelani.db.elephantsql.com',
         'PORT': '5432',
     }
 }
